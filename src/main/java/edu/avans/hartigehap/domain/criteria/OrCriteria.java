@@ -25,16 +25,10 @@ public class OrCriteria extends Criteria{
         if(alwaysSucceeds()){
             return l;
         }
-        List<Planning> list = new ArrayList<Planning>();
+        List<Planning> list = l;
 
-        int count = 0;
         for(Criteria orCrit : criteriaList){
-            if(count == 0){
-                list = mergeOr(list, orCrit.meetCriteria(l));
-            }else {
                 list = mergeOr(list, orCrit.meetCriteria(list));
-            }
-            count++;
         }
         return l;
     }

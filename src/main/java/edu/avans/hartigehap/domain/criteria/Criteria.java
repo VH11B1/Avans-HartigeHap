@@ -1,6 +1,11 @@
 package edu.avans.hartigehap.domain.criteria;
 
+import edu.avans.hartigehap.domain.criteria.impl.NotInPlannedRoleCriteria;
+import edu.avans.hartigehap.domain.criteria.impl.NotPresentCriteria;
+import edu.avans.hartigehap.domain.criteria.impl.PlannedCriteria;
+import edu.avans.hartigehap.domain.criteria.impl.PresentCriteria;
 import edu.avans.hartigehap.domain.planning.Planning;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -27,10 +32,19 @@ public abstract class Criteria {
     }
 
     public enum Type{
-        PRESENT,
-        NOT_PRESENT,
-        PLANNED,
-        NOT_PLANNED,
-        NOT_IN_PLANNED_ROLE;
+        PRESENT (new PresentCriteria()),
+        NOT_PRESENT(new NotPresentCriteria()),
+        PLANNED(new PlannedCriteria()),
+        NOT_PLANNED(null),
+        NOT_IN_PLANNED_ROLE(new NotInPlannedRoleCriteria());
+
+        @Getter
+        private Criteria criteria;
+
+        private Type(Criteria c){
+            this.criteria = c;
+        }
+
+
     }
 }

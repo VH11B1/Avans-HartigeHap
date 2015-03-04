@@ -38,10 +38,10 @@ public class CriteriaBuilder {
         Criteria[] crits = new Criteria[types.length];
 
         for (int i = 0; i < types.length; i++) {
-            crits[i] = getCriteriaByType(types[i]);
+            crits[i] = types[i].getCriteria();
         }
 
-        criteriaList.add(new AndCriteria(crits));
+        criteriaList.add(new AndCriteria(crits)); // list cast?
 
         // chaining
         return this;
@@ -53,7 +53,7 @@ public class CriteriaBuilder {
         Criteria[] crits = new Criteria[types.length];
 
         for (int i = 0; i < types.length; i++) {
-            crits[i] = getCriteriaByType(types[i]);
+            crits[i] = types[i].getCriteria(); // list cast?
         }
 
         criteriaList.add(new OrCriteria(crits));
@@ -63,7 +63,7 @@ public class CriteriaBuilder {
     }
 
     public CriteriaBuilder single(final Criteria.Type type){
-        criteriaList.add(getCriteriaByType(type));
+        criteriaList.add(type.getCriteria());
 
         return this;
     }
@@ -75,16 +75,5 @@ public class CriteriaBuilder {
             list = c.meetCriteria(list);
         }
         return list;
-    }
-
-    private Criteria getCriteriaByType(final Criteria.Type type){
-        //TODO move to enum Criteria.Type
-        switch (type){
-            case PLANNED : return new PlannedCriteria();
-            case PRESENT : return new PresentCriteria();
-            case NOT_PRESENT: return new NotPresentCriteria();
-            case NOT_IN_PLANNED_ROLE: return new NotInPlannedRoleCriteria();
-        }
-        return null;
     }
 }
