@@ -12,10 +12,25 @@ import java.util.List;
 public abstract class Criteria {
     public abstract List<Planning> meetCriteria(List<Planning> l);
 
+    private boolean alwaysSucceed = false;
+
+    public Criteria(){
+        this(false);
+    }
+
+    public Criteria(final boolean alwaysSucceed){
+        this.alwaysSucceed = alwaysSucceed;
+    }
+
+    public final boolean alwaysSucceeds(){
+        return alwaysSucceed;
+    }
+
     public enum Type{
         PRESENT,
-        NOTPRESENT,
+        NOT_PRESENT,
         PLANNED,
-        NOTPLANNED;
+        NOT_PLANNED,
+        NOT_IN_PLANNED_ROLE;
     }
 }

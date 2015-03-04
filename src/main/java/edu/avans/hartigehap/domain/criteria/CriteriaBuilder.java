@@ -1,14 +1,13 @@
 package edu.avans.hartigehap.domain.criteria;
 
+import edu.avans.hartigehap.domain.criteria.impl.NotInPlannedRoleCriteria;
 import edu.avans.hartigehap.domain.criteria.impl.NotPresentCriteria;
 import edu.avans.hartigehap.domain.criteria.impl.PlannedCriteria;
+import edu.avans.hartigehap.domain.criteria.impl.PresentCriteria;
 import edu.avans.hartigehap.domain.planning.Planning;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static edu.avans.hartigehap.domain.criteria.Criteria.Type.*;
 
 /**
  * Created by Alex on 3-3-2015.
@@ -34,31 +33,57 @@ public class CriteriaBuilder {
         // nope
     }
 
-    public CriteriaBuilder and(Criteria.Type... types){
-        Criteria andCriteria = new AndCriteria();
+    public CriteriaBuilder and(final Criteria.Type... types){
 
-        for(Criteria.Type t : types){
-            andCriteria = new AndCriteria(getCriteriaByType(t),andCriteria);
+        Criteria[] crits = new Criteria[types.length];
+
+        for (int i = 0; i < types.length; i++) {
+            crits[i] = getCriteriaByType(types[i]);
         }
 
-        criteriaList.add(andCriteria);
+        criteriaList.add(new AndCriteria(crits));
 
         // chaining
+        return this;
+    }
+
+
+    public CriteriaBuilder or(final Criteria.Type... types){
+
+        Criteria[] crits = new Criteria[types.length];
+
+        for (int i = 0; i < types.length; i++) {
+            crits[i] = getCriteriaByType(types[i]);
+        }
+
+        criteriaList.add(new OrCriteria(crits));
+
+        // chaining
+        return this;
+    }
+
+    public CriteriaBuilder single(final Criteria.Type type){
+        criteriaList.add(getCriteriaByType(type));
+
         return this;
     }
 
     public List<Planning> fetch(final List<Planning> allPlannings){
         List<Planning> list = allPlannings;
         for (Criteria c : criteriaList){
+            //System.err.println("calling meetcriteria for a " + c.getClass().getName());
             list = c.meetCriteria(list);
         }
         return list;
     }
 
-    private Criteria getCriteriaByType(Criteria.Type type){
+    private Criteria getCriteriaByType(final Criteria.Type type){
+        //TODO move to enum Criteria.Type
         switch (type){
             case PLANNED : return new PlannedCriteria();
-            case NOTPRESENT : return new NotPresentCriteria();
+            case PRESENT : return new PresentCriteria();
+            case NOT_PRESENT: return new NotPresentCriteria();
+            case NOT_IN_PLANNED_ROLE: return new NotInPlannedRoleCriteria();
         }
         return null;
     }

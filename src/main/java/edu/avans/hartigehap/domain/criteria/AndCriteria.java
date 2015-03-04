@@ -13,6 +13,10 @@ import java.util.List;
 public class AndCriteria extends Criteria {
     private List<Criteria> criteriaList = new ArrayList<Criteria>();
 
+    public AndCriteria(final boolean alwaysSucceed){
+        super(alwaysSucceed);
+    }
+
     public AndCriteria(final Criteria... a){
         criteriaList = Arrays.asList(a);
     }
@@ -20,11 +24,10 @@ public class AndCriteria extends Criteria {
     @Override
     public List<Planning> meetCriteria(final List<Planning> l) {
 
-        if(criteriaList == null){
-            // TODO problem? empty list == meets criteria
-            // needed for CriteriaBuilder, first and criteria init
+        if(alwaysSucceeds()){
             return l;
         }
+
         List<Planning> list= l;
 
         for(Criteria andCrit : criteriaList){

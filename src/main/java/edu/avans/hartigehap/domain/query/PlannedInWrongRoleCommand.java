@@ -7,15 +7,15 @@ import edu.avans.hartigehap.domain.planning.Planning;
 import java.util.List;
 
 /**
- * Created by Alex on 3-3-2015.
+ * Created by Alex on 4-3-2015.
  */
-public class PlannedAndNotPresentCommand extends HHCommand {
+public class PlannedInWrongRoleCommand extends HHCommand {
 
     @Override
-    public List<Planning> filter(final List<Planning> plannings) {
+    public List<Planning> filter(List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
-        b.and(Criteria.Type.PLANNED, Criteria.Type.NOT_PRESENT);
+        b.single(Criteria.Type.NOT_IN_PLANNED_ROLE);
 
         return b.fetch(plannings);
     }
