@@ -9,6 +9,6 @@ import java.util.List;
  *
  * Command pattern
  */
-public abstract class HHCommand {
-    public abstract List<Planning> filter(final List<Planning> plannings);
+public abstract class CriteriaCommand {
+    public abstract List<Planning> fetch(final List<Planning> plannings);
 }

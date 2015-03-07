@@ -3,6 +3,7 @@ package edu.avans.hartigehap.domain.planning;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -12,10 +13,10 @@ import java.util.Date;
 @Setter
 public abstract class TimeSlot {
     private DayPart part;
-    private Date start;
-    private Date end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
-    public TimeSlot(TimeSlot.DayPart dayPart, Date start, Date end) {
+    public TimeSlot(TimeSlot.DayPart dayPart, LocalDateTime start, LocalDateTime end) {
         setPart(dayPart);
         setEnd(end);
         setStart(start);

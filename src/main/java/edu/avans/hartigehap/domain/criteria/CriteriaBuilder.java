@@ -1,9 +1,5 @@
 package edu.avans.hartigehap.domain.criteria;
 
-import edu.avans.hartigehap.domain.criteria.impl.NotInPlannedRoleCriteria;
-import edu.avans.hartigehap.domain.criteria.impl.NotPresentCriteria;
-import edu.avans.hartigehap.domain.criteria.impl.PlannedCriteria;
-import edu.avans.hartigehap.domain.criteria.impl.PresentCriteria;
 import edu.avans.hartigehap.domain.planning.Planning;
 
 import java.util.ArrayList;
@@ -31,6 +27,13 @@ public class CriteriaBuilder {
 
     private CriteriaBuilder(){
         // nope
+    }
+
+    public CriteriaBuilder not(final Criteria.Type type){
+
+        criteriaList.add(new NotCriteria(type.getCriteria()));
+
+        return this;
     }
 
     public CriteriaBuilder and(final Criteria.Type... types){
@@ -71,9 +74,9 @@ public class CriteriaBuilder {
     public List<Planning> fetch(final List<Planning> allPlannings){
         List<Planning> list = allPlannings;
         for (Criteria c : criteriaList){
-            //System.err.println("calling meetcriteria for a " + c.getClass().getName());
             list = c.meetCriteria(list);
         }
+
         return list;
     }
 }
