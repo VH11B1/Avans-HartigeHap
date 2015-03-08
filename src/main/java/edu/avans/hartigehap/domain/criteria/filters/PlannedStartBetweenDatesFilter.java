@@ -60,7 +60,7 @@ public class PlannedStartBetweenDatesFilter extends FilterDecorator<LocalDateTim
         List<LocalDateTime> dates = getFilterItems();
         LocalDateTime startDate = slot.getStart();
 
-        if(startDate.compareTo(dates.get(0)) > -1 & startDate.compareTo(dates.get(1)) < -1){
+        if(startDate.compareTo(dates.get(0)) >= -1 & startDate.compareTo(dates.get(1)) <= -1){
             return true;
         }
         return false;

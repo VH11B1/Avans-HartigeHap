@@ -7,8 +7,10 @@ package edu.avans.hartigehap.domain.planning;
         import edu.avans.hartigehap.domain.query.*;
 
         import java.time.LocalDateTime;
+        import java.time.format.DateTimeFormatter;
         import java.util.ArrayList;
         import java.util.Arrays;
+        import java.util.Calendar;
         import java.util.List;
 
 /**
@@ -121,6 +123,31 @@ public class PlanningOverview {
     // TODO useless, for testing purposes
     public List<Planning> getPresentOrNotPresentEmployees(){
         return new PresentOrNotPresentCommand().fetch(planning);
+    }
+
+
+    // use case: het is mogelijk voor de manager om een overzicht op te vragen
+    // met daarin wie op dat moment welke rol vervult
+    public List<Planning> getCurrentOverview(){
+
+        TimeSlot.DayPart partOfDay = getCurrentDayPart();
+        Calendar c = Calendar.getInstance();
+
+        int hours = c.get(Calendar.HOUR_OF_DAY);
+        int minutes = c.get(Calendar.MINUTE);
+
+        // start of today is now() - current hours - current minutes
+        LocalDateTime startOfToday = LocalDateTime.now().minusHours(hours).minusMinutes(minutes);
+
+        // end of today is start of today + one day
+        LocalDateTime endOfToday = startOfToday.plusDays(1);
+
+        return new PlannedDayPartFilter(new PlannedStartBetweenDatesFilter(planning,startOfToday, endOfToday), partOfDay).filter() ;
+    }
+
+    // TODO implement for realsies
+    private TimeSlot.DayPart getCurrentDayPart(){
+        return TimeSlot.DayPart.MORNING;
     }
 
     public void populate() {

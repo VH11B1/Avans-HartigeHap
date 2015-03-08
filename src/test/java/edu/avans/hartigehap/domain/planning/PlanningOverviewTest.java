@@ -102,4 +102,30 @@ public class PlanningOverviewTest extends TestCase {
         }
         System.err.println("------------------------------------------------------------------------");
     }
+
+    @Test
+    public void testGetCurrentOverview(){
+        // use case: het is mogelijk voor de manager om een overzicht op te vragen
+        // met daarin wie op dat moment welke rol vervult
+
+        PlanningOverview overview = new PlanningOverview();
+        List<Planning> l = overview.getCurrentOverview();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        System.err.println("--------Planned and present employees at the current timeslot (hardcoded to morning for now)--------");
+        for (Planning p : l) {
+            System.err.print(p.getEmployee().getName()
+                            + " is planned for " + p.getRole()
+                            + " from " + p.getPlannedSlot().getStart().format(formatter) + " to " + p.getPlannedSlot().getEnd().format(formatter)
+            );
+
+            if(p.getActualSlot().getActualEmployee().equals(p.getEmployee())){
+                System.err.print(" and logged in on " +  p.getActualSlot().getStart().format(formatter));
+            }else{
+                System.err.print(" but did not log on and was replaced by " + p.getActualSlot().getActualEmployee().getName() + " on "  +  p.getActualSlot().getStart().format(formatter));
+            }
+            System.err.println();
+        }
+        System.err.println("----------------------------------------------------------------------------------------------------");
+    }
 }
