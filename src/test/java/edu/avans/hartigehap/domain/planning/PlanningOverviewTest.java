@@ -1,17 +1,10 @@
 package edu.avans.hartigehap.domain.planning;
 
 import junit.framework.TestCase;
-import org.h2.table.Plan;
 import org.junit.Test;
 
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 public class PlanningOverviewTest extends TestCase {
 

@@ -30,10 +30,6 @@ public abstract class Criteria {
 
     public enum Type{
         PRESENT (new PresentCriteria()),
-
-        //TODO change to new b.not() version
-        NOT_PRESENT(new NotPresentCriteria()),
-
         PLANNED(new PlannedCriteria()),
         IN_PLANNED_ROLE(new InPlannedRoleCriteria());
 

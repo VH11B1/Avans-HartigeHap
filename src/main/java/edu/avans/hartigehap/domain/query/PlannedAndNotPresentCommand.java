@@ -15,7 +15,7 @@ public class PlannedAndNotPresentCommand extends CriteriaCommand {
     public List<Planning> fetch(final List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
-        b.and(Criteria.Type.PLANNED, Criteria.Type.NOT_PRESENT);
+        b.and(Criteria.Type.PLANNED.getCriteria(), b.not(Criteria.Type.PRESENT));
 
         return b.fetch(plannings);
     }

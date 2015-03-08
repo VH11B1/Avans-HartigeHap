@@ -16,7 +16,7 @@ public class PresentOrNotPresentCommand extends CriteriaCommand {
     public List<Planning> fetch(final List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
-        b.or(Criteria.Type.PRESENT, Criteria.Type.NOT_PRESENT);
+        b.or(Criteria.Type.PRESENT.getCriteria(), b.not(Criteria.Type.PRESENT));
 
         return b.fetch(plannings);
     }

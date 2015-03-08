@@ -15,7 +15,7 @@ public class PlannedInWrongRoleCommand extends CriteriaCommand {
     public List<Planning> fetch(List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
-        b.not(Criteria.Type.IN_PLANNED_ROLE);
+        b.single(b.not(Criteria.Type.IN_PLANNED_ROLE));
 
         return b.fetch(plannings);
     }

@@ -29,13 +29,16 @@ public class CriteriaBuilder {
         // nope
     }
 
-    public CriteriaBuilder not(final Criteria.Type type){
-
-        criteriaList.add(new NotCriteria(type.getCriteria()));
-
-        return this;
+    // different from and/or/single, returns Criteria and NOT CriteriaBuilder
+    // basically a converter to NOT form, needs to be inserted into the list
+    // using and/or/single after conversion to NOT form
+    // note: when using a mix between CriteriaType and Criteria use
+    // CriteriaType.getCriteria() to convert Type to Criteria
+    public Criteria not(final Criteria.Type type){
+        return new NotCriteria(type.getCriteria());
     }
 
+    // for using criteria types
     public CriteriaBuilder and(final Criteria.Type... types){
 
         Criteria[] crits = new Criteria[types.length];
@@ -50,7 +53,17 @@ public class CriteriaBuilder {
         return this;
     }
 
+    // for using criteria
+    public CriteriaBuilder and(final Criteria... criterias){
 
+        criteriaList.add(new AndCriteria(criterias)); // list cast?
+
+        // chaining
+        return this;
+    }
+
+
+    // for using criteria types
     public CriteriaBuilder or(final Criteria.Type... types){
 
         Criteria[] crits = new Criteria[types.length];
@@ -65,8 +78,25 @@ public class CriteriaBuilder {
         return this;
     }
 
+    // for using criteria
+    public CriteriaBuilder or(final Criteria... crits){
+
+        criteriaList.add(new OrCriteria(crits));
+
+        // chaining
+        return this;
+    }
+
+    // for using criteria types
     public CriteriaBuilder single(final Criteria.Type type){
         criteriaList.add(type.getCriteria());
+
+        return this;
+    }
+
+    // for using criteria
+    public CriteriaBuilder single(final Criteria criteria){
+        criteriaList.add(criteria);
 
         return this;
     }
