@@ -78,12 +78,10 @@ public class PlanningOverview {
 
         // filters will override each other
         // this one will keep only service, kitchen and management employees
-        Filter<EmployeeRole> skmFilter = new PlannedRoleFilter(planning);
-            skmFilter.set(EmployeeRole.SERVICE,EmployeeRole.KITCHEN,EmployeeRole.MANAGEMENT);
+        Filter<EmployeeRole> skmFilter = new PlannedRoleFilter(planning,EmployeeRole.SERVICE,EmployeeRole.KITCHEN,EmployeeRole.MANAGEMENT);
 
         // this one will filter out managers
-        Filter<EmployeeRole> skFilter = new PlannedRoleFilter(skmFilter);
-        skFilter.set(EmployeeRole.SERVICE,EmployeeRole.KITCHEN);
+        Filter<EmployeeRole> skFilter = new PlannedRoleFilter(skmFilter,EmployeeRole.SERVICE,EmployeeRole.KITCHEN);
 
         // contains only service and kitchen
         return skFilter.filter();
@@ -94,16 +92,13 @@ public class PlanningOverview {
         List<Planning> list = planning; // all planned
 
         // filter by tomorrow
-        Filter<LocalDateTime> dateFilter = new PlannedStartDateFilter(planning);
-            dateFilter.set(LocalDateTime.now().plusDays(1));
+        Filter<LocalDateTime> dateFilter = new PlannedStartDateFilter(planning,LocalDateTime.now().plusDays(1));
 
         // filter by afternoon
-        Filter<TimeSlot.DayPart> partFilter = new PlannedDayPartFilter(dateFilter);
-            partFilter.set(TimeSlot.DayPart.AFTERNOON);
+        Filter<TimeSlot.DayPart> partFilter = new PlannedDayPartFilter(dateFilter,TimeSlot.DayPart.AFTERNOON);
 
         // filter by service
-        Filter<EmployeeRole> roleFilter = new PlannedRoleFilter(partFilter);
-            roleFilter.set(EmployeeRole.SERVICE);
+        Filter<EmployeeRole> roleFilter = new PlannedRoleFilter(partFilter,EmployeeRole.SERVICE);
 
         //service planning tomorrow afternoon
         return roleFilter.filter();
@@ -113,9 +108,9 @@ public class PlanningOverview {
         List<Planning> list = planning; // all planned
 
         // filter by next week, starting today
-        Filter<LocalDateTime> dateFilter = new PlannedStartBetweenDatesFilter(planning);
-        dateFilter.set(LocalDateTime.now().plusDays(1).minusMinutes(5),LocalDateTime.now().plusDays(7));
-        // minus 5 minutes or the now() calls below will be different from this now() call, shifting tomorrow
+        Filter<LocalDateTime> dateFilter = new PlannedStartBetweenDatesFilter(planning,LocalDateTime.now().plusDays(1).minusMinutes(5),LocalDateTime.now().plusDays(7));
+        // minus 5 minutes or the now() calls below will be different from this now() call,
+        // shifting tomorrow into today causing expected items not to show
 
         //planning tomorrow and days after
         return dateFilter.filter();

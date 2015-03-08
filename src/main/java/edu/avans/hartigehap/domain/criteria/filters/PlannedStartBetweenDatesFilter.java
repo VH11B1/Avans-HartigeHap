@@ -13,16 +13,14 @@ import java.util.List;
  */
 public class PlannedStartBetweenDatesFilter extends FilterDecorator<LocalDateTime> {
 
-    private Filter original;
-    private List<LocalDateTime> dates;
 
-    public PlannedStartBetweenDatesFilter(List<Planning> list){
-        super(list);
+    public PlannedStartBetweenDatesFilter(List<Planning> list,LocalDateTime... dates){
+        super(list,dates);
     }
 
-    public PlannedStartBetweenDatesFilter(Filter f){
-        super(f);
-        this.original = f;
+    public PlannedStartBetweenDatesFilter(Filter f,LocalDateTime... dates){
+        super(f,dates);
+        setOriginal(f);
     }
 
     /**
@@ -33,15 +31,7 @@ public class PlannedStartBetweenDatesFilter extends FilterDecorator<LocalDateTim
      */
     @Override
     public List<Planning> filter() {
-        List<Planning> originalList;
-
-        if(original == null){
-            // if no original, starting list is own list
-            originalList = getPlanningList();
-        }else{
-            // else base starting list on previous filter
-            originalList = original.filter();
-        }
+        List<Planning> originalList = getPlanningList();
         List<Planning> filteredList = new ArrayList<Planning>();
 
         for(Planning p : originalList){
@@ -56,18 +46,20 @@ public class PlannedStartBetweenDatesFilter extends FilterDecorator<LocalDateTim
     @Override
     public void set(LocalDateTime... l) {
         if(l == null || l.length < 1){
-            this.dates = null;
+            // will cause error log on get
+            setFilterItems(null);
         }else if(l.length < 2){
-            this.dates = Arrays.asList(new LocalDateTime[] {l[0], LocalDateTime.now()});
+            setFilterItems(Arrays.asList(new LocalDateTime[] {l[0], LocalDateTime.now()}));
         }else{
-            this.dates = Arrays.asList(new LocalDateTime[] {l[0], l[1]});
+            setFilterItems(Arrays.asList(new LocalDateTime[] {l[0], l[1]}));
         }
 
     }
 
     private boolean dateMatch(TimeSlot slot){
-
+        List<LocalDateTime> dates = getFilterItems();
         LocalDateTime startDate = slot.getStart();
+
         if(startDate.compareTo(dates.get(0)) > -1 & startDate.compareTo(dates.get(1)) < -1){
             return true;
         }
