@@ -12,6 +12,12 @@ import java.util.List;
 @Setter
 public class Employee {
     private String name;
+    private String username;
+    private String password;
+    private String email;
+    private byte[] photo;
+    private int hoursPerMonth;
+
     private List<AvailableSlot> availibility;
     private List<EmployeeRole> roles;
 }
