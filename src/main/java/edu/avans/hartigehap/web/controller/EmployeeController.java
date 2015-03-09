@@ -23,7 +23,6 @@ import java.util.Locale;
 /**
  * Created by Bob on 09/03/15.
  */
-
 @Controller
 @PreAuthorize("hasRole('MANAGEMENT')")
 public class EmployeeController {
@@ -34,15 +33,15 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @Autowired
-    private RestaurantService restaurantService;
+    //@Autowired
+    //private RestaurantService restaurantService;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public String listEmployees(Model model)
     {
         model.addAttribute("employees", employeeService.findAll());
 
-        return "hartigehap/listemployees";
+        return "employees/index";
     }
 
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
@@ -51,7 +50,7 @@ public class EmployeeController {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
 
-        return "hartigehap/showemployee";
+        return "employees/show";
     }
 
     @RequestMapping(value = "/employees/{id}/edit", method = RequestMethod.GET)
@@ -60,7 +59,7 @@ public class EmployeeController {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
 
-        return "hartigehap/editemployee";
+        return "employees/edit";
     }
 
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT)
@@ -81,7 +80,7 @@ public class EmployeeController {
 
             model.addAttribute("employee", employee);
 
-            return "hartigehap/editemployee";
+            return "employees/edit";
         }
 
         model.asMap().clear();
@@ -101,7 +100,7 @@ public class EmployeeController {
     {
         model.addAttribute("employee", new Employee());
 
-        return "hartigehap/createemployee";
+        return "employees/create";
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.POST)
@@ -121,7 +120,7 @@ public class EmployeeController {
 
             model.addAttribute("employee", employee);
 
-            return "hartigehap/createemployee";
+            return "employees/create";
         }
 
         model.asMap().clear();
