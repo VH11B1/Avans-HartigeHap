@@ -52,6 +52,10 @@ public class PlanningOverview {
         populate();
     }
 
+    public void setPlanningList(List<Planning> list){
+        this.planning = list;
+    }
+
     public List<Employee> getAllEmployees() {
         return employees;
     }
