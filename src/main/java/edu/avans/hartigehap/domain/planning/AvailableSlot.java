@@ -1,8 +1,12 @@
 package edu.avans.hartigehap.domain.planning;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -11,6 +15,9 @@ import java.util.Date;
  */
 @Getter
 @Setter
+@Entity
+@Table(name = "AVAILABLESLOTS")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class AvailableSlot extends TimeSlot {
 
     private boolean continuous;

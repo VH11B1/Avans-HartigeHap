@@ -25,19 +25,6 @@ public class EmailServiceImpl implements NotificationService {
     }
 
     public boolean sendNotification(String from, String to, String subject, String msg){
-        /*JavaMailSenderImpl sender = new JavaMailSenderImpl();
-        sender.setHost("smtp.gmail.com");
-        sender.setPort(587);
-        sender.setUsername("ivh11b1@gmail.com");
-        sender.setPassword("@welkom1");
-
-        Properties props = new Properties();
-        props.setProperty("mail.smtp.ssl.trust","smtp.gmail.com");
-        props.setProperty("mail.smtp.starttls.enable","true");
-        props.setProperty("mail.smtp.auth","true");
-
-        sender.setJavaMailProperties(props);*/
-
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);

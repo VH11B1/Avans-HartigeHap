@@ -152,11 +152,17 @@ public class CustomerController {
 	
 
 	@RequestMapping(value = "/restaurants/{restaurantName}/customers", params = "form", method = RequestMethod.POST)
-	public String createCustomer(@PathVariable("restaurantName") String restaurantName, @Valid Customer customer, BindingResult bindingResult,
-		Model uiModel, HttpServletRequest httpServletRequest,
-		RedirectAttributes redirectAttributes, Locale locale,
-		@RequestParam(value = "file", required = false) Part file) {
-
+	public String createCustomer(
+            @PathVariable("restaurantName") String restaurantName,
+            @Valid Customer customer,
+            BindingResult bindingResult,
+		    Model uiModel,
+            HttpServletRequest httpServletRequest,
+		    RedirectAttributes redirectAttributes,
+            Locale locale,
+		    @RequestParam(value = "file", required = false) Part file
+    )
+    {
 		logger.info("Creating customer: " + customer.getFirstName() + " " + customer.getLastName());	
 		logger.info("Binding Result target: " + (Customer) bindingResult.getTarget()); 
 		logger.info("Binding Result: " + bindingResult);
