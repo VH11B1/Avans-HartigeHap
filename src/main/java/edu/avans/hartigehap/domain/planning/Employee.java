@@ -3,12 +3,11 @@ package edu.avans.hartigehap.domain.planning;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import edu.avans.hartigehap.domain.DomainObject;
+import edu.avans.hartigehap.domain.Restaurant;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -27,6 +26,9 @@ public class Employee extends DomainObject {
     private String email;
     private byte[] photo;
     private int hoursPerMonth;
+
+    @ManyToOne
+    private Restaurant worksAt;
 
     @ManyToMany
     private List<AvailableSlot> availability;
@@ -56,4 +58,5 @@ public class Employee extends DomainObject {
         this.photo = employee.photo;
         this.hoursPerMonth = employee.hoursPerMonth;
     }
+
 }

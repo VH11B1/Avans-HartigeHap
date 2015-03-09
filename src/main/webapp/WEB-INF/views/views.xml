@@ -2,6 +2,23 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration
 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
+
+    <!-- EMPLOYEE VIEW BINDINGS -->
+    <definition extends="default" name="employees/index">
+        <put-attribute name="body" value="/WEB-INF/views/employees/index.jspx" />
+    </definition>
+    <definition extends="default" name="employees/show">
+        <put-attribute name="body" value="/WEB-INF/views/employees/show.jspx" />
+    </definition>
+    <definition extends="default" name="employees/edit">
+        <put-attribute name="body" value="/WEB-INF/views/employees/edit.jspx" />
+    </definition>
+    <definition extends="default" name="employees/create">
+        <put-attribute name="body" value="/WEB-INF/views/employees/create.jspx" />
+    </definition>
+    <!-- *** -->
+
+    <!-- WHY??? PLS SEGMENT -->
 	<definition extends="default" name="hartigehap/listrestaurants">
 		<put-attribute name="body" value="/WEB-INF/views/hartigehap/listrestaurants.jspx" />
 	</definition>
@@ -26,4 +43,6 @@
 	<definition extends="default" name="hartigehap/editcustomer">
 		<put-attribute name="body" value="/WEB-INF/views/hartigehap/editcustomer.jspx" />
 	</definition>
+    <!-- *** -->
+
 </tiles-definitions>

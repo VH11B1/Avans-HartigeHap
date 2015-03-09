@@ -1,6 +1,7 @@
 package edu.avans.hartigehap.service.impl;
 
 import com.google.common.collect.Lists;
+import edu.avans.hartigehap.domain.Restaurant;
 import edu.avans.hartigehap.domain.planning.Employee;
 import edu.avans.hartigehap.repository.EmployeeRepository;
 import edu.avans.hartigehap.service.EmployeeService;
@@ -23,6 +24,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findAll()
     {
         return Lists.newArrayList(employeeRepository.findAll());
+    }
+
+    @Transactional(readOnly=true)
+    public List<Employee> findByRestaurant(Restaurant restaurant)
+    {
+        return Lists.newArrayList(employeeRepository.findByRestaurant(restaurant));
     }
 
     @Transactional(readOnly=true)

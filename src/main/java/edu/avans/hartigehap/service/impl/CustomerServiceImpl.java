@@ -45,32 +45,20 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional(readOnly=true)
 	public Customer findByFirstNameAndLastName(String firstName, String lastName)
     {
-		Customer customer = null;
-		
 		List<Customer> customers = customerRepository.findByFirstNameAndLastName(firstName, lastName);
-		if (!customers.isEmpty()) {
-			customer = customers.get(0);
-		}
-		return customer;
+
+		if ( ! customers.isEmpty())
+			return customers.get(0);
+
+        return null;
 	}
 
 	@Transactional(readOnly=true)
 	public List<Customer> findCustomersForRestaurant(Restaurant restaurant)
     {
-		// a query created using a repository method name
-		List<Customer> customersForRestaurants = customerRepository.
-				findByRestaurants(
-						Arrays.asList(new Restaurant[]{restaurant}),
-						new Sort(Sort.Direction.ASC, "lastName"));
+		List<Customer> customersForRestaurants = customerRepository.findByRestaurants(
+                Arrays.asList(new Restaurant[]{restaurant}), new Sort(Sort.Direction.ASC, "lastName"));
 
-		logger.info("findCustomersForRestaurant using query created using repository method name");
-		ListIterator<Customer>	it = customersForRestaurants.listIterator();
-		while(it.hasNext())
-        {
-			Customer customer = it.next();
-			logger.info("customer = " + customer);
-		}
-		
 		return customersForRestaurants;
 	}
 	
@@ -83,16 +71,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional(readOnly=true)
 	public Page<Customer> findCustomersForRestaurantByPage(Restaurant restaurant, Pageable pageable)
     {
-		// a query created using a repository method name
 		Page<Customer> customersForRestaurants = customerRepository.
-				findByRestaurants((Collection<Restaurant>)Arrays.asList(new Restaurant[]{restaurant}), pageable);
-
-		logger.info("findCustomersForRestaurant using query created using repository method name");
-		Iterator<Customer>	it = customersForRestaurants.iterator();
-		while(it.hasNext()) {
-			Customer customer = it.next();
-			logger.info("customer = " + customer);
-		}
+				findByRestaurants(Arrays.asList(new Restaurant[]{restaurant}), pageable);
 		
 		return customersForRestaurants;
 	}

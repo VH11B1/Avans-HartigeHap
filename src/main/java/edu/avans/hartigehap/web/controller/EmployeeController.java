@@ -20,9 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Locale;
 
-/**
- * Created by Bob on 09/03/15.
- */
 @Controller
 @PreAuthorize("hasRole('MANAGEMENT')")
 public class EmployeeController {
@@ -32,9 +29,6 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
-
-    //@Autowired
-    //private RestaurantService restaurantService;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public String listEmployees(Model model)
