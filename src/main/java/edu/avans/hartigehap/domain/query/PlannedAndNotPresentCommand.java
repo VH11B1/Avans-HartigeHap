@@ -9,13 +9,13 @@ import java.util.List;
 /**
  * Created by Alex on 3-3-2015.
  */
-public class PlannedAndNotPresentCommand extends HHCommand {
+public class PlannedAndNotPresentCommand extends CriteriaCommand {
 
     @Override
-    public List<Planning> filter(final List<Planning> plannings) {
+    public List<Planning> fetch(final List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
-        b.and(Criteria.Type.PLANNED, Criteria.Type.NOT_PRESENT);
+        b.and(Criteria.Type.PLANNED.getCriteria(), b.not(Criteria.Type.PRESENT));
 
         return b.fetch(plannings);
     }

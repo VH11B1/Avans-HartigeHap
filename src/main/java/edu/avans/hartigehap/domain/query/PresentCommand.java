@@ -9,12 +9,11 @@ import java.util.List;
 /**
  * Created by Alex on 4-3-2015.
  */
-public class PresentCommand extends HHCommand {
+public class PresentCommand extends CriteriaCommand {
     @Override
-    public List<Planning> filter(final List<Planning> plannings) {
+    public List<Planning> fetch(final List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
-        // TODO THIS MIGHT BREAK STUFF
         b.single(Criteria.Type.PRESENT);
 
         return b.fetch(plannings);

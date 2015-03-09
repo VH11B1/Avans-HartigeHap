@@ -374,11 +374,11 @@ jQuery.fn.searchFilter = function(fields, options) {
             });
             jQ.find(".ui-del").click(function(e) {
                 var row = jQuery(e.target).parents(".sf");
-                if (row.siblings(".sf").length > 0) { // doesn't remove if there's only one filter left
+                if (row.siblings(".sf").length > 0) { // doesn't remove if there's only one fetch left
                     if (opts.datepickerFix === true && jQuery.fn.datepicker !== undefined)
                         row.find(".hasDatepicker").datepicker("destroy"); // clean up datepicker's $.data mess
                     row.remove(); // also unbinds
-                } else { // resets the filter if it's the last one
+                } else { // resets the fetch if it's the last one
                     row.find("select[name='field']")[0].selectedIndex = 0;
                     row.find("select[name='op']")[0].selectedIndex = 0;
                     row.find(".data input").val(""); // blank all input values
@@ -492,16 +492,16 @@ jQuery.fn.searchFilter = function(fields, options) {
             };
 
             this.setFilter = function(settings) {
-                /* a "setter" for an arbitrary SearchFilter's filter line.
+                /* a "setter" for an arbitrary SearchFilter's fetch line.
                  * designed to abstract the DOM manipulations required to infer
-                 * a particular filter is a fit to the search box.
+                 * a particular fetch is a fit to the search box.
                  *
                  * Inputs:
                  *  settings - an "object" (dictionary)
-                 *   index (optional*) (to be implemented in the future) : signed integer index (from top to bottom per DOM) of the filter line to fill.
+                 *   index (optional*) (to be implemented in the future) : signed integer index (from top to bottom per DOM) of the fetch line to fill.
                  *           Negative integers (rooted in -1 and lower) denote position of the line from the bottom.
                  *   sfref (optional*) : DOM object referencing individual '.sf' (normally a TR element) to be populated. (optional)
-                 *   filter (mandatory) : object (dictionary) of form {'field':'field_value','op':'op_value','data':'data value'}
+                 *   fetch (mandatory) : object (dictionary) of form {'field':'field_value','op':'op_value','data':'data value'}
                  *
                  * * It is mandatory to have either index or sfref defined.
                  *
@@ -632,7 +632,7 @@ jQuery.fn.searchFilter.defaults = {
      * TYPE:        array of objects, each object has the properties op and text 
      * DESCRIPTION: the selectable operators that are applied between rules
      *              e.g. for {op:"AND", text:"all"}
-     *                  the search filter box will say: match all rules
+     *                  the search fetch box will say: match all rules
      *                  the server should interpret this as putting the AND op between each rule:
      *                      rule1 AND rule2 AND rule3
      *              text will be the option text, and op will be the option value

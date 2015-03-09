@@ -22,21 +22,10 @@ public class InPlannedRoleCriteria extends Criteria {
     public List<Planning> meetCriteria(final List<Planning> l) {
         List<Planning> meetCrit = new ArrayList<Planning>();
         for(Planning p : l){
-            if(match(p)){
+            if(p.getEmployee().getRoles().contains(p.getRole())){
                 meetCrit.add(p);
             }
         }
         return meetCrit;
-    }
-
-    private boolean match(final Planning p){
-        for (EmployeeRole role : employeeRoles){
-            for(EmployeeRole r : p.getEmployee().getRoles()){
-                if(r == role){
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

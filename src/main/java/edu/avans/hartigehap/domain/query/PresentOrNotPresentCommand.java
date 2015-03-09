@@ -9,14 +9,14 @@ import java.util.List;
 /**
  * Created by Alex on 4-3-2015.
  */
-public class PresentOrNotPresentCommand extends HHCommand{
+public class PresentOrNotPresentCommand extends CriteriaCommand {
     //TODO useless, for testing only
 
     @Override
-    public List<Planning> filter(final List<Planning> plannings) {
+    public List<Planning> fetch(final List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
-        b.or(Criteria.Type.PRESENT, Criteria.Type.NOT_PRESENT);
+        b.or(Criteria.Type.PRESENT.getCriteria(), b.not(Criteria.Type.PRESENT));
 
         return b.fetch(plannings);
     }

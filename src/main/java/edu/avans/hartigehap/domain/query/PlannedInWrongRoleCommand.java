@@ -9,13 +9,13 @@ import java.util.List;
 /**
  * Created by Alex on 4-3-2015.
  */
-public class PlannedInWrongRoleCommand extends HHCommand {
+public class PlannedInWrongRoleCommand extends CriteriaCommand {
 
     @Override
-    public List<Planning> filter(List<Planning> plannings) {
+    public List<Planning> fetch(List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
-        b.single(Criteria.Type.NOT_IN_PLANNED_ROLE);
+        b.single(b.not(Criteria.Type.IN_PLANNED_ROLE));
 
         return b.fetch(plannings);
     }
