@@ -1,13 +1,10 @@
 package edu.avans.hartigehap.web.controller;
 
-import edu.avans.hartigehap.domain.Restaurant;
 import edu.avans.hartigehap.domain.planning.Employee;
 import edu.avans.hartigehap.service.EmployeeService;
 import edu.avans.hartigehap.service.RestaurantService;
 import edu.avans.hartigehap.web.form.Message;
 import edu.avans.hartigehap.web.util.UrlUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,8 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -32,8 +27,6 @@ import java.util.Locale;
 @Controller
 @PreAuthorize("hasRole('MANAGEMENT')")
 public class EmployeeController {
-
-    final Logger logger = LoggerFactory.getLogger(EmplyeeController.class);
 
     @Autowired
     private MessageSource messageSource;
@@ -47,8 +40,6 @@ public class EmployeeController {
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public String listEmployees(Model model)
     {
-        //Restaurant restaurant = warmupRestaurant(restaurantName, uiModel);
-        //List<Employee> employees = employeeService.findCustomersForRestaurant(restaurant);
         model.addAttribute("employees", employeeService.findAll());
 
         return "hartigehap/listemployees";
@@ -149,14 +140,6 @@ public class EmployeeController {
         employeeService.delete(id);
 
         return "redirect:/employees";
-    }
-
-    private Restaurant warmupRestaurant(String restaurantName, Model uiModel) {
-        Collection<Restaurant> restaurants = restaurantService.findAll();
-        uiModel.addAttribute("restaurants", restaurants);
-        Restaurant restaurant = restaurantService.fetchWarmedUp(restaurantName);
-        uiModel.addAttribute("restaurant", restaurant);
-        return restaurant;
     }
 
 }

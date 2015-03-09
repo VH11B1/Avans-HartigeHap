@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import edu.avans.hartigehap.domain.DomainObject;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -20,7 +19,8 @@ import java.util.List;
 @Getter
 @Setter
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class Employee extends DomainObject{
+public class Employee extends DomainObject {
+
     private String name;
     private String username;
     private String password;
@@ -34,13 +34,26 @@ public class Employee extends DomainObject{
     @ManyToMany
     private List<EmployeeRole> roles;
 
-    public Employee() {
+    public Employee()
+    {
+        //
     }
 
-    public Employee(String name, String username, String email, int hoursPerMonth) {
-        this.name= name;
+    public Employee(String name, String username, String email, int hoursPerMonth)
+    {
+        this.name = name;
         this.username = username;
         this.email = email;
         this.hoursPerMonth = hoursPerMonth;
+    }
+
+    public void updateEditableFields(Employee employee)
+    {
+        this.name = employee.name;
+        this.username = employee.username;
+        this.password = employee.password;
+        this.email = employee.email;
+        this.photo = employee.photo;
+        this.hoursPerMonth = employee.hoursPerMonth;
     }
 }
