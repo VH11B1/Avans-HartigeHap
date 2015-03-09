@@ -2,7 +2,10 @@ package edu.avans.hartigehap.service;
 
 import edu.avans.hartigehap.service.impl.EmailServiceImpl;
 import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
+import org.hibernate.validator.constraints.Email;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.Assert.assertTrue;
 
@@ -18,7 +21,9 @@ public class EmailServiceTest extends AbstractTransactionRollbackTest {
 
     @Test
     public void SendMail(){
-        NotificationService notificationService = new EmailServiceImpl();
-        assertTrue(notificationService.sendNotification("mbartele@avans.nl", "Henk"));
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("spring-context.xml");
+        NotificationService notificationService = (EmailServiceImpl) context.getBean("emailService");
+        assertTrue(notificationService.sendNotification("ivh11b1@rsgrijks.nl","mbartele@avans.nl", "Test", "Hallo test test"));
     }
 }
