@@ -1,5 +1,6 @@
 package edu.avans.hartigehap.domain.planning;
 
+import edu.avans.hartigehap.domain.DomainObject;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public abstract class TimeSlot {
+public abstract class TimeSlot extends DomainObject{
     private DayPart part;
     private LocalDateTime start;
     private LocalDateTime end;

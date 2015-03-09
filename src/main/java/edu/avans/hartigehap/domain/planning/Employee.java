@@ -1,16 +1,26 @@
 package edu.avans.hartigehap.domain.planning;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import edu.avans.hartigehap.domain.DomainObject;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ManyToAny;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
  * Created by Alex on 3-3-2015.
  */
+@Entity
+@Table(name = "EMPLOYEES")
 @Getter
 @Setter
-public class Employee {
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+public class Employee extends DomainObject{
     private String name;
     private String username;
     private String password;
@@ -18,6 +28,19 @@ public class Employee {
     private byte[] photo;
     private int hoursPerMonth;
 
-    private List<AvailableSlot> availibility;
+    @ManyToMany
+    private List<AvailableSlot> availability;
+
+    @ManyToMany
     private List<EmployeeRole> roles;
+
+    public Employee() {
+    }
+
+    public Employee(String name, String username, String email, int hoursPerMonth) {
+        this.name= name;
+        this.username = username;
+        this.email = email;
+        this.hoursPerMonth = hoursPerMonth;
+    }
 }

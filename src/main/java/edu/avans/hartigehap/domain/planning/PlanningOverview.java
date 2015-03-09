@@ -80,10 +80,10 @@ public class PlanningOverview {
 
         // filters will override each other
         // this one will keep only service, kitchen and management employees
-        Filter<EmployeeRole> skmFilter = new PlannedRoleFilter(planning,EmployeeRole.SERVICE,EmployeeRole.KITCHEN,EmployeeRole.MANAGEMENT);
+        Filter<EmployeeRole> skmFilter = new PlannedRoleFilter(planning, new EmployeeRole("SERVICE"),new EmployeeRole("KITCHEN"), new EmployeeRole("MANAGEMENT"));
 
         // this one will filter out managers
-        Filter<EmployeeRole> skFilter = new PlannedRoleFilter(skmFilter,EmployeeRole.SERVICE,EmployeeRole.KITCHEN);
+        Filter<EmployeeRole> skFilter = new PlannedRoleFilter(skmFilter,new EmployeeRole("SERVICE"),new EmployeeRole("KITCHEN"));
 
         // contains only service and kitchen
         return skFilter.filter();
@@ -100,7 +100,7 @@ public class PlanningOverview {
         Filter<TimeSlot.DayPart> partFilter = new PlannedDayPartFilter(dateFilter,TimeSlot.DayPart.AFTERNOON);
 
         // filter by service
-        Filter<EmployeeRole> roleFilter = new PlannedRoleFilter(partFilter,EmployeeRole.SERVICE);
+        Filter<EmployeeRole> roleFilter = new PlannedRoleFilter(partFilter,new EmployeeRole("SERVICE"));
 
         //service planning tomorrow afternoon
         return roleFilter.filter();
@@ -153,26 +153,26 @@ public class PlanningOverview {
     public void populate() {
         Employee e1 = new Employee();
         e1.setName("E.M. Ployee");
-        e1.setRoles(Arrays.asList(EmployeeRole.KITCHEN,
-                EmployeeRole.SERVICE));
+        e1.setRoles(Arrays.asList(new EmployeeRole("KITCHEN"),
+                new EmployeeRole("SERVICE")));
 
         Employee e2 = new Employee();
         e2.setName("W. Erknemer");
-        e2.setRoles(Arrays.asList(EmployeeRole.SERVICE));
+        e2.setRoles(Arrays.asList(new EmployeeRole("SERVICE")));
 
         Employee e3 = new Employee();
         e3.setName("M. Anager");
         e3.setRoles(Arrays
-                .asList(EmployeeRole.MANAGEMENT));
+                .asList(new EmployeeRole("MANAGEMENT")));
 
         Employee e4 = new Employee();
         e4.setName("N.O.T. Planned");
         e4.setRoles(Arrays
-                .asList(EmployeeRole.SERVICE));
+                .asList(new EmployeeRole("SERVICE")));
 
         Employee e5 = new Employee();
         e5.setName("I.N. Wrong Role");
-        e5.setRoles(Arrays.asList(EmployeeRole.KITCHEN));
+        e5.setRoles(Arrays.asList(new EmployeeRole("KITCHEN")));
 
         employees.add(e1);
         employees.add(e2);
@@ -215,7 +215,7 @@ public class PlanningOverview {
                 LocalDateTime.now().plusDays(1)));
         p4.setActualSlot(new ActualSlot(TimeSlot.DayPart.MORNING, LocalDateTime.now().plusDays(1),
                 LocalDateTime.now().plusDays(1), e5));
-        p4.setRole(EmployeeRole.SERVICE);
+        p4.setRole(new EmployeeRole("SERVICE"));
 
         // employee 3, manager planned
         Planning p6 = new Planning();
@@ -224,7 +224,7 @@ public class PlanningOverview {
                 LocalDateTime.now()));
         p6.setActualSlot(new ActualSlot(TimeSlot.DayPart.MORNING, LocalDateTime.now(),
                 LocalDateTime.now(), e3));
-        p6.setRole(EmployeeRole.MANAGEMENT);
+        p6.setRole(new EmployeeRole("MANAGEMENT"));
 
         // employee 3, manager planned in far future
         Planning p7 = new Planning();
@@ -233,7 +233,7 @@ public class PlanningOverview {
                 LocalDateTime.now()));
         p7.setActualSlot(new ActualSlot(TimeSlot.DayPart.MORNING, LocalDateTime.now().plusDays(9),
                 LocalDateTime.now(), e3));
-        p7.setRole(EmployeeRole.MANAGEMENT);
+        p7.setRole(new EmployeeRole("MANAGEMENT"));
 
         planning.add(p1);
         planning.add(p2);
