@@ -11,6 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +23,7 @@ import javax.validation.Valid;
 import java.util.Locale;
 
 @Controller
-@PreAuthorize("hasRole('MANAGEMENT')")
+//@PreAuthorize("hasRole('MANAGEMENT')")
 public class EmployeeController {
 
     @Autowired
@@ -29,6 +31,9 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private RestaurantService restaurantService;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public String listEmployees(Model model)
@@ -50,8 +55,8 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/{id}/edit", method = RequestMethod.GET)
     public String editCustomer(@PathVariable("id") Long id, Model model)
     {
-        Employee employee = employeeService.findById(id);
-        model.addAttribute("employee", employee);
+        model.addAttribute("employee", employeeService.findById(id));
+        model.addAttribute("restaurants", restaurantService.findAll());
 
         return "employees/edit";
     }

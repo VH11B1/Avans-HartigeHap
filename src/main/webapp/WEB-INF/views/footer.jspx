@@ -11,10 +11,16 @@
     <spring:message code="label_theme_elegant" var="labelThemeElegant"/>
 	<spring:url value="/" var="homeUrl"/>
 
-    <a href="${homeUrl}">${homeText}</a> |
-    <a href="?lang=en_US">${labelEnUs}</a> |
-    <a href="?lang=nl_NL">${labelNlNl}</a> |
-    <a href="?theme=standard">${labelThemeStandard}</a> |
-    <a href="?theme=elegant">${labelThemeElegant}</a>
+    <div class="container">
+        <ul class="list-unstyled list-inline">
+            <li><a href="${homeUrl}">${homeText}</a></li>
+            <li><a href="?lang=en_US">${labelEnUs}</a></li>
+            <li><a href="?lang=nl_NL">${labelNlNl}</a></li>
+            <!-- Unnecessary
+            <li><a href="?theme=standard">${labelThemeStandard}</a></li>
+            <li><a href="?theme=elegant">${labelThemeElegant}</a></li>
+            -->
+        </ul>
+    </div>
 
 </div>
