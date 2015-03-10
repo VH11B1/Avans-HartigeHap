@@ -8,8 +8,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.Collection;
 import java.util.List;
 
-public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long>, EmployeeRepositoryCustom {
 
     List<Employee> findByRestaurant(Restaurant restaurant);
+    Employee findById(long id);
 
 }

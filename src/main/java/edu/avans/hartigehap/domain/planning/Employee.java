@@ -3,11 +3,14 @@ package edu.avans.hartigehap.domain.planning;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import edu.avans.hartigehap.domain.DomainObject;
+import edu.avans.hartigehap.domain.MenuItem;
 import edu.avans.hartigehap.domain.Restaurant;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -30,27 +33,27 @@ public class Employee extends DomainObject {
     @ManyToOne
     private Restaurant restaurant;
 
-    @ManyToMany
-    private List<AvailableSlot> availability;
+    @ManyToMany(mappedBy = "availableslots")
+    private Collection<AvailableSlot> availability = new ArrayList<AvailableSlot>();
 
-    @ManyToMany
-    private List<EmployeeRole> roles;
+    @ManyToMany(mappedBy = "employeeroles")
+    private Collection<EmployeeRole> roles = new ArrayList<EmployeeRole>();
 
-    public Employee()
-    {
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
+    private Collection<Planning> plannings = new ArrayList<Planning>();
+
+    public Employee() {
         //
     }
 
-    public Employee(String name, String username, String email, int hoursPerMonth)
-    {
+    public Employee(String name, String username, String email, int hoursPerMonth) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.hoursPerMonth = hoursPerMonth;
     }
 
-    public void updateEditableFields(Employee employee)
-    {
+    public void updateEditableFields(Employee employee) {
         this.name = employee.name;
         this.username = employee.username;
         this.password = employee.password;
