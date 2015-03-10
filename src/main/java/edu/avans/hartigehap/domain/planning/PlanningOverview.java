@@ -52,6 +52,10 @@ public class PlanningOverview {
         populate();
     }
 
+    public void setPlanningList(List<Planning> list){
+        this.planning = list;
+    }
+
     public List<Employee> getAllEmployees() {
         return employees;
     }
@@ -118,7 +122,14 @@ public class PlanningOverview {
         return dateFilter.filter();
     }
 
+    public List<Planning> getEmployeesPlannedToday(final Employee... employees){
+        List<Planning> list = planning; // all planned
 
+        Filter<LocalDateTime> dateFilter = new PlannedTodayFilter(planning);
+        Filter<Employee> employeeFilter = new PlannedEmployeeFilter(dateFilter,employees);
+
+        return employeeFilter.filter();
+    }
 
     // TODO useless, for testing purposes
     public List<Planning> getPresentOrNotPresentEmployees(){

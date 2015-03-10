@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 /**
@@ -15,12 +16,17 @@ import java.util.Date;
 public abstract class TimeSlot extends DomainObject{
     private DayPart part;
     private LocalDateTime start;
+    private Date startDate;
     private LocalDateTime end;
 
     public TimeSlot(TimeSlot.DayPart dayPart, LocalDateTime start, LocalDateTime end) {
         setPart(dayPart);
         setEnd(end);
         setStart(start);
+    }
+
+    public Date getStartDate(){
+        return Date.from(start.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     @Getter
