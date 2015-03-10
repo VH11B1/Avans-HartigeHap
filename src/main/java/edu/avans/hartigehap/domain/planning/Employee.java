@@ -52,10 +52,10 @@ public class Employee extends DomainObject {
     @ManyToOne
     private Restaurant restaurant;
 
-    @ManyToMany(mappedBy = "availableslots")
-    private Collection<AvailableSlot> availability = new ArrayList<AvailableSlot>();
+    //@ManyToMany(mappedBy = "availableslots")
+    //private Collection<AvailableSlot> availability = new ArrayList<AvailableSlot>();
 
-    @ManyToMany(mappedBy = "employeeroles")
+    @ManyToMany
     private Collection<EmployeeRole> roles = new ArrayList<EmployeeRole>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
