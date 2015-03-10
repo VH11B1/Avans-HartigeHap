@@ -2,7 +2,7 @@ CREATE  TABLE users (
   username VARCHAR(45) NOT NULL ,
   password VARCHAR(45) NOT NULL ,
   enabled TINYINT NOT NULL DEFAULT 1 ,
-  employeeId INT,
+  employeeId BIGINT,
   PRIMARY KEY (username),
   CONSTRAINT fk_employee FOREIGN KEY (employeeId) REFERENCES employees(id)
 );

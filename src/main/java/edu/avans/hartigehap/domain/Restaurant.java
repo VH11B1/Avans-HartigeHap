@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import javax.persistence.*;
 
+import edu.avans.hartigehap.domain.planning.Employee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +36,9 @@ public class Restaurant extends DomainObjectNaturalId {
 	
 	@OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "restaurant")
 	private Collection<DiningTable> diningTables = new ArrayList<DiningTable>();
+
+    @OneToMany(mappedBy = "restaurant")
+    private Collection<Employee> employees = new ArrayList<Employee>();
 		
 	// no cascading
 	@ManyToMany(mappedBy = "restaurants")

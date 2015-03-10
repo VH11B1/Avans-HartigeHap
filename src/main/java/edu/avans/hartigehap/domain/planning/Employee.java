@@ -28,7 +28,7 @@ public class Employee extends DomainObject {
     private int hoursPerMonth;
 
     @ManyToOne
-    private Restaurant worksAt;
+    private Restaurant restaurant;
 
     @ManyToMany
     private List<AvailableSlot> availability;

@@ -27,9 +27,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Transactional(readOnly=true)
-    public List<Employee> findByRestaurant(Restaurant restaurant)
+    public List<Employee> findByRestaurant(Restaurant worksAt)
     {
-        return Lists.newArrayList(employeeRepository.findByRestaurant(restaurant));
+        return Lists.newArrayList(employeeRepository.findByRestaurant(worksAt));
     }
 
     @Transactional(readOnly=true)

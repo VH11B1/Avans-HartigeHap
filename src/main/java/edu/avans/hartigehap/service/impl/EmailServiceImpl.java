@@ -18,7 +18,7 @@ import java.util.Properties;
  */
 public class EmailServiceImpl implements NotificationService {
 
-    MailSender mailSender;
+    private MailSender mailSender;
 
     public void setMailSender (MailSender  mailSender){
         this.mailSender = mailSender;
