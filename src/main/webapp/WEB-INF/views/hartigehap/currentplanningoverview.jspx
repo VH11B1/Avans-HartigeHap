@@ -23,7 +23,6 @@
     <table>
         <thead>
         <tr>
-            <!-- TODO labels -->
             <th>${label_employee_col}</th>
             <th>${label_role_col}</th>
             <th>${label_plannedslot_col}</th>

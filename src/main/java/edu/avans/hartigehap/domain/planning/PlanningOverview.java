@@ -14,7 +14,7 @@ package edu.avans.hartigehap.domain.planning;
         import java.util.List;
 
 /**
- * How to add a new getSomethingMeetingThisAndThatCondition:
+ * How to add a new getSomethingMeetingThisAndThatCondition method to PlanningOverview:
  *
  * - Create a new Criteria in criteria.impl, for instance PresentCriteria
  * - Create a new Criteria Type in Criteria, for instance PRESENT (new PresentCriteria())
