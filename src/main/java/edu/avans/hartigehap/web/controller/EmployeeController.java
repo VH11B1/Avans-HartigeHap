@@ -53,7 +53,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees/{id}/edit", method = RequestMethod.GET)
-    public String editCustomer(@PathVariable("id") Long id, Model model)
+    public String editEmployee(@PathVariable("id") Long id, Model model)
     {
         model.addAttribute("employee", employeeService.findById(id));
         model.addAttribute("restaurants", restaurantService.findAll());
@@ -72,6 +72,8 @@ public class EmployeeController {
             Locale locale
     )
     {
+        //employee.setRestaurant(restaurantService.findById());
+
         if (bindingResult.hasErrors())
         {
             model.addAttribute("message", new Message("error", messageSource.getMessage(
