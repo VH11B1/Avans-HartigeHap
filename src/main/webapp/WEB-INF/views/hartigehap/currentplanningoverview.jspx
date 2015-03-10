@@ -5,11 +5,13 @@
      xmlns:joda="http://www.joda.org/joda/time/tags"
      xmlns:spring="http://www.springframework.org/tags" version="2.0"
      xmlns:sec="http://www.springframework.org/security/tags">
+    <jsp:directive.page import="edu.avans.hartigehap.domain.planning.Planning"/>
     <jsp:directive.page contentType="text/html;charset=UTF-8" />
     <jsp:output omit-xml-declaration="yes" />
 
     <spring:message code="label_planning_overview" var="labelPlanningOverview" />
     <spring:message code="label_employee_col" var="label_employee_col" />
+    <spring:message code="label_actual_employee_col" var="label_actual_employee_col" />
     <spring:message code="label_role_col" var="label_role_col" />
     <spring:message code="label_plannedslot_col" var="label_plannedslot_col" />
     <spring:message code="label_actualslot_col" var="label_actualslot_col" />
@@ -24,6 +26,7 @@
         <thead>
         <tr>
             <th>${label_employee_col}</th>
+            <th>${label_actual_employee_col}</th>
             <th>${label_role_col}</th>
             <th>${label_plannedslot_col}</th>
             <th>${label_actualslot_col}</th>
@@ -31,9 +34,21 @@
         </thead>
         <tbody>
         <c:forEach items="${plannings}" var="planning">
-            <!--<spring:url var="showRestaurant" value="/restaurants/${planning.}" />-->
-            <tr>
+                <!--<spring:url var="showRestaurant" value="/restaurants/${planning.}" />-->
+
+                <c:choose>
+                    <c:when test='${(planning.getActualSlot().getActualEmployee().getName().equals(planning.getEmployee().getName()))}'>
+                        <c:set var="warning" value="" scope="page"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="warning" value="background-color:red;" scope="page"/>
+                    </c:otherwise>
+                </c:choose>
+
+                <tr style="${warning}">
+
                 <td><a href="#">${planning.getEmployee().getName()}</a></td>
+                <td><a href="#">${planning.getActualSlot().getActualEmployee().getName()}</a></td>
                 <td><a href="#">${planning.getRole()}</a></td>
                 <td><fmt:formatDate value="${planning.getPlannedSlot().getStartDate()}" pattern="HH:mm dd-MM-yyyy" /></td>
                 <td><fmt:formatDate value="${planning.getActualSlot().getStartDate()}" pattern="HH:mm dd-MM-yyyy" /></td>

@@ -24,6 +24,8 @@
 	<spring:message code="label_dining_tables" var="labelDiningTables" />
 	<spring:message code="label_dining_table" var="labelDiningTable" />
 
+    <spring:message code="label_planning_overview" var="label_planning_overview" />
+
     <sec:authorize access="isAnonymous()">
 	    <h3>${labelEmployeeArea}</h3>
     </sec:authorize>
@@ -54,6 +56,8 @@
 			<spring:url var="customerSubsystem" value="/restaurants/${restaurant.id}/customers" />					
 			<a href="${customerSubsystem}">${restaurant.id} ${labelCustomerSubsystem}</a>							
 		</c:if>
+        <spring:url var="planningoverview" value="/currentoverviews" />
+        <a href="${planningoverview}">${label_planning_overview}</a>
     </sec:authorize>
 
     <sec:authorize access="isAnonymous()">
