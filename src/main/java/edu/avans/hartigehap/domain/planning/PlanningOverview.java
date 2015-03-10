@@ -52,6 +52,14 @@ public class PlanningOverview {
         populate();
     }
 
+    public void addEmployee(Employee employee){
+        this.employees.add(employee);
+    }
+
+    public void addPlanning(Planning p){
+        this.planning.add(p);
+    }
+
     public void setPlanningList(List<Planning> list){
         this.planning = list;
     }
