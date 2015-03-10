@@ -128,4 +128,26 @@ public class PlanningOverviewTest extends TestCase {
         }
         System.err.println("----------------------------------------------------------------------------------------------------");
     }
+
+    @Test
+    public void testGetEmployeesPlannedToday(){
+
+        PlanningOverview overview = new PlanningOverview();
+
+        List<Employee> employees = overview.getAllEmployees();
+
+        List<Planning> l = overview.getEmployeesPlannedToday(employees.get(0));
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        System.err.println("----------------------Is E.M. Ployee planned today?---------------------");
+        for (Planning p : l) {
+            System.err.println(p.getEmployee().getName()
+                    + " is planned from "
+                    + p.getPlannedSlot().getStart().format(formatter)
+                    + " to "
+                    + p.getPlannedSlot().getEnd().format(formatter)
+            + " in " + p.getRole());
+        }
+        System.err.println("------------------------------------------------------------------------");
+    }
 }
