@@ -7,7 +7,6 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
-
 	<spring:message code="label_restaurant_overview" var="labelRestaurantOverview" />
 	<spring:message code="label_restaurants" var="labelRestaurants" />
 	<spring:message code="label_admin_area" var="labelAdminArea" />
@@ -16,12 +15,21 @@
 	<spring:message code="label_create_huilendehamburger" var="labelCreateHuilendeHamburger" />
 	<spring:message code="label_create_button" var="labelCreateButton" />
 
-	<h1>${labelRestaurantOverview}</h1>
+    <h2>Manage restaurants</h2>
 
 	<c:if test="${not empty message}">
 		<div id="message" class="${message.type}">${message.message}</div>
 	</c:if>
 
+    <table class="table table-striped">
+        <tbody>
+            <c:forEach items="${restaurants}" var="restaurant">
+                <tr><td><a href="/restaurants/${restaurant.id}">${restaurant.id}</a></td></tr>
+            </c:forEach>
+        </tbody>
+    </table>
+
+    <!--
 	<table>
 		<thead>
 			<tr>
@@ -30,11 +38,12 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${restaurants}" var="restaurant">
-				<spring:url var="showRestaurant" value="/restaurants/${restaurant.id}" />					
+				<spring:url var="showRestaurant" value="/restaurants/${restaurant.id}" />
 				<tr>
-					<td><a href="${showRestaurant}">${restaurant.id}</a></td>							
+					<td><a href="${showRestaurant}">${restaurant.id}</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	-->
 </div>

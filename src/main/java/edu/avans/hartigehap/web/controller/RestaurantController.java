@@ -58,5 +58,4 @@ public class RestaurantController {
     public void createRestaurants() {
         //restaurantPopulatorService.createRestaurantsWithInventory();
     }
-
 }
