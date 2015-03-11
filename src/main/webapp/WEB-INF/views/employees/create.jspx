@@ -1,13 +1,50 @@
-<!--
-  Created by IntelliJ IDEA.
-  User: Bob
-  Date: 3/9/2015
-  Time: 5:19 PM
-  To change this template use File | Settings | File Templates.
--->
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
-    <html>
-    <head><title>Simple jspx page</title></head>
-    <body>Place content here</body>
-    </html>
-</jsp:root>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0" xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:form="http://www.springframework.org/tags/form">
+    <jsp:directive.page contentType="text/html;charset=UTF-8" />
+    <jsp:output omit-xml-declaration="yes" />
+
+    <h2>Create employee ${employee.name}</h2>
+
+    <form:form method="POST" action="/employees/${employee.id}" commandName="employee">
+
+        <h3>Account information</h3>
+        <div class="form-group">
+            <form:label path="username">Username</form:label>
+            <form:input path="username" cssClass="form-control" />
+        </div>
+
+        <div class="form-group">
+            <form:label path="password">Password</form:label>
+            <form:password path="password" cssClass="form-control" showPassword="false" />
+        </div>
+
+        <h3>Employee information</h3>
+        <div class="form-group">
+            <form:label path="name">Name</form:label>
+            <form:input path="name" cssClass="form-control" />
+        </div>
+
+        <div class="form-group">
+            <form:label path="email">E-mail</form:label>
+            <form:input path="email" type="email" cssClass="form-control" />
+        </div>
+
+        <div class="form-group">
+            <form:label path="hoursPerMonth">Workhours p/m</form:label>
+            <form:input path="hoursPerMonth" type="number" cssClass="form-control" />
+        </div>
+
+        <div class="form-group">
+            <form:label path="restaurant">Works at</form:label>
+            <form:select path="restaurant" items="${restaurants}" itemLabel="id" itemValue="id" cssClass="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-ok-sign"><jsp:text/></span>
+            Save changes
+        </button>
+
+    </form:form>
+
+</div>

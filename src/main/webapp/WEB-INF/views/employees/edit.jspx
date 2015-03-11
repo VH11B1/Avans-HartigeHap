@@ -40,7 +40,10 @@
             <form:select path="restaurant" items="${restaurants}" itemLabel="id" itemValue="id" cssClass="form-control" />
         </div>
 
-        <input value="Save changes" type="submit" class="btn btn-success" />
+        <button type="submit" class="btn btn-success">
+            <span class="glyphicon glyphicon-ok-sign"><jsp:text/></span>
+            Save changes
+        </button>
 
     </form:form>
 
