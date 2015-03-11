@@ -26,7 +26,7 @@ import javax.validation.Valid;
 import java.util.Locale;
 
 @Controller
-//@PreAuthorize("hasRole('MANAGEMENT')")
+@PreAuthorize("hasRole('ROLE_EMPLOYEE')")
 public class EmployeeController {
 
     @Autowired
