@@ -91,7 +91,7 @@ public class PlanningOverviewTest extends TestCase {
     @Test
     public void testBetweenStartDates(){
         PlanningOverview overview = new PlanningOverview();
-        List<Planning> l = overview.getPlannedForNextWeekExclToday();
+        List<Planning> l = overview.getPlannedForNextWeekInclToday();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 

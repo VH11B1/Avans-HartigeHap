@@ -15,7 +15,7 @@
     <spring:message code="label_role_col" var="label_role_col" />
     <spring:message code="label_plannedslot_col" var="label_plannedslot_col" />
     <spring:message code="label_actualslot_col" var="label_actualslot_col" />
-
+    <spring:message code="label_unauthorized" var="label_unauthorized" />
     <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
     <h1>${labelPlanningOverview}</h1>
 
@@ -43,18 +43,18 @@
         </thead>
         <tbody>
         <c:forEach items="${plannings}" var="planning">
-                <!--<spring:url var="showRestaurant" value="/restaurants/${planning.}" />-->
+            <!--<spring:url var="showRestaurant" value="/restaurants/${planning.}" />-->
 
-                <c:choose>
-                    <c:when test='${(planning.getActualSlot().getActualEmployee().getName().equals(planning.getEmployee().getName()))}'>
-                        <c:set var="warning" value="" scope="page"/>
-                    </c:when>
-                    <c:otherwise>
-                        <c:set var="warning" value="background-color:red;" scope="page"/>
-                    </c:otherwise>
-                </c:choose>
+            <c:choose>
+                <c:when test='${(planning.getActualSlot().getActualEmployee().getName().equals(planning.getEmployee().getName()))}'>
+                    <c:set var="warning" value="" scope="page"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="warning" value="background-color:red;" scope="page"/>
+                </c:otherwise>
+            </c:choose>
 
-                <tr style="${warning}">
+            <tr style="${warning}">
 
                 <td><a href="#">${planning.getEmployee().getName()}</a></td>
                 <td><a href="#">${planning.getActualSlot().getActualEmployee().getName()}</a></td>

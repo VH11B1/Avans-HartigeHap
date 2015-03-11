@@ -12,4 +12,8 @@ public interface PlanningOverviewService {
     // use case: het is mogelijk voor de manager om een overzicht op te vragen
     // met daarin wie op dat moment welke rol vervult
     List<Planning> getCurrentWorking();
+
+    List<Planning> getWeekPlanning();
+
+
 }

@@ -110,7 +110,7 @@ public class PlanningOverview {
         return roleFilter.filter();
     }
 
-    public List<Planning> getPlannedForNextWeekExclToday(){
+    public List<Planning> getPlannedForNextWeekInclToday(){
         List<Planning> list = planning; // all planned
 
         // filter by next week, starting today

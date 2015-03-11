@@ -22,7 +22,6 @@ public class PlanningOverviewController {
     @Autowired
     private PlanningOverviewService planningOverviewService;
 
-    // mapping to "/" is not RESTful, but is for bootstrapping!
     @RequestMapping(value = "/currentoverviews", method = RequestMethod.GET)
     public String currentOverview(Model uiModel) {
 
@@ -31,5 +30,16 @@ public class PlanningOverviewController {
         uiModel.addAttribute("plannings",list);
 
         return "hartigehap/currentplanningoverview";
+    }
+
+
+    @RequestMapping(value = "/weekoverviews", method = RequestMethod.GET)
+    public String currentWeekOverview(Model uiModel) {
+
+        Collection<Planning> list = planningOverviewService.getWeekPlanning();
+
+        uiModel.addAttribute("plannings",list);
+
+        return "hartigehap/weekplanningoverview";
     }
 }
