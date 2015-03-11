@@ -16,6 +16,6 @@ public class MailObserver implements IObserver{
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("spring-context.xml");
         NotificationService notificationService = (EmailServiceImpl) context.getBean("emailService");
-        notificationService.sendNotification("no-reply@hh.nl",employee.getEmail(), subject, message);
+        notificationService.sendNotification("no-reply@hh.nl",supervisor.getEmail(), subject, message);
     }
 }

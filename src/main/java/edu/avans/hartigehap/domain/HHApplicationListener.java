@@ -46,7 +46,7 @@ public class HHApplicationListener implements AuthenticationSuccessHandler {
             overview.addPlanning(p);
         }
 
-        List<Planning> l = overview.getEmployeesPlannedToday();
+        List<Planning> l = overview.getEmployeesPlannedToday(employee);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         Date currentDate = Calendar.getInstance().getTime();
@@ -56,8 +56,9 @@ public class HHApplicationListener implements AuthenticationSuccessHandler {
         for (Planning p : l) {
             long tempDiff = TimeUnit.MILLISECONDS.toMinutes(p.getPlannedSlot().getStartDate().getTime() - currentDate.getTime());
 
-            if (tempDiff >= 30 && p.getPlannedSlot().getStartDate().after(currentDate))
+            if (tempDiff >= 30 && p.getPlannedSlot().getStartDate().after(currentDate)) {
                 late = false;
+            }
             else if(tempDiff > diff){
                 diff = tempDiff;
                 supervisor = p.getSupervisor();
@@ -65,7 +66,7 @@ public class HHApplicationListener implements AuthenticationSuccessHandler {
         }
 
         if(late && l.size() > 0){
-            NotificationSubject.getInstance().notifyObservers(employee, supervisor, employee.getName() +" te laat", employee.getName() + " is " + diff + " minuten te laat aangemeld.");
+            NotificationSubject.getInstance().notifyObservers(employee, supervisor, employee.getName() +" te laat", employee.getName() + " is " + -diff + " minuten te laat aangemeld.");
         }
         httpServletResponse.sendRedirect("/");
     }

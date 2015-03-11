@@ -22,7 +22,13 @@ public class Planning extends DomainObject{
         private Employee employee;
 
         private EmployeeRole role;
+
+        @OneToOne
         private PlannedSlot plannedSlot;
+
+        @OneToOne
         private ActualSlot actualSlot;
+
+        @ManyToOne
         private Employee supervisor;
 }
