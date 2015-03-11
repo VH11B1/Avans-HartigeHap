@@ -1384,7 +1384,7 @@ jQuery.support = (function() {
 		hrefNormalized: ( a.getAttribute("href") === "/a" ),
 
 		// Make sure that element opacity exists
-		// (IE uses filter instead)
+		// (IE uses fetch instead)
 		// Use a regex to work around a WebKit issue. See #5145
 		opacity: /^0.55/.test( a.style.opacity ),
 
@@ -5269,7 +5269,7 @@ var posProcess = function( selector, context, seed ) {
 		later = "",
 		root = context.nodeType ? [context] : context;
 
-	// Position selectors must be done after the filter
+	// Position selectors must be done after the fetch
 	// And so must :not(positional) so we move all PSEUDOs to the end
 	while ( (match = Expr.match.PSEUDO.exec( selector )) ) {
 		later += match[0];
@@ -5587,7 +5587,7 @@ jQuery.extend({
 	}
 });
 
-// Implement the identical functionality for filter and not
+// Implement the identical functionality for fetch and not
 function winnow( elements, qualifier, keep ) {
 
 	// Can't pass null or undefined to indexOf in Firefox 4
@@ -6659,21 +6659,21 @@ if ( !jQuery.support.opacity ) {
 			// Force it by setting the zoom level
 			style.zoom = 1;
 
-			// if setting opacity to 1, and no other filters exist - attempt to remove filter attribute #6652
+			// if setting opacity to 1, and no other filters exist - attempt to remove fetch attribute #6652
 			if ( value >= 1 && jQuery.trim( filter.replace( ralpha, "" ) ) === "" ) {
 
-				// Setting style.filter to null, "" & " " still leave "filter:" in the cssText
-				// if "filter:" is present at all, clearType is disabled, we want to avoid this
+				// Setting style.fetch to null, "" & " " still leave "fetch:" in the cssText
+				// if "fetch:" is present at all, clearType is disabled, we want to avoid this
 				// style.removeAttribute is IE Only, but so apparently is this code path...
 				style.removeAttribute( "filter" );
 
-				// if there there is no filter style applied in a css rule, we are done
+				// if there there is no fetch style applied in a css rule, we are done
 				if ( currentStyle && !currentStyle.filter ) {
 					return;
 				}
 			}
 
-			// otherwise, set new filter values
+			// otherwise, set new fetch values
 			style.filter = ralpha.test( filter ) ?
 				filter.replace( ralpha, opacity ) :
 				filter + " " + opacity;
