@@ -156,6 +156,10 @@ public class PlanningOverview {
         return new PlannedDayPartFilter(new PlannedStartBetweenDatesFilter(planning,startOfToday, endOfToday), partOfDay).filter() ;
     }
 
+    public List<Planning> getFullOverviewFromNow(){
+        return new PlannedStartFromDateFilter(planning,LocalDateTime.now()).filter();
+    }
+
     // TODO implement for realsies
     private TimeSlot.DayPart getCurrentDayPart(){
         return TimeSlot.DayPart.MORNING;
@@ -203,11 +207,20 @@ public class PlanningOverview {
         // employee 2 planned, employee 3 actual
         Planning p2 = new Planning();
         p2.setEmployee(e2);
-        p2.setPlannedSlot(new PlannedSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now().plusDays(1),
+        p2.setPlannedSlot(new PlannedSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now(),
                 LocalDateTime.now()));
-        p2.setActualSlot(new ActualSlot(TimeSlot.DayPart.AFTERNOON,LocalDateTime.now().plusDays(1),
+        p2.setActualSlot(new ActualSlot(TimeSlot.DayPart.AFTERNOON,LocalDateTime.now(),
                 LocalDateTime.now(), e3));
         p2.setRole(e2.getRoles().get(0));
+
+        // employee 2 planned, employee 2 actual
+        Planning p8 = new Planning();
+        p8.setEmployee(e2);
+        p8.setPlannedSlot(new PlannedSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now().plusDays(1),
+                LocalDateTime.now()));
+        p8.setActualSlot(new ActualSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now().plusDays(1),
+                LocalDateTime.now(), e2));
+        p8.setRole(e2.getRoles().get(0));
 
         // employee 2 planned, employee 1 actual
         Planning p3 = new Planning();

@@ -26,9 +26,12 @@
     <div>
         <spring:url var="showDailyPlanning" value="/currentoverviews" />
         <spring:url var="showWeeklyPlanning" value="/weekoverviews" />
+        <spring:url var="showFullPlanning" value="/fulloverview" />
         <a href="${showDailyPlanning}">day</a>
         |
         <a href="${showWeeklyPlanning}">week</a>
+        |
+        <a href="${showFullPlanning}">full</a>
     </div>
 
     <table>

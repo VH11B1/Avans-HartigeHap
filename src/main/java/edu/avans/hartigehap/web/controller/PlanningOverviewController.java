@@ -42,4 +42,16 @@ public class PlanningOverviewController {
 
         return "hartigehap/weekplanningoverview";
     }
+
+    @RequestMapping(value = "/fulloverview", method = RequestMethod.GET)
+    public String fullOverview(Model uiModel) {
+
+        // TODO pagination
+
+        Collection<Planning> list = planningOverviewService.getAllPlanningFromNow();
+
+        uiModel.addAttribute("plannings",list);
+
+        return "hartigehap/fullplanningoverview";
+    }
 }

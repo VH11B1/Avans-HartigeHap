@@ -15,5 +15,5 @@ public interface PlanningOverviewService {
 
     List<Planning> getWeekPlanning();
 
-
+    List<Planning> getAllPlanningFromNow();
 }

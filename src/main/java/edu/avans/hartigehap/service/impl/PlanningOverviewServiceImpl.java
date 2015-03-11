@@ -48,4 +48,15 @@ public class PlanningOverviewServiceImpl implements PlanningOverviewService{
 
         return planningOverview.getPlannedForNextWeekInclToday();
     }
+
+    @Override
+    public List<Planning> getAllPlanningFromNow() {
+        PlanningOverview planningOverview = new PlanningOverview();
+
+        List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
+
+        planningOverview.setPlanningList(allPlanning);
+
+        return planningOverview.getFullOverviewFromNow();
+    }
 }
