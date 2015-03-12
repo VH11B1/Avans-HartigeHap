@@ -11,11 +11,11 @@ import java.util.List;
  */
 public class PlannedDayPartFilter extends FilterDecorator<TimeSlot.DayPart> {
 
-    public PlannedDayPartFilter(List<Planning> list,TimeSlot.DayPart... l){
+    public PlannedDayPartFilter(final List<Planning> list, final TimeSlot.DayPart... l){
         super(list,l);
     }
 
-    public PlannedDayPartFilter(Filter f,TimeSlot.DayPart... l){
+    public PlannedDayPartFilter(final Filter f, final TimeSlot.DayPart... l){
         super(f,l);
         setOriginal(f);
     }

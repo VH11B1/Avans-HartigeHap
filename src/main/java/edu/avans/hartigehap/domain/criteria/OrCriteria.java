@@ -33,7 +33,7 @@ public class OrCriteria extends Criteria{
         return l;
     }
 
-    private List<Planning> mergeOr(List<Planning> original, final List<Planning> newList){
+    private List<Planning> mergeOr(final List<Planning> original, final List<Planning> newList){
         for(Planning p : newList){
             if(!original.contains(p)){
                 original.add(p);

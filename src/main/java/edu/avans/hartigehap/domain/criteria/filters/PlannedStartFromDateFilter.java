@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class PlannedStartFromDateFilter extends FilterDecorator<LocalDateTime> {
 
-    public PlannedStartFromDateFilter(List<Planning> list,LocalDateTime... dates){
+    public PlannedStartFromDateFilter(final List<Planning> list, final LocalDateTime... dates){
         super(list,dates);
     }
 
-    public PlannedStartFromDateFilter(Filter f,LocalDateTime... dates){
+    public PlannedStartFromDateFilter(final Filter f, final LocalDateTime... dates){
         super(f,dates);
         setOriginal(f);
     }
@@ -36,7 +36,7 @@ public class PlannedStartFromDateFilter extends FilterDecorator<LocalDateTime> {
         return filteredList;
     }
 
-    private boolean dateMatch(TimeSlot slot){
+    private boolean dateMatch(final TimeSlot slot){
 
         LocalDateTime startDate = slot.getStart();
 

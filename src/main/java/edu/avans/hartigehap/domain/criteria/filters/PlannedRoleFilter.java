@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class PlannedRoleFilter extends FilterDecorator<EmployeeRole> {
 
-    public PlannedRoleFilter(List<Planning> list, EmployeeRole... roles){
+    public PlannedRoleFilter(final List<Planning> list, final EmployeeRole... roles){
         super(list, roles);
     }
 
-    public PlannedRoleFilter(Filter f, EmployeeRole... roles){
+    public PlannedRoleFilter(final Filter f, final EmployeeRole... roles){
         super(f, roles);
         setOriginal(f);
     }

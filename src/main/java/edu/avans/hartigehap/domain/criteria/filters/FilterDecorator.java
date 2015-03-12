@@ -11,12 +11,12 @@ import java.util.List;
  */
 public abstract class FilterDecorator<E> extends Filter<E>{
 
-    public FilterDecorator(Filter f, E... items){
+    public FilterDecorator(final Filter f, final E... items){
         setPlanningList(f.getPlanningList());
         set(items);
     }
 
-    public FilterDecorator(List<Planning> list, E... items){
+    public FilterDecorator(final List<Planning> list, final E... items){
         setPlanningList(list);
         set(items);
     }

@@ -14,7 +14,7 @@ import java.util.List;
 public class InPlannedRoleCriteria extends Criteria {
     private List<EmployeeRole> employeeRoles;
 
-    public InPlannedRoleCriteria(EmployeeRole... a){
+    public InPlannedRoleCriteria(final EmployeeRole... a){
         this.employeeRoles = Arrays.asList(a);
     }
 

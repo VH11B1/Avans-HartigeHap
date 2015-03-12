@@ -216,9 +216,9 @@ public class PlanningOverview {
         // employee 2 planned, employee 2 actual
         Planning p8 = new Planning();
         p8.setEmployee(e2);
-        p8.setPlannedSlot(new PlannedSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now().plusDays(1),
+        p8.setPlannedSlot(new PlannedSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now().plusDays(1).plusMinutes(5),
                 LocalDateTime.now()));
-        p8.setActualSlot(new ActualSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now().plusDays(1),
+        p8.setActualSlot(new ActualSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now().plusDays(1).plusMinutes(5),
                 LocalDateTime.now(), e2));
         p8.setRole(e2.getRoles().get(0));
 
@@ -265,6 +265,7 @@ public class PlanningOverview {
         planning.add(p4);
         planning.add(p6);
         planning.add(p7);
+        planning.add(p8);
 
     }
 }

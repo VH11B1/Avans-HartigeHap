@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class PlannedCriteria extends Criteria{
     @Override
-    public List<Planning> meetCriteria(List<Planning> l) {
+    public List<Planning> meetCriteria(final List<Planning> l) {
         return l;
     }
 }

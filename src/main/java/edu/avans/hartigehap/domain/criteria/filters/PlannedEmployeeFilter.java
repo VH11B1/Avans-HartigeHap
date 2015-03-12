@@ -11,11 +11,11 @@ import java.util.List;
  */
 public class PlannedEmployeeFilter extends FilterDecorator<Employee>{
 
-    public PlannedEmployeeFilter(List<Planning> list, Employee... employees){
+    public PlannedEmployeeFilter(final List<Planning> list, final Employee... employees){
         super(list, employees);
     }
 
-    public PlannedEmployeeFilter(Filter f, Employee... employees){
+    public PlannedEmployeeFilter(final Filter f, final Employee... employees){
         super(f, employees);
         setOriginal(f);
     }
@@ -34,7 +34,7 @@ public class PlannedEmployeeFilter extends FilterDecorator<Employee>{
         return filteredList;
     }
 
-    private boolean employeeInList(Employee e){
+    private boolean employeeInList(final Employee e){
         if (getFilterItems().contains(e)){
             return true;
         }else{

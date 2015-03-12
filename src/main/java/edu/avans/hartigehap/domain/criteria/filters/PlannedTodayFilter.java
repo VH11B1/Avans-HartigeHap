@@ -13,11 +13,11 @@ import java.util.List;
  */
 public class PlannedTodayFilter extends FilterDecorator<LocalDateTime>{
 
-    public PlannedTodayFilter(List<Planning> list){
+    public PlannedTodayFilter(final List<Planning> list){
         super(list, LocalDateTime.now());
     }
 
-    public PlannedTodayFilter(Filter f){
+    public PlannedTodayFilter(final Filter f){
         super(f, LocalDateTime.now());
         setOriginal(f);
     }
@@ -36,7 +36,7 @@ public class PlannedTodayFilter extends FilterDecorator<LocalDateTime>{
         return filteredList;
     }
 
-    private boolean dateIsToday(Planning p){
+    private boolean dateIsToday(final Planning p){
         if(p.getPlannedSlot().getStart().compareTo(LocalDateTime.now()) >= -1 & p.getPlannedSlot().getStart().compareTo(LocalDateTime.now()) <= -1){
             return true;
         }
@@ -48,8 +48,7 @@ public class PlannedTodayFilter extends FilterDecorator<LocalDateTime>{
     }
 
     @Override
-    public void set(LocalDateTime... l){
-
+    public void set(final LocalDateTime... l){
         LOGGER.info("This filter does not require filter items to be set");
     }
 }

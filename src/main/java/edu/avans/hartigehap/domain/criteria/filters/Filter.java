@@ -36,14 +36,14 @@ public abstract class Filter<E> {
      */
     public abstract List<Planning> filter();
 
-    protected List<E> getFilterItems(){
+    protected final List<E> getFilterItems(){
         if(filterItems == null || filterItems.isEmpty()){
             LOGGER.info("No filter items specified: " + this.getClass().getCanonicalName());
         }
         return filterItems;
     }
 
-    protected List<Planning> getPlanningList(){
+    protected final List<Planning> getPlanningList(){
         if(original == null){
             // if no original, starting list is own list
             return planningList;

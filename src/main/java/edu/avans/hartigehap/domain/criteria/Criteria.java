@@ -12,7 +12,7 @@ import java.util.List;
  * Criteria/Filter pattern
  */
 public abstract class Criteria {
-    public abstract List<Planning> meetCriteria(List<Planning> l);
+    public abstract List<Planning> meetCriteria(final List<Planning> l);
 
     private boolean alwaysSucceed = false;
 
@@ -36,7 +36,7 @@ public abstract class Criteria {
         @Getter
         private Criteria criteria;
 
-        private Type(Criteria c){
+        private Type(final Criteria c){
             this.criteria = c;
         }
 

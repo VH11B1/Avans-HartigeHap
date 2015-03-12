@@ -14,11 +14,11 @@ import java.util.List;
 public class PlannedStartBetweenDatesFilter extends FilterDecorator<LocalDateTime> {
 
 
-    public PlannedStartBetweenDatesFilter(List<Planning> list,LocalDateTime... dates){
+    public PlannedStartBetweenDatesFilter(final List<Planning> list, final LocalDateTime... dates){
         super(list,dates);
     }
 
-    public PlannedStartBetweenDatesFilter(Filter f,LocalDateTime... dates){
+    public PlannedStartBetweenDatesFilter(final Filter f, final LocalDateTime... dates){
         super(f,dates);
         setOriginal(f);
     }
@@ -44,7 +44,7 @@ public class PlannedStartBetweenDatesFilter extends FilterDecorator<LocalDateTim
     }
 
     @Override
-    public void set(LocalDateTime... l) {
+    public void set(final LocalDateTime... l) {
         if(l == null || l.length < 1){
             // will cause error log on get
             setFilterItems(null);
@@ -56,7 +56,7 @@ public class PlannedStartBetweenDatesFilter extends FilterDecorator<LocalDateTim
 
     }
 
-    private boolean dateMatch(TimeSlot slot){
+    private boolean dateMatch(final TimeSlot slot){
         List<LocalDateTime> dates = getFilterItems();
         LocalDateTime startDate = slot.getStart();
 

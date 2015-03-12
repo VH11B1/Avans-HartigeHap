@@ -23,4 +23,12 @@ public class Planning extends DomainObject{
         private EmployeeRole role;
         private PlannedSlot plannedSlot;
         private ActualSlot actualSlot;
+
+        public boolean hasActual(){
+            if(actualSlot == null){
+                return false;
+            }else{
+                return true;
+            }
+        }
 }
