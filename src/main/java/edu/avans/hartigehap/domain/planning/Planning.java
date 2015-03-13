@@ -31,4 +31,12 @@ public class Planning extends DomainObject{
 
         @ManyToOne
         private Employee supervisor;
+
+        @Transient
+        public boolean hasActualSlot(){
+            if(actualSlot==null){
+                return false;
+            }
+            return true;
+        }
 }

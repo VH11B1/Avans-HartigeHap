@@ -1,5 +1,13 @@
 # README #
 
+### Starten met lege hh database ###
+Na opstarten applicatie (aan laten maken van database), eerst src/main/resources/Users.sql importeren/uitvoeren in de (nu gevulde) hh database.
+Anders kan er niet ingelogd worden en kunnen zodoende de gemaakte onderdelen niet bekeken worden.
+
+Inloggegevens
+username: mark
+password: mark
+
 Deze Hartige Hap webapplicatie is gemaakt met Spring MVC.
 
 ### What is this repository for? ###

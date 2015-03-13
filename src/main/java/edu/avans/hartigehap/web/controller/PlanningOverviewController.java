@@ -28,6 +28,7 @@ public class PlanningOverviewController {
         Collection<Planning> list = planningOverviewService.getCurrentWorking();
 
         uiModel.addAttribute("plannings",list);
+        uiModel.addAttribute("scope","day");
 
         return "hartigehap/currentplanningoverview";
     }
@@ -39,8 +40,9 @@ public class PlanningOverviewController {
         Collection<Planning> list = planningOverviewService.getWeekPlanning();
 
         uiModel.addAttribute("plannings",list);
+        uiModel.addAttribute("scope","week");
 
-        return "hartigehap/weekplanningoverview";
+        return "hartigehap/currentplanningoverview";
     }
 
     @RequestMapping(value = "/fulloverview", method = RequestMethod.GET)
@@ -51,7 +53,8 @@ public class PlanningOverviewController {
         Collection<Planning> list = planningOverviewService.getAllPlanningFromNow();
 
         uiModel.addAttribute("plannings",list);
+        uiModel.addAttribute("scope","full");
 
-        return "hartigehap/fullplanningoverview";
+        return "hartigehap/currentplanningoverview";
     }
 }

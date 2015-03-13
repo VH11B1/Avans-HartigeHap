@@ -25,12 +25,6 @@
     <definition extends="default" name="hartigehap/currentplanningoverview">
         <put-attribute name="body" value="/WEB-INF/views/hartigehap/currentplanningoverview.jspx" />
     </definition>
-    <definition extends="default" name="hartigehap/weekplanningoverview">
-        <put-attribute name="body" value="/WEB-INF/views/hartigehap/weekplanningoverview.jspx" />
-    </definition>
-    <definition extends="default" name="hartigehap/fullplanningoverview">
-        <put-attribute name="body" value="/WEB-INF/views/hartigehap/fullplanningoverview.jspx" />
-    </definition>
 	<definition extends="default" name="hartigehap/restaurant">
 		<put-attribute name="body" value="/WEB-INF/views/hartigehap/restaurant.jspx" />
 	</definition>

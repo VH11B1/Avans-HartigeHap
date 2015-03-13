@@ -27,9 +27,11 @@ public class PlanningOverviewTest extends TestCase {
 
         System.err.println("-------------- Planned employees who did not show up ------------------");
         for (Planning p : l) {
-            System.err.println(p.getEmployee().getName()
-                    + " was not present and was replaced by "
-                    + p.getActualSlot().getActualEmployee().getName());
+            if(p.hasActualSlot()){
+                System.err.println(p.getEmployee().getName()
+                        + " was not present and was replaced by "
+                        + p.getActualSlot().getActualEmployee().getName());
+            }
         }
 
         System.err.println("-------------------------------------------------------------------------");

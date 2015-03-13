@@ -24,7 +24,12 @@
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" media="screen" href="${bootstrap_css_url}" />
         <link rel="stylesheet" type="text/css" media="screen" href="${custom_css_url}" />
-
+        <style>
+            /* voor bottom navbar */
+            body{
+                padding-bottom: 70px;
+            }
+        </style>
         <!-- JavaScript -->
         <script type="text/javascript" src="${jquery_url}"><jsp:text/></script>
         <script type="text/javascript" src="${bootstrap_js_url}"><jsp:text/></script>

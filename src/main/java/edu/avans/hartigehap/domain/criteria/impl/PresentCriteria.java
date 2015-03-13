@@ -16,9 +16,11 @@ public class PresentCriteria extends Criteria {
     public List<Planning> meetCriteria(List<Planning> l) {
         List<Planning> present = new ArrayList<Planning>();
         for (Planning p : l) {
-            ActualSlot actual = p.getActualSlot();
-            if (p.getEmployee().equals(actual.getActualEmployee())) {
-                present.add(p);
+            if(p.hasActualSlot()) {
+                ActualSlot actual = p.getActualSlot();
+                if (p.getEmployee().equals(actual.getActualEmployee())) {
+                    present.add(p);
+                }
             }
         }
         return present;

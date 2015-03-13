@@ -30,34 +30,38 @@
 	    <h3>${labelEmployeeArea}</h3>
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
-		<h3>${labelRestaurants}</h3>
-		<c:forEach items="${restaurants}" var="restaurant">
-			<spring:url var="showRestaurant" value="/restaurants/${restaurant.id}" />					
-			<a href="${showRestaurant}">${restaurant.id}</a>							
-		</c:forEach>
-	
-	
-		<c:if test="${not empty restaurant}">
-			<h3>${restaurant.id} ${labelSubsystems}</h3>
-	
-			<c:forEach items="${restaurant.diningTables}" var="diningTable">
-				<spring:url var="showTable" value="/diningTables/${diningTable.id}" />					
-				<tr>
-					<td><a href="${showTable}">${restaurant.id} ${labelDiningTable} ${diningTable.tableNr}</a></td>							
-				</tr>
-			</c:forEach>
-		
-			<spring:url var="kitchenSubsystem" value="/restaurants/${restaurant.id}/kitchen" />					
-			<a href="${kitchenSubsystem}">${restaurant.id} ${labelKitchenSubsystem}</a>							
-		
-			<spring:url var="waiterSubsystem" value="/restaurants/${restaurant.id}/waiter" />					
-			<a href="${waiterSubsystem}">${restaurant.id} ${labelWaiterSubsystem}</a>							
-		
-			<spring:url var="customerSubsystem" value="/restaurants/${restaurant.id}/customers" />					
-			<a href="${customerSubsystem}">${restaurant.id} ${labelCustomerSubsystem}</a>							
-		</c:if>
-        <spring:url var="planningoverview" value="/currentoverviews" />
-        <a href="${planningoverview}">${label_planning_overview}</a>
+
+        <div class="list-group">
+
+            <c:if test="${not empty restaurant}">
+
+                <h3>${labelRestaurants}</h3>
+                <c:forEach items="${restaurants}" var="restaurant">
+                    <spring:url var="showRestaurant" value="/restaurants/${restaurant.id}" />
+                    <a href="${showRestaurant}" class="list-group-item">${restaurant.id}</a>
+                </c:forEach>
+
+                <h3>${restaurant.id} ${labelSubsystems}</h3>
+                <c:forEach items="${restaurant.diningTables}" var="diningTable">
+                    <spring:url var="showTable" value="/diningTables/${diningTable.id}" />
+                    <tr>
+                        <td><a href="${showTable}"  class="list-group-item">${restaurant.id} ${labelDiningTable} ${diningTable.tableNr}</a></td>
+                    </tr>
+                </c:forEach>
+
+                <spring:url var="kitchenSubsystem" value="/restaurants/${restaurant.id}/kitchen" />
+                <a href="${kitchenSubsystem}"  class="list-group-item">${restaurant.id} ${labelKitchenSubsystem}</a>
+
+                <spring:url var="waiterSubsystem" value="/restaurants/${restaurant.id}/waiter" />
+                <a href="${waiterSubsystem}"  class="list-group-item">${restaurant.id} ${labelWaiterSubsystem}</a>
+
+                <spring:url var="customerSubsystem" value="/restaurants/${restaurant.id}/customers" />
+                <a href="${customerSubsystem}"  class="list-group-item">${restaurant.id} ${labelCustomerSubsystem}</a>
+            </c:if>
+            <h3>Planning </h3>
+            <spring:url var="planningoverview" value="/currentoverviews" />
+            <a href="${planningoverview}"  class="list-group-item">${label_planning_overview}</a>
+        </div>
     </sec:authorize>
 
     <sec:authorize access="isAnonymous()">

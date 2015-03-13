@@ -29,11 +29,19 @@
                     <li><a href="/employees">Employees</a></li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
+                <!-- style because oldskool (en het enige ganse labeltje ever dat wit moet zijn)-->
+                <ul class="nav navbar-nav navbar-right" style="color:#FFFFFF" id="userinfo">
+                    <sec:authorize access="isAuthenticated()">${labelWelcome}
+                        <sec:authentication property="principal.username"/>
+                        <br/>
+                        <a href="${logoutUrl}">${labelLogout}</a>
+                    </sec:authorize>
                 </ul>
 
             </div>
+
         </div>
+
     </nav>
 
     <!--
@@ -43,12 +51,6 @@
     </div>
     -->
 
-    <div id="userinfo">
-        <sec:authorize access="isAuthenticated()">${labelWelcome}
-            <sec:authentication property="principal.username"/>
-            <br/>
-            <a href="${logoutUrl}">${labelLogout}</a>
-        </sec:authorize>
-    </div>
+
 
 </div>

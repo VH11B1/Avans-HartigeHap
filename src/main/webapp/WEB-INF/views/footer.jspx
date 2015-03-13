@@ -11,7 +11,8 @@
     <spring:message code="label_theme_elegant" var="labelThemeElegant"/>
 	<spring:url value="/" var="homeUrl"/>
 
-    <div class="container">
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
         <ul class="list-unstyled list-inline">
             <li><a href="${homeUrl}">${homeText}</a></li>
             <li><a href="?lang=en_US">${labelEnUs}</a></li>
@@ -22,5 +23,6 @@
             -->
         </ul>
     </div>
+    </nav>
 
 </div>
