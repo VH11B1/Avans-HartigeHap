@@ -40,33 +40,34 @@ public class HHApplicationListener implements AuthenticationSuccessHandler {
         PlanningOverview overview = new PlanningOverview();
 
         Employee employee = employeeRepository.findEmployeeByUsername(userDetails.getUsername());
-        overview.addEmployee(employee);
+        if(employee != null) {
+            overview.addEmployee(employee);
 
-        for (Planning p : employee.getPlannings()) {
-            overview.addPlanning(p);
-        }
-
-        List<Planning> l = overview.getEmployeesPlannedToday(employee);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        Date currentDate = Calendar.getInstance().getTime();
-        boolean late = true;
-        long diff = Long.MIN_VALUE;
-        Employee supervisor = null;
-        for (Planning p : l) {
-            long tempDiff = TimeUnit.MILLISECONDS.toMinutes(p.getPlannedSlot().getStartDate().getTime() - currentDate.getTime());
-
-            if (tempDiff >= 30 && p.getPlannedSlot().getStartDate().after(currentDate)) {
-                late = false;
+            for (Planning p : employee.getPlannings()) {
+                overview.addPlanning(p);
             }
-            else if(tempDiff > diff){
-                diff = tempDiff;
-                supervisor = p.getSupervisor();
-            }
-        }
 
-        if(late && l.size() > 0){
-            NotificationSubject.getInstance().notifyObservers(employee, supervisor, employee.getName() +" te laat", employee.getName() + " is " + -diff + " minuten te laat aangemeld.");
+            List<Planning> l = overview.getEmployeesPlannedToday(employee);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            Date currentDate = Calendar.getInstance().getTime();
+            boolean late = true;
+            long diff = Long.MIN_VALUE;
+            Employee supervisor = null;
+            for (Planning p : l) {
+                long tempDiff = TimeUnit.MILLISECONDS.toMinutes(p.getPlannedSlot().getStartDate().getTime() - currentDate.getTime());
+
+                if (tempDiff >= 30 && p.getPlannedSlot().getStartDate().after(currentDate)) {
+                    late = false;
+                } else if (tempDiff > diff) {
+                    diff = tempDiff;
+                    supervisor = p.getSupervisor();
+                }
+            }
+
+            if (late && l.size() > 0) {
+                NotificationSubject.getInstance().notifyObservers(employee, supervisor, employee.getName() + " te laat", employee.getName() + " is " + -diff + " minuten te laat aangemeld.");
+            }
         }
         httpServletResponse.sendRedirect("/");
     }

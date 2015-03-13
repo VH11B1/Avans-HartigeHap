@@ -24,7 +24,12 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
     public Employee findEmployeeByUsername(String username) {
         Query query = em.createNativeQuery("SELECT employeeId FROM users WHERE username = ?");
         query.setParameter(1, username);
-        int employeeId = ((BigInteger)query.getSingleResult()).intValue();
-        return employeeRepository.findById(employeeId);
+
+        Object result = query.getSingleResult();
+        if(result !=null) {
+            int employeeId = ((BigInteger)result).intValue();
+            return employeeRepository.findById(employeeId);
+        }
+        return null;
     }
 }
