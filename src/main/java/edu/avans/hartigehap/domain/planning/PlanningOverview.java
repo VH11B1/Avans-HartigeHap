@@ -228,7 +228,7 @@ public class PlanningOverview {
                 LocalDateTime.now()));
         p8.setActualSlot(new ActualSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now().plusDays(1),
                 LocalDateTime.now(), e2));
-        p8.setRole(e2.getRoles().get(0));
+        p8.setRole(new EmployeeRole("SERVICE"));
 
         // employee 2 planned, employee 1 actual
         Planning p3 = new Planning();
@@ -237,7 +237,7 @@ public class PlanningOverview {
                 LocalDateTime.now()));
         p3.setActualSlot(new ActualSlot(TimeSlot.DayPart.MORNING, LocalDateTime.now(),
                 LocalDateTime.now(), e1));
-        p3.setRole((EmployeeRole)e2.getRoles().toArray()[0]);
+        p3.setRole(new EmployeeRole("SERVICE"));
 
 
         // employee 5 planned in wrong role
@@ -273,6 +273,7 @@ public class PlanningOverview {
         planning.add(p4);
         planning.add(p6);
         planning.add(p7);
+        planning.add(p8);
 
     }
 }
