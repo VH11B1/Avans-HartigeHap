@@ -52,6 +52,14 @@ public class PlanningOverview {
         populate();
     }
 
+    public void addEmployee(Employee employee){
+        this.employees.add(employee);
+    }
+
+    public void addPlanning(Planning p){
+        this.planning.add(p);
+    }
+
     public void setPlanningList(List<Planning> list){
         this.planning = list;
     }
@@ -202,7 +210,7 @@ public class PlanningOverview {
                 LocalDateTime.now()));
         p1.setActualSlot(new ActualSlot(TimeSlot.DayPart.MORNING, LocalDateTime.now(),
                 LocalDateTime.now(), e1));
-        p1.setRole(e1.getRoles().get(0));
+        p1.setRole((EmployeeRole)e1.getRoles().toArray()[0]);
 
         // employee 2 planned, employee 3 actual
         Planning p2 = new Planning();
@@ -211,7 +219,7 @@ public class PlanningOverview {
                 LocalDateTime.now()));
         p2.setActualSlot(new ActualSlot(TimeSlot.DayPart.AFTERNOON,LocalDateTime.now(),
                 LocalDateTime.now(), e3));
-        p2.setRole(e2.getRoles().get(0));
+        p2.setRole((EmployeeRole)e2.getRoles().toArray()[0]);
 
         // employee 2 planned, employee 2 actual
         Planning p8 = new Planning();
@@ -229,7 +237,7 @@ public class PlanningOverview {
                 LocalDateTime.now()));
         p3.setActualSlot(new ActualSlot(TimeSlot.DayPart.MORNING, LocalDateTime.now(),
                 LocalDateTime.now(), e1));
-        p3.setRole(e2.getRoles().get(0));
+        p3.setRole((EmployeeRole)e2.getRoles().toArray()[0]);
 
 
         // employee 5 planned in wrong role

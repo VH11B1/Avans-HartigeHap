@@ -2,8 +2,10 @@ package edu.avans.hartigehap.domain.planning;
 
 import edu.avans.hartigehap.domain.DomainObject;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -13,6 +15,8 @@ import java.util.Date;
  */
 @Getter
 @Setter
+@MappedSuperclass
+@NoArgsConstructor
 public abstract class TimeSlot extends DomainObject{
     private DayPart part;
     private LocalDateTime start;

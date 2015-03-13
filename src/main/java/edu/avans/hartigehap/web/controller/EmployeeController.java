@@ -1,8 +1,10 @@
 package edu.avans.hartigehap.web.controller;
 
+import edu.avans.hartigehap.domain.Restaurant;
 import edu.avans.hartigehap.domain.planning.Employee;
 import edu.avans.hartigehap.service.EmployeeService;
 import edu.avans.hartigehap.service.RestaurantService;
+import edu.avans.hartigehap.web.controller.pe.RestaurantEditor;
 import edu.avans.hartigehap.web.form.Message;
 import edu.avans.hartigehap.web.util.UrlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +26,7 @@ import javax.validation.Valid;
 import java.util.Locale;
 
 @Controller
-@PreAuthorize("hasRole('MANAGEMENT')")
+@PreAuthorize("hasRole('ROLE_EMPLOYEE')")
 public class EmployeeController {
 
     @Autowired
@@ -29,6 +34,14 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private RestaurantService restaurantService;
+
+    @InitBinder
+    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+        binder.registerCustomEditor(Restaurant.class, new RestaurantEditor(this.restaurantService));
+    }
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public String listEmployees(Model model)
@@ -48,10 +61,10 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees/{id}/edit", method = RequestMethod.GET)
-    public String editCustomer(@PathVariable("id") Long id, Model model)
+    public String editEmployee(@PathVariable("id") Long id, Model model)
     {
-        Employee employee = employeeService.findById(id);
-        model.addAttribute("employee", employee);
+        model.addAttribute("employee", employeeService.findById(id));
+        model.addAttribute("restaurants", restaurantService.findAll());
 
         return "employees/edit";
     }
@@ -70,7 +83,7 @@ public class EmployeeController {
         if (bindingResult.hasErrors())
         {
             model.addAttribute("message", new Message("error", messageSource.getMessage(
-                    "employee_save_fail", new Object[] {}, locale)));
+                    "employee_save_fail", new Object[]{}, locale)));
 
             model.addAttribute("employee", employee);
 
@@ -85,14 +98,14 @@ public class EmployeeController {
         existingEmployee.updateEditableFields(employee);
         employeeService.save(existingEmployee);
 
-        return "redirect:/employees/" + UrlUtil.encodeUrlPathSegment(
-                employee.getId().toString(), httpServletRequest);
+        return "redirect:/employees/" + employee.getId() + "/edit";
     }
 
     @RequestMapping(value = "/employees/create", method = RequestMethod.GET)
     public String createEmployee(Model model)
     {
         model.addAttribute("employee", new Employee());
+        model.addAttribute("restaurants", restaurantService.findAll());
 
         return "employees/create";
     }

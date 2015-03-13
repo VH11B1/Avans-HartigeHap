@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import edu.avans.hartigehap.domain.DomainObject;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ import java.util.Date;
 @Entity
 @Table(name = "ACTUALSLOTS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@NoArgsConstructor
 public class ActualSlot extends TimeSlot {
     private Employee actualEmployee;
 

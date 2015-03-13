@@ -6,10 +6,13 @@
     
     <http use-expressions="true">
         <intercept-url pattern='/*' access='permitAll' />
-        <form-login login-page="/" authentication-failure-url="/security/loginfail" default-target-url="/" />
+        <form-login login-page="/" authentication-failure-url="/security/loginfail" default-target-url="/" authentication-success-handler-ref="successHandler" />
         <logout logout-success-url="/"/>
     </http>
-    
+
+    <beans:bean id="successHandler"
+                class="edu.avans.hartigehap.domain.HHApplicationListener" />
+
     <authentication-manager>
         <authentication-provider>
             <jdbc-user-service data-source-ref="dataSource"
@@ -25,6 +28,5 @@
                 <user name="customer" password="customer" authorities="ROLE_CUSTOMER" />
             </user-service>
         </authentication-provider>-->
-    </authentication-manager> 
-    
+    </authentication-manager>
 </beans:beans>
