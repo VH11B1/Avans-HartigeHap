@@ -5,8 +5,9 @@ Na opstarten applicatie (aan laten maken van database), eerst src/main/resources
 Anders kan er niet ingelogd worden en kunnen zodoende de gemaakte onderdelen niet bekeken worden.
 
 Inloggegevens
-username: mark
-password: mark
+
+* username: mark
+* password: mark
 
 Deze Hartige Hap webapplicatie is gemaakt met Spring MVC.
 
