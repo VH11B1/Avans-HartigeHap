@@ -1,3 +1,4 @@
+use hh;
 CREATE  TABLE users (
   username VARCHAR(45) NOT NULL ,
   password VARCHAR(45) NOT NULL ,
@@ -16,13 +17,14 @@ CREATE TABLE user_roles (
   KEY fk_username_idx (username),
   CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username));
 
-INSERT INTO users(username,password,enabled)
-VALUES ('erco','erco', TRUE);
-INSERT INTO users(username,password,enabled)
-VALUES ('employee','employee', TRUE);
-INSERT INTO users(username,password,enabled)
-VALUES ('customer','customer', TRUE);
- 
+INSERT INTO `hh`.`employees` (`version`, `email`, `hoursPerMonth`, `name`, `password`, `username`) VALUES ('0', 'mbartele@avans.nl', '160', 'Mark Bartelen', '', 'mark');
+INSERT INTO `hh`.`employees` (`version`, `email`, `hoursPerMonth`, `name`, `password`, `username`) VALUES ('0', 'erco@test.nl', '160', 'Erco Argante', '', 'erco');
+INSERT INTO `hh`.`employees` (`version`, `email`, `hoursPerMonth`, `name`, `password`, `username`) VALUES ('0', 'employee@test.nl', '160', 'Emplo Yee', '', 'employee');
+insert into users(username,password,enabled,employeeId) values ("mark","mark",1,1);
+insert into users(username,password,enabled,employeeId) values ("erco","erco",1,2);
+insert into users(username,password,enabled,employeeId) values ("employee","employee",1,3);
+insert into users(username,password,enabled) values ("customer","customer",1);
+
 INSERT INTO user_roles (username, ROLE)
 VALUES ('erco', 'ROLE_CUSTOMER');
 INSERT INTO user_roles (username, ROLE)
@@ -34,3 +36,5 @@ INSERT INTO user_roles (username, ROLE)
 VALUES ('erco', 'ROLE_EMPLOYEE');
 INSERT INTO user_roles (username, ROLE)
 VALUES ('employee', 'ROLE_EMPLOYEE');
+INSERT INTO user_roles (username, ROLE)
+VALUES ('mark', 'ROLE_EMPLOYEE');
