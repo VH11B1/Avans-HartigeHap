@@ -1,5 +1,6 @@
-package edu.avans.hartigehap.service;
+package edu.avans.hartigehap.web.it;
 
+import edu.avans.hartigehap.service.NotificationService;
 import edu.avans.hartigehap.service.impl.EmailServiceImpl;
 import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
 import org.junit.Test;
@@ -23,6 +24,6 @@ public class EmailServiceTest extends AbstractTransactionRollbackTest {
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("spring-context.xml");
         NotificationService notificationService = (EmailServiceImpl) context.getBean("emailService");
-        assertTrue(notificationService.sendNotification("ivh11b1@rsgrijks.nl","mbartele@avans.nl", "Test", "Hallo test test"));
+        assertTrue(notificationService.sendNotification("ivh11b1@rsgrijks.nl", "mbartele@avans.nl", "Test", "Hallo test test"));
     }
 }
