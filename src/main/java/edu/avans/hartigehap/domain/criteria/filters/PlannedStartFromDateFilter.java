@@ -3,7 +3,6 @@ package edu.avans.hartigehap.domain.criteria.filters;
 import edu.avans.hartigehap.domain.planning.Planning;
 import edu.avans.hartigehap.domain.planning.TimeSlot;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

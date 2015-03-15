@@ -1,33 +1,34 @@
 package edu.avans.hartigehap.web.controller;
 
-import javax.validation.Valid;
-
+import com.google.common.collect.Lists;
+import edu.avans.hartigehap.domain.Customer;
+import edu.avans.hartigehap.domain.Restaurant;
+import edu.avans.hartigehap.service.CustomerService;
+import edu.avans.hartigehap.service.RestaurantService;
+import edu.avans.hartigehap.web.form.CustomerGrid;
+import edu.avans.hartigehap.web.form.Message;
+import edu.avans.hartigehap.web.util.UrlUtil;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.*;
-import org.springframework.validation.*;
-import java.io.IOException;
-import java.io.InputStream;
-import org.apache.commons.io.IOUtils;
-import edu.avans.hartigehap.web.form.*;
-import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import com.google.common.collect.Lists;
-import edu.avans.hartigehap.web.util.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
-
-import edu.avans.hartigehap.domain.*;
-import edu.avans.hartigehap.service.*;
-import javax.servlet.http.*;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_EMPLOYEE')")

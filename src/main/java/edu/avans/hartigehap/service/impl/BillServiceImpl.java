@@ -1,7 +1,11 @@
 package edu.avans.hartigehap.service.impl;
 
-import java.util.List;
-
+import edu.avans.hartigehap.domain.Bill;
+import edu.avans.hartigehap.domain.Restaurant;
+import edu.avans.hartigehap.domain.StateException;
+import edu.avans.hartigehap.repository.BillRepository;
+import edu.avans.hartigehap.repository.OrderRepository;
+import edu.avans.hartigehap.service.BillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.avans.hartigehap.repository.*;
-import edu.avans.hartigehap.service.*;
-import edu.avans.hartigehap.domain.*;
+import java.util.List;
 
 @Service("billService")
 @Repository

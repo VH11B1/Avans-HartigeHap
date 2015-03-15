@@ -1,8 +1,10 @@
 package edu.avans.hartigehap.service;
 
-import java.util.List;
+import edu.avans.hartigehap.domain.Bill;
+import edu.avans.hartigehap.domain.Restaurant;
+import edu.avans.hartigehap.domain.StateException;
 
-import edu.avans.hartigehap.domain.*;
+import java.util.List;
 
 public interface BillService {
 	Bill findById(Long billId);

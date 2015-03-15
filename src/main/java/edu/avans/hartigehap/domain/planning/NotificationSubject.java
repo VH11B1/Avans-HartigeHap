@@ -1,9 +1,5 @@
 package edu.avans.hartigehap.domain.planning;
 
-import edu.avans.hartigehap.service.NotificationService;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.Collection;
 

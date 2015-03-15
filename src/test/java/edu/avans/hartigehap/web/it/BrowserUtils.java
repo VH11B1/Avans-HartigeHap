@@ -1,11 +1,10 @@
 package edu.avans.hartigehap.web.it;
 
-import java.util.concurrent.TimeUnit;
-
 import lombok.extern.slf4j.Slf4j;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class BrowserUtils {

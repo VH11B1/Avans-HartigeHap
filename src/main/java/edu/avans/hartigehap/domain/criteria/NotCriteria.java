@@ -1,6 +1,5 @@
 package edu.avans.hartigehap.domain.criteria;
 
-import edu.avans.hartigehap.domain.criteria.Criteria;
 import edu.avans.hartigehap.domain.planning.Planning;
 
 import java.util.ArrayList;

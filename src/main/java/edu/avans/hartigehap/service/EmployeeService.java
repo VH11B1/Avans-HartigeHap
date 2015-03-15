@@ -12,5 +12,6 @@ public interface EmployeeService {
     Employee findById(Long id);
     Employee save(Employee employee);
     void delete(Long id);
+    void checkTiming(String username);
 
 }

@@ -1,16 +1,15 @@
 package edu.avans.hartigehap.service;
 
-import static org.junit.Assert.assertEquals;
+import edu.avans.hartigehap.domain.MenuItem;
+import edu.avans.hartigehap.domain.Restaurant;
+import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import edu.avans.hartigehap.domain.MenuItem;
-import edu.avans.hartigehap.domain.Restaurant;
-import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
+import static org.junit.Assert.assertEquals;
 
 public class RestaurantServiceTest extends AbstractTransactionRollbackTest {
 

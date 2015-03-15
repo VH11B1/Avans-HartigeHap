@@ -3,15 +3,18 @@ package edu.avans.hartigehap.domain.planning;
 /**
  * Created by Alex on 3-3-2015.
  */
-        import edu.avans.hartigehap.domain.criteria.filters.*;
-        import edu.avans.hartigehap.domain.query.*;
 
-        import java.time.LocalDateTime;
-        import java.time.format.DateTimeFormatter;
-        import java.util.ArrayList;
-        import java.util.Arrays;
-        import java.util.Calendar;
-        import java.util.List;
+import edu.avans.hartigehap.domain.criteria.filters.*;
+import edu.avans.hartigehap.domain.query.PlannedAndNotPresentCommand;
+import edu.avans.hartigehap.domain.query.PlannedInWrongRoleCommand;
+import edu.avans.hartigehap.domain.query.PresentCommand;
+import edu.avans.hartigehap.domain.query.PresentOrNotPresentCommand;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * How to add a new getSomethingMeetingThisAndThatCondition method to PlanningOverview:

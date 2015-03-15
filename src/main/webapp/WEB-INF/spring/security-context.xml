@@ -6,12 +6,12 @@
     
     <http use-expressions="true">
         <intercept-url pattern='/*' access='permitAll' />
-        <form-login login-page="/" authentication-failure-url="/security/loginfail" default-target-url="/" authentication-success-handler-ref="successHandler" />
+        <form-login login-page="/" authentication-failure-url="/security/loginfail" default-target-url="/" />
         <logout logout-success-url="/"/>
     </http>
 
     <beans:bean id="successHandler"
-                class="edu.avans.hartigehap.domain.HHApplicationListener" />
+                class="edu.avans.hartigehap.web.HHApplicationListener" />
 
     <authentication-manager>
         <authentication-provider>

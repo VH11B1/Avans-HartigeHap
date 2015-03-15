@@ -1,11 +1,9 @@
 package edu.avans.hartigehap.domain.criteria.filters;
 
-import edu.avans.hartigehap.domain.planning.Employee;
 import edu.avans.hartigehap.domain.planning.Planning;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

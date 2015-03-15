@@ -2,7 +2,6 @@ package edu.avans.hartigehap.service;
 
 import edu.avans.hartigehap.service.impl.EmailServiceImpl;
 import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
-import org.hibernate.validator.constraints.Email;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,10 +1,11 @@
 package edu.avans.hartigehap.repository;
 
-import java.util.List;
-
+import edu.avans.hartigehap.domain.Bill;
+import edu.avans.hartigehap.domain.Restaurant;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import edu.avans.hartigehap.domain.*;
+
+import java.util.List;
 
 public interface BillRepository extends PagingAndSortingRepository<Bill, Long> {
 

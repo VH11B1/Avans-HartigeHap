@@ -1,20 +1,26 @@
 package edu.avans.hartigehap.web.controller;
 
-import java.util.Collection;
-import java.util.Locale;
-
+import edu.avans.hartigehap.domain.DiningTable;
+import edu.avans.hartigehap.domain.EmptyBillException;
+import edu.avans.hartigehap.domain.Restaurant;
+import edu.avans.hartigehap.domain.StateException;
+import edu.avans.hartigehap.service.DiningTableService;
+import edu.avans.hartigehap.service.RestaurantService;
+import edu.avans.hartigehap.web.form.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.avans.hartigehap.domain.*;
-import edu.avans.hartigehap.service.*;
-import edu.avans.hartigehap.web.form.Message;
-import org.springframework.web.servlet.mvc.support.*;
+import java.util.Collection;
+import java.util.Locale;
 
 @Controller
 public class DiningTableController {

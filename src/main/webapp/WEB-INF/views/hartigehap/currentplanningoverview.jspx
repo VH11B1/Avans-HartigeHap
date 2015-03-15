@@ -2,10 +2,8 @@
 <div id="body" xmlns:jsp="http://java.sun.com/JSP/Page"
      xmlns:c="http://java.sun.com/jsp/jstl/core"
      xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
-     xmlns:joda="http://www.joda.org/joda/time/tags"
      xmlns:spring="http://www.springframework.org/tags" version="2.0"
      xmlns:sec="http://www.springframework.org/security/tags">
-    <jsp:directive.page import="edu.avans.hartigehap.domain.planning.Planning"/>
     <jsp:directive.page contentType="text/html;charset=UTF-8" />
     <jsp:output omit-xml-declaration="yes" />
 

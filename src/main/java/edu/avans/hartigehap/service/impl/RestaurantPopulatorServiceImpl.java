@@ -1,17 +1,22 @@
 package edu.avans.hartigehap.service.impl;
 
-import java.util.*;
-
+import edu.avans.hartigehap.domain.*;
+import edu.avans.hartigehap.repository.CustomerRepository;
+import edu.avans.hartigehap.repository.FoodCategoryRepository;
+import edu.avans.hartigehap.repository.MenuItemRepository;
+import edu.avans.hartigehap.repository.RestaurantRepository;
+import edu.avans.hartigehap.service.RestaurantPopulatorService;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import edu.avans.hartigehap.domain.*;
-import edu.avans.hartigehap.repository.*;
-import edu.avans.hartigehap.service.*;
-import org.joda.time.DateTime;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service("restaurantPopulatorService")
 @Repository

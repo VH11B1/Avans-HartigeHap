@@ -1,7 +1,6 @@
 package edu.avans.hartigehap.domain.criteria;
 
 import edu.avans.hartigehap.domain.planning.Planning;
-import org.aspectj.weaver.ast.And;
 
 import java.util.ArrayList;
 import java.util.Arrays;

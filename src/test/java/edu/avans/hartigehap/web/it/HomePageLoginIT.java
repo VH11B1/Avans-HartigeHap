@@ -1,14 +1,14 @@
 package edu.avans.hartigehap.web.it;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 
 @Slf4j

@@ -5,8 +5,6 @@ import edu.avans.hartigehap.service.impl.EmailServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Observer;
-
 /**
  * Created by Mark on 9-3-2015.
  */

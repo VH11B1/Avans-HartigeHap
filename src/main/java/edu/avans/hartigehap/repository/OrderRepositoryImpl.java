@@ -1,12 +1,11 @@
 package edu.avans.hartigehap.repository;
 
-import java.util.List;
+import edu.avans.hartigehap.domain.Order;
+import edu.avans.hartigehap.domain.Restaurant;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import edu.avans.hartigehap.domain.Order;
-import edu.avans.hartigehap.domain.Restaurant;
+import java.util.List;
 
 // this impl class must be in the same package as the interfaces
 // you could call this a spring limitation

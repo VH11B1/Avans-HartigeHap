@@ -1,6 +1,8 @@
 package edu.avans.hartigehap.domain.criteria;
 
-import edu.avans.hartigehap.domain.criteria.impl.*;
+import edu.avans.hartigehap.domain.criteria.impl.InPlannedRoleCriteria;
+import edu.avans.hartigehap.domain.criteria.impl.PlannedCriteria;
+import edu.avans.hartigehap.domain.criteria.impl.PresentCriteria;
 import edu.avans.hartigehap.domain.planning.Planning;
 import lombok.Getter;
 

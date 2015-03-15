@@ -4,7 +4,8 @@ import edu.avans.hartigehap.domain.planning.Planning;
 import edu.avans.hartigehap.domain.planning.TimeSlot;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Alex on 7-3-2015.

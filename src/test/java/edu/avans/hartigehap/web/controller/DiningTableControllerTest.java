@@ -1,16 +1,15 @@
 package edu.avans.hartigehap.web.controller;
 
 
-import java.util.Collection;
-
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ExtendedModelMap;
-
 import edu.avans.hartigehap.domain.DiningTable;
 import edu.avans.hartigehap.domain.Restaurant;
 import edu.avans.hartigehap.service.RestaurantPopulatorService;
 import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ExtendedModelMap;
+
+import java.util.Collection;
 
 public class DiningTableControllerTest extends AbstractTransactionRollbackTest {
 

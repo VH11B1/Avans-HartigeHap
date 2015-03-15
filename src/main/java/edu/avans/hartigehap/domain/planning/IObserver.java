@@ -1,7 +1,5 @@
 package edu.avans.hartigehap.domain.planning;
 
-import java.util.Observable;
-
 /**
  * Created by Mark on 9-3-2015.
  */
