@@ -14,19 +14,27 @@
 	<spring:message code="label_create_huilendehamburger" var="labelCreateHuilendeHamburger" />
 	<spring:message code="label_create_button" var="labelCreateButton" />
 
-    <h2>Manage restaurants</h2>
+    <h1 class="page-title">Manage restaurants</h1>
 
-	<c:if test="${not empty message}">
-		<div id="message" class="${message.type}">${message.message}</div>
-	</c:if>
+    <c:if test="${not empty message}">
+        <div id="message" class="${message.type}">${message.message}</div>
+    </c:if>
 
-    <table class="table table-striped">
-        <tbody>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Available restaurants
+            </h3>
+        </div>
+        <ul class="list-group">
             <c:forEach items="${restaurants}" var="restaurant">
-                <tr><td><a href="/restaurants/${restaurant.id}">${restaurant.id}</a></td></tr>
+                <li class="list-group-item">
+                    <spring:url value="/restaurants/${restaurant.id}" var="showRestaurantUrl" />
+                    <a href="${showRestaurantUrl}">${restaurant.id}</a>
+                </li>
             </c:forEach>
-        </tbody>
-    </table>
+        </ul>
+    </div>
 
     <!--
 	<table>

@@ -20,71 +20,74 @@
     <spring:message code="label_plan_full" var="label_plan_full" />
 
     <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
-        <h1>${labelPlanningOverview}</h1>
+        <h1 class="page-title">${labelPlanningOverview}</h1>
 
-        <c:choose>
-            <c:when test='${scope.equals("day")}'>
-                <c:set var="dayClass" value="active" scope="page"/>
-            </c:when>
-            <c:when test='${scope.equals("week")}'>
-                <c:set var="weekClass" value="active" scope="page"/>
-            </c:when>
-            <c:when test='${scope.equals("full")}'>
-                <c:set var="fullClass" value="active" scope="page"/>
-            </c:when>
-        </c:choose>
-
-        <div>
-            <spring:url var="showDailyPlanning" value="/currentoverviews" />
-            <spring:url var="showWeeklyPlanning" value="/weekoverviews" />
-            <spring:url var="showFullPlanning" value="/fulloverview" />
-
-            <ul class="nav nav-tabs">
-                <li role="presentation" class="${dayClass}"><a href="${showDailyPlanning}">${label_plan_day}</a></li>
-                <li role="presentation" class="${weekClass}"><a href="${showWeeklyPlanning}">${label_plan_week}</a></li>
-                <li role="presentation" class="${fullClass}"><a href="${showFullPlanning}">${label_plan_full}</a></li>
-            </ul>
-
-        </div>
-
-        <table class="table table-striped table-responsive">
-            <thead>
-            <tr>
-                <th>${label_employee_col}</th>
-                <th>${label_actual_employee_col}</th>
-                <th>${label_role_col}</th>
-                <th>${label_plannedslot_col}</th>
-                <th>${label_actualslot_col}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${plannings}" var="planning">
-                <!--<spring:url var="showRestaurant" value="/restaurants/${planning.}" />-->
-
+        <div class="panel panel-default">
+            <div class="panel-heading tabbed">
                 <c:choose>
-                    <c:when test='${planning.getEmployee().getName().equals(planning.getActualSlot().getActualEmployee().getName())}'>
-                        <c:set var="warning" value="" scope="page"/>
-                        <c:set var="actualName" value="" scope="page"/>
+                    <c:when test='${scope.equals("day")}'>
+                        <c:set var="dayClass" value="active" scope="page"/>
                     </c:when>
-                    <c:when test="${!planning.hasActualSlot()}">
-                        <c:set var="warning" value="" scope="page"/>
-                        <c:set var="actualName" value="" scope="page"/>
+                    <c:when test='${scope.equals("week")}'>
+                        <c:set var="weekClass" value="active" scope="page"/>
                     </c:when>
-                    <c:otherwise>
-                        <c:set var="warning" value="background-color:#d43f3a;" scope="page"/>
-                        <c:set var="actualName" value="${planning.getActualSlot().getActualEmployee().getName()}" scope="page"/>
-                    </c:otherwise>
+                    <c:when test='${scope.equals("full")}'>
+                        <c:set var="fullClass" value="active" scope="page"/>
+                    </c:when>
                 </c:choose>
-                <tr style="${warning}">
-                    <td>${planning.getEmployee().getName()}</td>
-                    <td>${actualName}</td>
-                    <td>${planning.getRole()}</td>
-                    <td><fmt:formatDate value="${planning.getPlannedSlot().getStartDate()}" pattern="HH:mm (dd-MM-yyyy)" /></td>
-                    <td><fmt:formatDate value="${planning.getActualSlot().getStartDate()}" pattern="HH:mm (dd-MM-yyyy)" /></td>
+
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="${dayClass}">
+                        <spring:url var="showDailyPlanning" value="/currentoverviews" />
+                        <a href="${showDailyPlanning}">${label_plan_day}</a>
+                    </li>
+                    <li role="presentation" class="${weekClass}">
+                        <spring:url var="showWeeklyPlanning" value="/weekoverviews" />
+                        <a href="${showWeeklyPlanning}">${label_plan_week}</a>
+                    </li>
+                    <li role="presentation" class="${fullClass}">
+                        <spring:url var="showFullPlanning" value="/fulloverview" />
+                        <a href="${showFullPlanning}">${label_plan_full}</a>
+                    </li>
+                </ul>
+            </div>
+            <table class="table table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th>${label_employee_col}</th>
+                    <th>${label_actual_employee_col}</th>
+                    <th>${label_role_col}</th>
+                    <th>${label_plannedslot_col}</th>
+                    <th>${label_actualslot_col}</th>
                 </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <c:forEach items="${plannings}" var="planning">
+                    <c:choose>
+                        <c:when test='${planning.getEmployee().getName().equals(planning.getActualSlot().getActualEmployee().getName())}'>
+                            <c:set var="warning" value="" scope="page"/>
+                            <c:set var="actualName" value="" scope="page"/>
+                        </c:when>
+                        <c:when test="${!planning.hasActualSlot()}">
+                            <c:set var="warning" value="" scope="page"/>
+                            <c:set var="actualName" value="" scope="page"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="warning" value="danger" scope="page"/>
+                            <c:set var="actualName" value="${planning.getActualSlot().getActualEmployee().getName()}" scope="page"/>
+                        </c:otherwise>
+                    </c:choose>
+                    <tr class="${warning}">
+                        <td>${planning.getEmployee().getName()}</td>
+                        <td>${actualName}</td>
+                        <td>${planning.getRole()}</td>
+                        <td><fmt:formatDate value="${planning.getPlannedSlot().getStartDate()}" pattern="HH:mm (dd-MM-yyyy)" /></td>
+                        <td><fmt:formatDate value="${planning.getActualSlot().getStartDate()}" pattern="HH:mm (dd-MM-yyyy)" /></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </sec:authorize>
     <sec:authorize access="!hasRole('ROLE_EMPLOYEE')">
         <h4>

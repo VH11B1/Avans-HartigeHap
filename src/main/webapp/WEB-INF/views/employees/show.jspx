@@ -3,26 +3,27 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8" />
     <jsp:output omit-xml-declaration="yes" />
 
-    <h2>${employee.name}</h2>
+    <h1 class="page-title">${employee.name}</h1>
 
-    <div class="form-group">
-        <label>Username</label><br/>
-        <span>${employee.username}</span>
-    </div>
+    <section class="content-block full-pad">
+        <div class="form-group">
+            <label>Username</label><br/>
+            <span>${employee.username}</span>
+        </div>
 
-    <div class="form-group">
-        <label>E-mail</label><br/>
-        <span>${employee.email}</span>
-    </div>
+        <div class="form-group">
+            <label>E-mail</label><br/>
+            <span>${employee.email}</span>
+        </div>
 
-    <div class="form-group">
-        <label>Workhours p/m</label><br/>
-        <span>${employee.hoursPerMonth}</span>
-    </div>
+        <div class="form-group">
+            <label>Workhours p/m</label><br/>
+            <span>${employee.hoursPerMonth}</span>
+        </div>
 
-    <div class="form-group">
-        <label>Works at</label><br/>
-        <span>${employee.restaurant.id}</span>
-    </div>
-
+        <div class="form-group">
+            <label>Works at</label><br/>
+            <span>${employee.restaurant.id}</span>
+        </div>
+    </section>
 </div>

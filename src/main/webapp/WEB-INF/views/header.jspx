@@ -8,7 +8,11 @@
     <spring:message code="header_text" var="headerText"/>
     <spring:message code="label_logout" var="labelLogout"/>
     <spring:message code="label_welcome" var="labelWelcome"/>
-    <spring:url var="logoutUrl" value="/j_spring_security_logout"/>
+
+    <spring:url value="/" var="indexRestaurantsUrl" />
+    <spring:url value="/employees" var="indexEmployeesUrl" />
+    <spring:url value="/currentoverviews" var="indexPlanningsUrl" />
+    <spring:url value="/j_spring_security_logout" var="logoutUrl" />
 
     <nav class="navbar navbar-default navbar-inverse navbar-static-top">
         <div class="container">
@@ -19,29 +23,34 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">RMS</a>
+                <a class="navbar-brand" href="${indexRestaurantsUrl}">RMS</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Restaurants</a></li>
-                    <li><a href="/employees">Employees</a></li>
-                </ul>
+                    <li><a href="${indexRestaurantsUrl}">Restaurants</a></li>
 
-                <!-- style because oldskool (en het enige ganse labeltje ever dat wit moet zijn)-->
-                <ul class="nav navbar-nav navbar-right" style="color:#FFFFFF" id="userinfo">
-                    <sec:authorize access="isAuthenticated()">${labelWelcome}
-                        <sec:authentication property="principal.username"/>
-                        <br/>
-                        <a href="${logoutUrl}">${labelLogout}</a>
+                    <sec:authorize access="isAuthenticated()">
+                        <li><a href="${indexEmployeesUrl}">Employees</a></li>
+                        <li><a href="${indexPlanningsUrl}">Plannings</a></li>
                     </sec:authorize>
                 </ul>
 
+                <sec:authorize access="isAuthenticated()">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                ${labelWelcome} <sec:authentication property="principal.username" />
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="${logoutUrl}">${labelLogout}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </sec:authorize>
             </div>
-
         </div>
-
     </nav>
 
     <!--
@@ -50,7 +59,5 @@
         <a href="${showRestMgtSystem}"><h3>${headerText}</h3></a>
     </div>
     -->
-
-
 
 </div>
