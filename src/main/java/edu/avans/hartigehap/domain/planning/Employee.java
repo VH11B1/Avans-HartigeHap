@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import sun.security.util.Password;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -25,23 +26,23 @@ import java.util.Collection;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Employee extends DomainObject {
 
-    @NotBlank
-    @Size(max = 30)
+    @NotBlank(message = "{validation.employee.name.NotBlank.message}")
+    @Size(max = 30, message = "{validation.employee.name.Size.message}")
     private String name;
 
-    @NotBlank
-    @Size(min = 4, max = 16)
+    @NotBlank(message = "{validation.employee.username.NotBlank.message}")
+    @Size(min = 4, max = 16, message = "validation.employee.username.Size.message")
     private String username;
 
     private String password;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "{validation.employee.email.NotBlank.message}")
+    @Email(message = "{validation.employee.email.Email.message}")
     private String email;
 
     private byte[] photo;
 
-    @Min(0)
+    @Min(value = 0, message = "{validation.employee.hoursPerMonth.Min.message}")
     private int hoursPerMonth;
 
     @ManyToOne
@@ -67,6 +68,12 @@ public class Employee extends DomainObject {
         this.username = username;
         this.email = email;
         this.hoursPerMonth = hoursPerMonth;
+    }
+
+    public Employee(String name, String username, String password, String email, int hoursPerMonth)
+    {
+        this(name, username, email, hoursPerMonth);
+        this.password = password;
     }
 
     public void updateEditableFields(Employee employee)

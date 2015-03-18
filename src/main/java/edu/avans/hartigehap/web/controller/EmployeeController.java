@@ -7,6 +7,8 @@ import edu.avans.hartigehap.service.RestaurantService;
 import edu.avans.hartigehap.web.controller.pe.RestaurantEditor;
 import edu.avans.hartigehap.web.form.Message;
 import edu.avans.hartigehap.web.util.UrlUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,11 +24,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Locale;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
 public class EmployeeController {
+
+    final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     @Autowired
     private MessageSource messageSource;
@@ -47,6 +52,8 @@ public class EmployeeController {
     {
         model.addAttribute("employees", employeeService.findAll());
 
+        logger.info("Listing employees");
+
         return "employees/index";
     }
 
@@ -56,14 +63,21 @@ public class EmployeeController {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
 
+        logger.info("Showing employee: '" + employee.getName() + "'");
+
         return "employees/show";
     }
 
     @RequestMapping(value = "/employees/{id}/edit", method = RequestMethod.GET)
     public String editEmployee(@PathVariable("id") Long id, Model model)
     {
-        model.addAttribute("employee", employeeService.findById(id));
-        model.addAttribute("restaurants", restaurantService.findAll());
+        Employee employee = employeeService.findById(id);
+        List<Restaurant> restaurants = restaurantService.findAll();
+
+        model.addAttribute("employee", employee);
+        model.addAttribute("restaurants", restaurants);
+
+        logger.info("Editing employee: '" + employee.getName() + "'");
 
         return "employees/edit";
     }
@@ -97,6 +111,8 @@ public class EmployeeController {
         existingEmployee.updateEditableFields(employee);
         employeeService.save(existingEmployee);
 
+        logger.info("Updated employee: '" + existingEmployee.getName() + "'");
+
         return "redirect:/employees/" + employee.getId() + "/edit";
     }
 
@@ -105,6 +121,8 @@ public class EmployeeController {
     {
         model.addAttribute("employee", new Employee());
         model.addAttribute("restaurants", restaurantService.findAll());
+
+        logger.info("Creating a new employee");
 
         return "employees/create";
     }
@@ -135,6 +153,8 @@ public class EmployeeController {
 
         Employee storedEmployee = employeeService.save(employee);
 
+        logger.info("New employee created: '" + storedEmployee.getName() + "'");
+
         return "redirect:/employees/" + UrlUtil.encodeUrlPathSegment(
                 storedEmployee.getId().toString(), httpServletRequest);
     }
@@ -143,6 +163,8 @@ public class EmployeeController {
     public String destroyEmployee(@PathVariable("id") Long id)
     {
         employeeService.delete(id);
+
+        logger.info("Deleted employee");
 
         return "redirect:/employees";
     }

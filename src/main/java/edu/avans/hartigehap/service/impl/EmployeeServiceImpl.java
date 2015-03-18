@@ -45,6 +45,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findOne(id);
     }
 
+    @Transactional(readOnly=true)
+    public Employee findByUsername(String username)
+    {
+        return employeeRepository.findByUsername(username);
+    }
+
     public Employee save(Employee employee)
     {
         return employeeRepository.save(employee);
