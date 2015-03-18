@@ -38,15 +38,15 @@
 
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="${dayClass}">
-                        <spring:url var="showDailyPlanning" value="/currentoverviews" />
+                        <spring:url var="showDailyPlanning" value="/plannings/daily" />
                         <a href="${showDailyPlanning}">${label_plan_day}</a>
                     </li>
                     <li role="presentation" class="${weekClass}">
-                        <spring:url var="showWeeklyPlanning" value="/weekoverviews" />
+                        <spring:url var="showWeeklyPlanning" value="/plannings/weekly" />
                         <a href="${showWeeklyPlanning}">${label_plan_week}</a>
                     </li>
                     <li role="presentation" class="${fullClass}">
-                        <spring:url var="showFullPlanning" value="/fulloverview" />
+                        <spring:url var="showFullPlanning" value="/plannings" />
                         <a href="${showFullPlanning}">${label_plan_full}</a>
                     </li>
                 </ul>

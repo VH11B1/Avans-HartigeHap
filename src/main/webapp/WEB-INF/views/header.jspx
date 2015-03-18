@@ -11,7 +11,7 @@
 
     <spring:url value="/" var="indexRestaurantsUrl" />
     <spring:url value="/employees" var="indexEmployeesUrl" />
-    <spring:url value="/currentoverviews" var="indexPlanningsUrl" />
+    <spring:url value="/plannings" var="indexPlanningsUrl" />
     <spring:url value="/j_spring_security_logout" var="logoutUrl" />
 
     <nav class="navbar navbar-default navbar-inverse navbar-static-top">

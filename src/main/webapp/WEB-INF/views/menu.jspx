@@ -25,7 +25,7 @@
 
     <spring:message code="label_planning_overview" var="label_planning_overview"/>
 
-    <spring:url var="planningoverview" value="/currentoverviews"/>
+    <spring:url var="planningoverview" value="/plannings"/>
     <spring:url var="indexEmployeesUrl" value="/employees"/>
     <spring:url var="createEmployeesUrl" value="/employees/create"/>
     <spring:url var="loginUrl" value="/j_spring_security_check"/>
