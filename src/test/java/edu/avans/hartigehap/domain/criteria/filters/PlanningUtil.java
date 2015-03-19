@@ -16,8 +16,11 @@ import static org.junit.Assert.assertTrue;
 public class PlanningUtil {
 
     private static List<Planning> planning;
+    private static List<Employee> employees;
+
     static{
         planning = new ArrayList<Planning>();
+        employees = new ArrayList<Employee>();
         populate();
     }
 
@@ -34,6 +37,9 @@ public class PlanningUtil {
 
     public static List<Planning> getPlanningList(){
         return planning;
+    }
+    public static List<Employee> getEmployees() {
+        return employees;
     }
 
     private static void populate(){
@@ -59,6 +65,12 @@ public class PlanningUtil {
         Employee e5 = new Employee();
         e5.setName("I.N. Wrong Role");
         e5.setRoles(Arrays.asList(new EmployeeRole("KITCHEN")));
+
+        employees.add(e1);
+        employees.add(e2);
+        employees.add(e3);
+        employees.add(e4);
+        employees.add(e5);
 
         // employee 1 planned, employee 1 actual
         Planning p1 = new Planning();
