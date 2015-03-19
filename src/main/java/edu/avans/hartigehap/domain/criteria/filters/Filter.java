@@ -1,7 +1,6 @@
 package edu.avans.hartigehap.domain.criteria.filters;
 
 import edu.avans.hartigehap.domain.planning.Planning;
-import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,6 @@ import java.util.List;
  */
 public abstract class Filter<E> {
 
-    @Getter
     @Setter
     private Filter original;
 

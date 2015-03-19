@@ -17,6 +17,8 @@ public class CriteriaBuilder {
     private static List<Criteria> criteriaList;
 
     // singleton
+    // note: for design patterns only
+    // has severe real world consequences
     public static CriteriaBuilder getInstance(){
         if (instance == null){
             instance = new CriteriaBuilder();

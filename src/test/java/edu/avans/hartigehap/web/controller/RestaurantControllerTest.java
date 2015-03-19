@@ -100,11 +100,12 @@ public class RestaurantControllerTest {
     Mockito.when(restaurantServiceMock.findAll()).thenReturn(restaurants);
     mockMvc.perform(get( "/restaurants"))
         .andExpect(status().isOk())
-        .andExpect(view().name("hartigehap/listrestaurants"))
+        //.andExpect(view().name("hartigehap/listrestaurants"))
+        .andExpect(view().name("restaurants/index"))
         .andExpect(model().attribute("restaurants", hasItems(restaurants.toArray(new Restaurant[]{}))));
   }
 
-  private List<Restaurant> getRestaurants() {
+    private List<Restaurant> getRestaurants() {
     LinkedList<Restaurant> retval = new LinkedList<Restaurant>();
     Restaurant r1 = new Restaurant();
     r1.setId(RESTAURANT_ID);

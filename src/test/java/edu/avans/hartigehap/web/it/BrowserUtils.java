@@ -25,7 +25,11 @@ public class BrowserUtils {
       /*
        * Vervang dit eventueel door een browser naar keuze.
        */
+
+      // TODO fix test, change firefox location if needed
       webDriver = new FirefoxDriver();
+      //webDriver = new FirefoxDriver(new FirefoxBinary(new File("C:\\Utilities\\Internet\\Firefox\\firefox.exe")),new FirefoxProfile(new File("C:\\Users\\Alex\\AppData\\Roaming\\Mozilla\\Firefox")));
+
     }
 
     /*

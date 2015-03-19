@@ -32,7 +32,7 @@ public class PlannedDayPartFilterTest {
         filter = new PlannedDayPartFilter(filter, new TimeSlot.DayPart[]{TimeSlot.DayPart.AFTERNOON, TimeSlot.DayPart.EVENING});
         assertEquals(2, filter.getFilterItems().size());
 
-        // get all afternoon day parts from full list
+        // get expected results
         List<Planning> expectedList = new ArrayList<Planning>();
         for (Planning p : PlanningUtil.getPlanningList()){
             if(TimeSlot.DayPart.AFTERNOON.equals(p.getPlannedSlot().getPart())){
