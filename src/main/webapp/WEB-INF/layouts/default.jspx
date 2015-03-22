@@ -19,6 +19,7 @@
         <spring:url value="/resources/css/app.css" var="custom_css_url" />
         <spring:url value="/resources/js/jquery-2.1.3.min.js" var="jquery_url" />
         <spring:url value="/resources/js/bootstrap.min.js" var="bootstrap_js_url" />
+        <spring:url value="/resources/js/app.js" var="app_js_url" />
         <spring:url value="/resources/ckeditor/ckeditor.js" var="ckeditor_url" />
         <spring:url value="/resources/ckeditor/adapters/jquery.js" var="ckeditor_jquery_url" />
 
@@ -67,5 +68,6 @@
         <script type="text/javascript" src="${bootstrap_js_url}"><jsp:text/></script>
         <script type="text/javascript" src="${ckeditor_url}"><jsp:text/></script>
         <script type="text/javascript" src="${ckeditor_jquery_url}"><jsp:text/></script>
+        <script type="text/javascript" src="${app_js_url}"><jsp:text/></script>
 	</body>
 </html>

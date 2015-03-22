@@ -5,9 +5,6 @@ import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.constraints.AssertTrue;
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**

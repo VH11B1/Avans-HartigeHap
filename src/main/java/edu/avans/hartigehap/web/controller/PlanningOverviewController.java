@@ -35,6 +35,7 @@ public class PlanningOverviewController {
         Collection<Planning> list = planningOverviewService.getAllPlanningFromNow();
 
         uiModel.addAttribute("plannings", list);
+        uiModel.addAttribute("scope", "all");
 
         return "plannings/index";
     }
@@ -45,6 +46,7 @@ public class PlanningOverviewController {
         Collection<Planning> list = planningOverviewService.getCurrentWorking();
 
         uiModel.addAttribute("plannings", list);
+        uiModel.addAttribute("scope", "day");
 
         return "plannings/index";
     }
@@ -55,6 +57,7 @@ public class PlanningOverviewController {
         Collection<Planning> list = planningOverviewService.getWeekPlanning();
 
         uiModel.addAttribute("plannings", list);
+        uiModel.addAttribute("scope", "week");
 
         return "plannings/index";
     }

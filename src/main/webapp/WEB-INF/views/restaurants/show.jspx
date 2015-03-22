@@ -16,42 +16,51 @@
 	<spring:message code="label_dining_table" var="labelDiningTable" />
 
 
-	<h1>${labelRestaurant} ${restaurant.id}</h1>
+	<h1 class="page-title">${labelRestaurant} ${restaurant.id}</h1>
 
-	<h3>${labelOrderingSubsystem}</h3>
+	<!--<h3>${labelOrderingSubsystem}</h3>-->
 
 	<c:if test="${not empty message}">
 		<div id="message" class="${message.type}">${message.message}</div>
 	</c:if>
 
-	<table>
-		<thead>
-			<tr>
-				<th>${labelDiningTables}</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${restaurant.diningTables}" var="diningTable">
-				<spring:url var="showTable" value="/diningTables/${diningTable.id}" />					
-				<tr>
-					<td><a href="${showTable}">${labelDiningTable} ${diningTable.tableNr}</a></td>							
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                ${labelDiningTables}
+            </h3>
+        </div>
+        <ul class="list-group">
+            <c:forEach items="${restaurant.diningTables}" var="diningTable">
+                <li class="list-group-item">
+                    <spring:url var="showTable" value="/diningTables/${diningTable.id}" />
+                    <a href="${showTable}">${labelDiningTable} ${diningTable.tableNr}</a>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
 
     <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
-		<h3>${labelKitchenSubsystem}</h3>
-		<spring:url var="kitchenSubsystem" value="/restaurants/${restaurant.id}/kitchen" />					
-		<a href="${kitchenSubsystem}">${labelKitchenSubsystem}</a>							
-	
-		<h3>${labelWaiterSubsystem}</h3>
-		<spring:url var="waiterSubsystem" value="/restaurants/${restaurant.id}/waiter" />					
-		<a href="${waiterSubsystem}">${labelWaiterSubsystem}</a>							
-	
-		<h3>${labelCustomerSubsystem}</h3>
-		<spring:url var="customerSubsystem" value="/restaurants/${restaurant.id}/customers" />					
-		<a href="${customerSubsystem}">${labelCustomerSubsystem}</a>							
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Employee section
+                </h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <spring:url var="kitchenSubsystem" value="/restaurants/${restaurant.id}/kitchen" />
+                    <a href="${kitchenSubsystem}">${labelKitchenSubsystem}</a>
+                </li>
+                <li class="list-group-item">
+                    <spring:url var="waiterSubsystem" value="/restaurants/${restaurant.id}/waiter" />
+                    <a href="${waiterSubsystem}">${labelWaiterSubsystem}</a>
+                </li>
+                <li class="list-group-item">
+                    <spring:url var="customerSubsystem" value="/restaurants/${restaurant.id}/customers" />
+                    <a href="${customerSubsystem}">${labelCustomerSubsystem}</a>
+                </li>
+            </ul>
+        </div>
     </sec:authorize>
-
 </div>

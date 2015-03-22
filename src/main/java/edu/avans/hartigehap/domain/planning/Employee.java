@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import sun.security.util.Password;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
