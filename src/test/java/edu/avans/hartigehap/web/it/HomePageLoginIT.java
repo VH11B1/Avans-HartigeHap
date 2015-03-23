@@ -14,14 +14,14 @@ import static org.junit.Assert.fail;
 @Slf4j
 public class HomePageLoginIT {
 
-  public static String URL = "http://localhost:8080/hh";
+  public static String URL = "http://localhost:8080/";
 
   @Test
   public void login() {
     WebDriver driver = BrowserUtils.getWebDriver();
     driver.get(URL);
     log.debug("Congratulations, the home page is available ;-) {}", URL);
-    WebElement loginDiv = driver.findElement(By.id("login"));
+    WebElement loginDiv = driver.findElement(By.id("menu"));
     assertNotNull(loginDiv);
     WebElement nameInput = loginDiv.findElement(By.name("j_username"));
     assertNotNull(nameInput);

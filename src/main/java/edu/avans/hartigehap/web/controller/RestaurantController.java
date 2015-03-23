@@ -58,7 +58,7 @@ public class RestaurantController {
     @PostConstruct
     public void createRestaurants()
     {
-        //restaurantPopulatorService.createRestaurantsWithInventory();
+           restaurantPopulatorService.createRestaurantsWithInventory();
     }
 
 }

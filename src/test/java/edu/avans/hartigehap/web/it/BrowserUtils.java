@@ -2,8 +2,11 @@ package edu.avans.hartigehap.web.it;
 
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -26,9 +29,9 @@ public class BrowserUtils {
        * Vervang dit eventueel door een browser naar keuze.
        */
 
-      // TODO fix test, change firefox location if needed
-      webDriver = new FirefoxDriver();
-      //webDriver = new FirefoxDriver(new FirefoxBinary(new File("C:\\Utilities\\Internet\\Firefox\\firefox.exe")),new FirefoxProfile(new File("C:\\Users\\Alex\\AppData\\Roaming\\Mozilla\\Firefox")));
+      // TODO change firefox location if needed
+      //webDriver = new FirefoxDriver();
+      webDriver = new FirefoxDriver(new FirefoxBinary(new File("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe")),new FirefoxProfile(new File("C:\\Users\\Alex\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\")));
 
     }
 
