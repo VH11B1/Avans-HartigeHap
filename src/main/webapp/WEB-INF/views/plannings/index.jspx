@@ -17,7 +17,11 @@
 
     <spring:message code="label_plan_day" var="label_plan_day" />
     <spring:message code="label_plan_week" var="label_plan_week" />
-    <spring:message code="label_plan_full" var="label_plan_full" />
+    <spring:message code="label_plan_all" var="label_plan_all" />
+
+    <sec:authorize access="!hasRole('ROLE_EMPLOYEE')">
+        <h4>${label_unauthorized}</h4>
+    </sec:authorize>
 
     <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
         <h1 class="page-title">${labelPlanningOverview}</h1>
@@ -31,23 +35,23 @@
                     <c:when test='${scope.equals("week")}'>
                         <c:set var="weekClass" value="active" scope="page"/>
                     </c:when>
-                    <c:when test='${scope.equals("full")}'>
-                        <c:set var="fullClass" value="active" scope="page"/>
+                    <c:when test='${scope.equals("all")}'>
+                        <c:set var="allClass" value="active" scope="page"/>
                     </c:when>
                 </c:choose>
 
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="${dayClass}">
-                        <spring:url var="showDailyPlanning" value="/currentoverviews" />
+                        <spring:url var="showDailyPlanning" value="/plannings/daily" />
                         <a href="${showDailyPlanning}">${label_plan_day}</a>
                     </li>
                     <li role="presentation" class="${weekClass}">
-                        <spring:url var="showWeeklyPlanning" value="/weekoverviews" />
+                        <spring:url var="showWeeklyPlanning" value="/plannings/weekly" />
                         <a href="${showWeeklyPlanning}">${label_plan_week}</a>
                     </li>
-                    <li role="presentation" class="${fullClass}">
-                        <spring:url var="showFullPlanning" value="/fulloverview" />
-                        <a href="${showFullPlanning}">${label_plan_full}</a>
+                    <li role="presentation" class="${allClass}">
+                        <spring:url var="showAllPlanning" value="/plannings" />
+                        <a href="${showAllPlanning}">${label_plan_all}</a>
                     </li>
                 </ul>
             </div>
@@ -88,10 +92,5 @@
                 </tbody>
             </table>
         </div>
-    </sec:authorize>
-    <sec:authorize access="!hasRole('ROLE_EMPLOYEE')">
-        <h4>
-            ${label_unauthorized}
-        </h4>
     </sec:authorize>
 </div>

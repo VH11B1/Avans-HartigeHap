@@ -94,3 +94,78 @@ h1.page-title {
     font-family: 'Roboto-Light', 'noto_sansregular', sans-serif;
     text-transform: uppercase;
 }
+
+.grid-item {
+    position: relative;
+    display: block;
+    padding: 15px 0;
+}
+
+.grid-item-core {
+    background: white;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, .15);
+}
+
+.grid-cover {
+    position: relative;
+    display: block;
+    padding: 0 0 15px 0;
+    overflow: hidden;
+}
+
+.grid-cover > .wrap {
+    position: relative;
+    display: block;
+    height: 0;
+    padding-bottom: 60%;
+    overflow: hidden;
+}
+
+.grid-cover img {
+    border: none;
+    display: block;
+    max-width: 100%;
+    width: 100%;
+}
+
+.grid-description {
+    position: relative;
+    display: block;
+    padding: 0 15px 15px;
+}
+
+.grid-description h5 {
+    font-size: 14px;
+    font-family: 'Roboto-Bold', 'noto_sansbold', sans-serif;
+    margin: 0 0 15px 0;
+}
+
+.grid-description span {
+
+}
+
+.grid-item-tools {
+    margin: 0;
+}
+
+.grid-item-tools li {
+    padding: 0;
+    width: 25%;
+}
+
+.grid-item-tools li:first-child {
+    width: 75%;
+}
+
+.grid-item-tools li .btn {
+    padding: 6px 3px;
+    text-align: center;
+}
+
+.tab {
+    cursor: pointer;
+}
+
+.tab-content {
+    display: none;
+}
