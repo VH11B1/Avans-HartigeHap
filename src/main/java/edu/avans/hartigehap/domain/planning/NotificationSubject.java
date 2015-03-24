@@ -14,7 +14,7 @@ public class NotificationSubject {
     private NotificationSubject(){
         observerCollection = new ArrayList<>();
 
-        //TEST functie om mailobserver initieel toe te voegen
+        //Functie om mailobserver initieel toe te voegen
         registerObserver(new MailObserver());
     }
 
