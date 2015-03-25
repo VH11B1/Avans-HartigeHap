@@ -23,7 +23,7 @@ public class PlannedEmployeeFilter extends FilterDecorator<Employee> {
     @Override
     public List<Planning> filter () {
         List<Planning> originalList = getPlanningList();
-        List<Planning> filteredList = new ArrayList<Planning>();
+        List<Planning> filteredList = new ArrayList<>();
 
         for (Planning p : originalList) {
             if (employeeInList(p.getEmployee())) {

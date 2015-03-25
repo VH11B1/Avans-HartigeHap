@@ -24,7 +24,7 @@ public class PlannedStartFromDateFilter extends FilterDecorator<LocalDateTime> {
     @Override
     public List<Planning> filter () {
         List<Planning> originalList = getPlanningList();
-        List<Planning> filteredList = new ArrayList<Planning>();
+        List<Planning> filteredList = new ArrayList<>();
 
         for (Planning p : originalList) {
             if (dateMatch(p.getPlannedSlot())) {
@@ -33,6 +33,11 @@ public class PlannedStartFromDateFilter extends FilterDecorator<LocalDateTime> {
         }
 
         return filteredList;
+    }
+
+    @Override
+    public void set(LocalDateTime... slots){
+        super.set(slots[0]);
     }
 
     private boolean dateMatch (TimeSlot slot) {

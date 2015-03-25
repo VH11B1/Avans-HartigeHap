@@ -133,7 +133,7 @@
                         <input type="password" name="j_password" placeholder="Password" class="form-control"/>
                     </div>
 
-                    <input type="submit" class="btn btn-primary btn-block" value="Sign in"/>
+                    <input id="submit" name="submit" type="submit" class="btn btn-primary btn-block" value="Sign in"/>
 
                 </form>
             </div>

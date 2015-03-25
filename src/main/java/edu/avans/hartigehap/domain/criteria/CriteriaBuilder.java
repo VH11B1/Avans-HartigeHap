@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Created by Alex on 3-3-2015.
  * <p/>
+ *
  * Builder pattern
  */
 public class CriteriaBuilder {
@@ -21,6 +22,8 @@ public class CriteriaBuilder {
     }
 
     // singleton
+    // note: for design patterns only
+    // has severe real world consequences
     public static CriteriaBuilder getInstance () {
         if (instance == null) {
             instance = new CriteriaBuilder();
