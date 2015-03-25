@@ -31,7 +31,7 @@ import java.util.Locale;
 @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
 public class EmployeeController {
 
-    final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
 
     @Autowired
     private MessageSource messageSource;
@@ -51,7 +51,7 @@ public class EmployeeController {
     public String listEmployees (Model model) {
         model.addAttribute("employees", employeeService.findAll());
 
-        logger.info("Listing employees");
+        LOGGER.info("Listing employees");
 
         return "employees/index";
     }
@@ -61,7 +61,7 @@ public class EmployeeController {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
 
-        logger.info("Showing employee: '" + employee.getName() + "'");
+        LOGGER.info("Showing employee: '" + employee.getName() + "'");
 
         return "employees/show";
     }
@@ -74,7 +74,7 @@ public class EmployeeController {
         model.addAttribute("employee", employee);
         model.addAttribute("restaurants", restaurants);
 
-        logger.info("Editing employee: '" + employee.getName() + "'");
+        LOGGER.info("Editing employee: '" + employee.getName() + "'");
 
         return "employees/edit";
     }
@@ -106,7 +106,7 @@ public class EmployeeController {
         existingEmployee.updateEditableFields(employee);
         employeeService.save(existingEmployee);
 
-        logger.info("Updated employee: '" + existingEmployee.getName() + "'");
+        LOGGER.info("Updated employee: '" + existingEmployee.getName() + "'");
 
         return "redirect:/employees/" + employee.getId() + "/edit";
     }
@@ -116,7 +116,7 @@ public class EmployeeController {
         model.addAttribute("employee", new Employee());
         model.addAttribute("restaurants", restaurantService.findAll());
 
-        logger.info("Creating a new employee");
+        LOGGER.info("Creating a new employee");
 
         return "employees/create";
     }
@@ -145,7 +145,7 @@ public class EmployeeController {
 
         Employee storedEmployee = employeeService.save(employee);
 
-        logger.info("New employee created: '" + storedEmployee.getName() + "'");
+        LOGGER.info("New employee created: '" + storedEmployee.getName() + "'");
 
         return "redirect:/employees/" + UrlUtil.encodeUrlPathSegment(
                 storedEmployee.getId().toString(), httpServletRequest);
@@ -155,7 +155,7 @@ public class EmployeeController {
     public String destroyEmployee (@PathVariable("id") Long id) {
         employeeService.delete(id);
 
-        logger.info("Deleted employee");
+        LOGGER.info("Deleted employee");
 
         return "redirect:/employees";
     }

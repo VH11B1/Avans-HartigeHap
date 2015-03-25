@@ -3,6 +3,8 @@ package edu.avans.hartigehap.domain.planning;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import edu.avans.hartigehap.domain.DomainObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 //Als klasse omdat JPA een ENUM niet als kolom kan opslaan
 public class EmployeeRole extends DomainObject {
     private String roleName;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRole.class);
     public EmployeeRole (final String roleName) {
         this.roleName = roleName;
     }
@@ -38,13 +40,9 @@ public class EmployeeRole extends DomainObject {
     @Override
     public boolean equals (final Object other) {
         try {
-            if (this.roleName.equals(((EmployeeRole) other).roleName)) {
-                return true;
-            } else {
-                return false;
-            }
+            return this.roleName.equals(((EmployeeRole) other).roleName);
         } catch (ClassCastException e) {
-            // SonarQube will bitch, error logging bla bla
+            LOGGER.error("Error occurred while comparing Employee roles",e);
             return false;
         }
     }

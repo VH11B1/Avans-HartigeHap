@@ -22,7 +22,7 @@ import java.util.List;
 @Repository
 @Transactional
 public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorService {
-    final Logger logger = LoggerFactory.getLogger(RestaurantPopulatorServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantPopulatorServiceImpl.class);
 
     @Autowired
     private RestaurantRepository restaurantRepository;

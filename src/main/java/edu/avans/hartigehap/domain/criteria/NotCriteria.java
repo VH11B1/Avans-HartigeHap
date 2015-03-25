@@ -10,17 +10,17 @@ import java.util.List;
  */
 public class NotCriteria extends Criteria {
 
-    private Criteria notCriteria;
+    private Criteria notCrit;
 
     // slechts een, anders gedoe met default AND/OR
     public NotCriteria (final Criteria criteria) {
-        this.notCriteria = criteria;
+        this.notCrit = criteria;
     }
 
     @Override
     public List<Planning> meetCriteria (final List<Planning> l) {
 
-        List<Planning> meetCriteria = notCriteria.meetCriteria(l);
+        List<Planning> meetCriteria = notCrit.meetCriteria(l);
         List<Planning> notMeetCriteria = new ArrayList<>(l);
 
         for (Planning p : meetCriteria) {

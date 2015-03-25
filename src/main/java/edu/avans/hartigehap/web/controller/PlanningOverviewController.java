@@ -24,7 +24,7 @@ import java.util.Locale;
 @Controller
 public class PlanningOverviewController {
 
-    final Logger logger = LoggerFactory.getLogger(PlanningOverviewController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlanningOverviewController.class);
 
     @Autowired
     private PlanningOverviewService planningOverviewService;

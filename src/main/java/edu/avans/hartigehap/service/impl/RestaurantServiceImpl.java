@@ -20,7 +20,7 @@ import java.util.List;
 @Repository
 @Transactional
 public class RestaurantServiceImpl implements RestaurantService {
-    final Logger logger = LoggerFactory.getLogger(RestaurantServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantServiceImpl.class);
 
     @Autowired
     private RestaurantRepository restaurantRepository;

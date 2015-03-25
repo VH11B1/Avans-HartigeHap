@@ -21,7 +21,7 @@ import java.util.List;
 public class RestaurantsRS {
     private static final String DATA_FIELD = "data";
     private static final String ERROR_FIELD = "error";
-    private final Logger logger = LoggerFactory.getLogger(RestaurantsRS.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantsRS.class);
     @Autowired
     private RestaurantService restaurantService;
     // TODO: reason to comment out that it gives a problem in unit test of DiningTableController
@@ -38,7 +38,7 @@ public class RestaurantsRS {
     @RequestMapping(value = RSConstants.URL_PREFIX + "/restaurants", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Restaurant> restaurants () {
-        logger.debug("");
+        LOGGER.debug("");
         return restaurantService.findAll();
     }
 
@@ -49,7 +49,7 @@ public class RestaurantsRS {
     @ResponseBody
     public ModelAndView createRestaurantJson (@RequestBody Restaurant restaurant, HttpServletResponse httpResponse,
                                               WebRequest httpRequest) {
-        logger.debug("body: {}", restaurant);
+        LOGGER.debug("body: {}", restaurant);
 
         try {
             Restaurant savedRestaurant = restaurantService.save(restaurant);
@@ -58,7 +58,7 @@ public class RestaurantsRS {
                     .setHeader("Location", httpRequest.getContextPath() + "/restaurants/" + savedRestaurant.getId());
             return new ModelAndView(jsonView, DATA_FIELD, savedRestaurant);
         } catch (Exception e) {
-            logger.error("Error creating new restaurant", e);
+            LOGGER.error("Error creating new restaurant", e);
             String message = "Error creating new restaurant. [%1$s]";
             return createErrorResponse(String.format(message, e.toString()));
         }
@@ -70,7 +70,7 @@ public class RestaurantsRS {
             @PathVariable String restaurantId,
             HttpServletResponse httpResponse,
             WebRequest httpRequest) {
-        logger.debug("restaurantId: {}", restaurantId);
+        LOGGER.debug("restaurantId: {}", restaurantId);
         return restaurantService.findById(restaurantId);
     }
 

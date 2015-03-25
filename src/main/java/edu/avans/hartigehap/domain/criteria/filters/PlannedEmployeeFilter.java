@@ -35,10 +35,6 @@ public class PlannedEmployeeFilter extends FilterDecorator<Employee> {
     }
 
     private boolean employeeInList (Employee e) {
-        if (getFilterItems().contains(e)) {
-            return true;
-        } else {
-            return false;
-        }
+        return getFilterItems().contains(e);
     }
 }

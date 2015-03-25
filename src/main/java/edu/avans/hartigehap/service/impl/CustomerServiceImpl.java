@@ -23,7 +23,7 @@ import java.util.List;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-    final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -42,8 +42,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer findByFirstNameAndLastName (String firstName, String lastName) {
         List<Customer> customers = customerRepository.findByFirstNameAndLastName(firstName, lastName);
 
-        if (!customers.isEmpty())
+        if (!customers.isEmpty()){
             return customers.get(0);
+        }
 
         return null;
     }

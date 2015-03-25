@@ -19,7 +19,7 @@ import java.util.Collection;
 @Controller
 public class RestaurantController {
 
-    final Logger logger = LoggerFactory.getLogger(RestaurantController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantController.class);
 
     @Autowired
     private RestaurantService restaurantService;
@@ -29,8 +29,7 @@ public class RestaurantController {
 
     // mapping to "/" is not RESTful, but is for bootstrapping!
     @RequestMapping(value = {"/", "/restaurants"}, method = RequestMethod.GET)
-    public String listRestaurants(Model uiModel)
-    {
+    public String listRestaurants(Model uiModel){
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
 

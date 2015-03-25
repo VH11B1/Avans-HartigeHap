@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -68,7 +67,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
             List<Planning> l = overview.getEmployeesPlannedToday(employee);
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
             Date currentDate = Calendar.getInstance().getTime();
             boolean late = true;
             long diff = Long.MIN_VALUE;
@@ -84,7 +82,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 }
             }
 
-            if (late && l.size() > 0) {
+            if (late && !l.isEmpty()) {
                 NotificationSubject.getInstance().notifyObservers(employee, supervisor, employee.getName() + " te laat", employee.getName() + " is " + -diff + " minuten te laat aangemeld.");
             }
         }

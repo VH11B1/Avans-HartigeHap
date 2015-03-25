@@ -19,7 +19,7 @@ import java.util.List;
 @Repository
 @Transactional(rollbackFor = StateException.class)
 public class PlanningOverviewServiceImpl implements PlanningOverviewService {
-    final Logger logger = LoggerFactory.getLogger(PlanningOverviewServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlanningOverviewServiceImpl.class);
 
     //@Autowired
     //private PlanningRepository planningRepository;

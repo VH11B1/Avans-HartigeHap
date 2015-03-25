@@ -1,6 +1,8 @@
 package edu.avans.hartigehap.service.impl;
 
 import edu.avans.hartigehap.service.NotificationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -8,7 +10,7 @@ import org.springframework.mail.SimpleMailMessage;
  * Created by Mark on 8-3-2015.
  */
 public class EmailServiceImpl implements NotificationService {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailServiceImpl.class);
     private MailSender mailSender;
 
     public void setMailSender (MailSender mailSender) {
@@ -25,7 +27,7 @@ public class EmailServiceImpl implements NotificationService {
         try {
             mailSender.send(message);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.warn("Error occurred in email service provider",e);
             return false;
         }
         return true;

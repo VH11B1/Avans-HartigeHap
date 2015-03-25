@@ -16,21 +16,21 @@ import java.util.Locale;
 @RequestMapping("/security")
 public class SecurityController {
 
-    final Logger logger = LoggerFactory.getLogger(SecurityController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SecurityController.class);
 
     @Autowired
     private MessageSource messageSource;
 
     @RequestMapping("/loginfail")
     public String loginFail (Model uiModel, Locale locale) {
-        logger.info("Login failed detected");
+        LOGGER.info("Login failed detected");
         uiModel.addAttribute("message", new Message("error", messageSource.getMessage("message_login_fail", new Object[]{}, locale)));
         return "restaurants/index";
     }
 
     @RequestMapping("/loginSuccess")
     public String loginSuccess (Model uiModel, Locale locale) {
-        logger.info("Login success detected");
+        LOGGER.info("Login success detected");
         return "restaurants/index";
     }
 

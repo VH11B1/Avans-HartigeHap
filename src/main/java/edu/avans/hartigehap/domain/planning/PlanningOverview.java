@@ -95,7 +95,7 @@ public class PlanningOverview {
 
         // filters will override each other
         // this one will keep only service, kitchen and management employees
-        Filter<EmployeeRole> skmFilter = new PlannedRoleFilter(planning, new EmployeeRole("SERVICE"), new EmployeeRole("KITCHEN"), new EmployeeRole("MANAGEMENT"));
+        Filter<EmployeeRole> skmFilter = new PlannedRoleFilter(list, new EmployeeRole("SERVICE"), new EmployeeRole("KITCHEN"), new EmployeeRole("MANAGEMENT"));
 
         // this one will filter out managers
         Filter<EmployeeRole> skFilter = new PlannedRoleFilter(skmFilter, new EmployeeRole("SERVICE"), new EmployeeRole("KITCHEN"));
@@ -109,7 +109,7 @@ public class PlanningOverview {
         List<Planning> list = planning; // all planned
 
         // filter by tomorrow
-        Filter<LocalDateTime> dateFilter = new PlannedStartDateFilter(planning, LocalDateTime.now().plusDays(1));
+        Filter<LocalDateTime> dateFilter = new PlannedStartDateFilter(list, LocalDateTime.now().plusDays(1));
 
         // filter by afternoon
         Filter<TimeSlot.DayPart> partFilter = new PlannedDayPartFilter(dateFilter, TimeSlot.DayPart.AFTERNOON);
@@ -125,7 +125,7 @@ public class PlanningOverview {
         List<Planning> list = planning; // all planned
 
         // filter by next week, starting today
-        Filter<LocalDateTime> dateFilter = new PlannedStartBetweenDatesFilter(planning, LocalDateTime.now().plusDays(1).minusMinutes(5), LocalDateTime.now().plusDays(7));
+        Filter<LocalDateTime> dateFilter = new PlannedStartBetweenDatesFilter(list, LocalDateTime.now().plusDays(1).minusMinutes(5), LocalDateTime.now().plusDays(7));
         // minus 5 minutes or the now() calls below will be different from this now() call,
         // shifting tomorrow into today causing expected items not to show
 
@@ -136,7 +136,7 @@ public class PlanningOverview {
     public List<Planning> getEmployeesPlannedToday (final Employee... employees) {
         List<Planning> list = planning; // all planned
 
-        Filter<LocalDateTime> dateFilter = new PlannedTodayFilter(planning);
+        Filter<LocalDateTime> dateFilter = new PlannedTodayFilter(list);
         Filter<Employee> employeeFilter = new PlannedEmployeeFilter(dateFilter, employees);
 
         return employeeFilter.filter();

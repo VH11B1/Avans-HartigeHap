@@ -20,7 +20,7 @@ import java.util.List;
 @Repository
 @Transactional(rollbackFor = StateException.class)
 public class BillServiceImpl implements BillService {
-    final Logger logger = LoggerFactory.getLogger(BillServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BillServiceImpl.class);
 
     @Autowired
     private OrderRepository orderRepository;

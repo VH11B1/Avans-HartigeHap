@@ -13,7 +13,7 @@ import java.util.List;
  */
 public abstract class Filter<E> {
 
-    protected final Logger LOGGER = LoggerFactory.getLogger(Filter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Filter.class);
     @Setter
     private Filter original;
     @Setter

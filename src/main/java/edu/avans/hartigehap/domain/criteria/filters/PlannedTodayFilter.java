@@ -1,6 +1,8 @@
 package edu.avans.hartigehap.domain.criteria.filters;
 
 import edu.avans.hartigehap.domain.planning.Planning;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
  * Created by Alex on 10-3-2015.
  */
 public class PlannedTodayFilter extends FilterDecorator<LocalDateTime> {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlannedTodayFilter.class);
     public PlannedTodayFilter (List<Planning> list) {
         super(list, LocalDateTime.now());
     }

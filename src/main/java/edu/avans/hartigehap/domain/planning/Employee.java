@@ -80,7 +80,9 @@ public class Employee extends DomainObject {
         this.hoursPerMonth = employee.hoursPerMonth;
         this.restaurant = employee.restaurant;
 
-        if (!employee.password.isEmpty()) this.password = employee.password;
+        if (!employee.password.isEmpty()) {
+            this.password = employee.password;
+        }
     }
 
 }
