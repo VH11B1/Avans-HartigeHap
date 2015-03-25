@@ -7,4 +7,5 @@ import edu.avans.hartigehap.domain.planning.Employee;
  */
 public interface EmployeeRepositoryCustom {
     public Employee findEmployeeByUsername (String username);
+    public Employee saveEmployeeAndUser(Employee employee);
 }

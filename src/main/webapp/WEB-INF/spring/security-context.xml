@@ -11,11 +11,15 @@
         <logout logout-success-url="/"/>
     </http>
 
-    <beans:bean id="successHandler"
-                class="edu.avans.hartigehap.web.HHApplicationListener"/>
+    <beans:bean id="successHandler" class="edu.avans.hartigehap.web.HHApplicationListener"/>
+
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11" />
+    </beans:bean>
 
     <authentication-manager>
         <authentication-provider>
+            <password-encoder ref="encoder" />
             <jdbc-user-service data-source-ref="dataSource"
                                users-by-username-query=
                                        "select username,password, enabled from users where username=?"

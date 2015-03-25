@@ -1,7 +1,7 @@
 use hh;
 CREATE  TABLE users (
   username VARCHAR(45) NOT NULL ,
-  password VARCHAR(45) NOT NULL ,
+  password VARCHAR(255) NOT NULL ,
   enabled TINYINT NOT NULL DEFAULT 1 ,
   employeeId BIGINT,
   PRIMARY KEY (username),
@@ -20,7 +20,7 @@ CREATE TABLE user_roles (
 INSERT INTO `hh`.`employees` (`version`, `email`, `hoursPerMonth`, `name`, `password`, `username`) VALUES ('0', 'mbartele@avans.nl', '160', 'Mark Bartelen', '', 'mark');
 INSERT INTO `hh`.`employees` (`version`, `email`, `hoursPerMonth`, `name`, `password`, `username`) VALUES ('0', 'erco@test.nl', '160', 'Erco Argante', '', 'erco');
 INSERT INTO `hh`.`employees` (`version`, `email`, `hoursPerMonth`, `name`, `password`, `username`) VALUES ('0', 'employee@test.nl', '160', 'Emplo Yee', '', 'employee');
-insert into users(username,password,enabled,employeeId) values ("mark","mark",1,1);
+insert into users(username,password,enabled,employeeId) values ("mark","$11$Z2im/VePke/kur1khyqtjuRhhws4JT6zc0JON71Vebzpx5dfb.ee2",1,1);
 insert into users(username,password,enabled,employeeId) values ("erco","erco",1,2);
 insert into users(username,password,enabled,employeeId) values ("employee","employee",1,3);
 insert into users(username,password,enabled) values ("customer","customer",1);
