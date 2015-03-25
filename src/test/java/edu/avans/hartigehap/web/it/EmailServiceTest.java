@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Mark on 9-3-2015.
@@ -24,7 +25,7 @@ public class EmailServiceTest extends AbstractTransactionRollbackTest {
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("spring-context.xml");
         NotificationService notificationService = (EmailServiceImpl) context.getBean("emailService");
-        assertTrue(notificationService.sendNotification("ivh11b1@rsgrijks.nl", "ivh11b1@rsgrijks.nl", "Test", "Hallo test test"));
+        assertTrue(notificationService.sendNotification("ivh11b1@gmail.com", "ivh11b1@gmail.com", "Test", "Hallo test test"));
         assertNotNull(notificationService);
     }
 }
