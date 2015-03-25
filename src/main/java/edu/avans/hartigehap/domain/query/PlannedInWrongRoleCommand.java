@@ -12,7 +12,7 @@ import java.util.List;
 public class PlannedInWrongRoleCommand extends CriteriaCommand {
 
     @Override
-    public List<Planning> fetch(List<Planning> plannings) {
+    public List<Planning> fetch (List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
         b.single(b.not(Criteria.Type.IN_PLANNED_ROLE));

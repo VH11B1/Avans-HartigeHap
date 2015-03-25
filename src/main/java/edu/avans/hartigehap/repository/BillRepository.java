@@ -1,20 +1,21 @@
 package edu.avans.hartigehap.repository;
 
-import java.util.List;
-
+import edu.avans.hartigehap.domain.Bill;
+import edu.avans.hartigehap.domain.Restaurant;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import edu.avans.hartigehap.domain.*;
+
+import java.util.List;
 
 public interface BillRepository extends PagingAndSortingRepository<Bill, Long> {
 
-	// Spring creates an implementation based one the method name
-	// in this case all orders for which:
-	// bill.getBillStatus() == billStatus
-	// AND
-	// bill.getDiningTable().getRestaurant() == restaurant
-	List<Bill> findByBillStatusAndDiningTableRestaurant(
-			Bill.BillStatus billStatus, 
-			Restaurant restaurant, 
-			Sort sort);
+    // Spring creates an implementation based one the method name
+    // in this case all orders for which:
+    // bill.getBillStatus() == billStatus
+    // AND
+    // bill.getDiningTable().getRestaurant() == restaurant
+    List<Bill> findByBillStatusAndDiningTableRestaurant (
+            Bill.BillStatus billStatus,
+            Restaurant restaurant,
+            Sort sort);
 }

@@ -3,12 +3,12 @@ package edu.avans.hartigehap.domain.planning;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * Created by Alex on 3-3-2015.
@@ -18,12 +18,12 @@ import java.util.Date;
 @Entity
 @Table(name = "AVAILABLESLOTS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@NoArgsConstructor
 public class AvailableSlot extends TimeSlot {
 
     private boolean continuous;
 
-    public AvailableSlot(DayPart dayPart, LocalDateTime start, LocalDateTime end,
-                         boolean continuous) {
+    public AvailableSlot (DayPart dayPart, LocalDateTime start, LocalDateTime end, boolean continuous) {
         super(dayPart, start, end);
         this.continuous = continuous;
     }

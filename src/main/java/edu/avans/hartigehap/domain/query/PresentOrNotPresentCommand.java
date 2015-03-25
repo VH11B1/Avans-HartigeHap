@@ -13,7 +13,7 @@ public class PresentOrNotPresentCommand extends CriteriaCommand {
     //TODO useless, for testing only
 
     @Override
-    public List<Planning> fetch(final List<Planning> plannings) {
+    public List<Planning> fetch (final List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
         b.or(Criteria.Type.PRESENT.getCriteria(), b.not(Criteria.Type.PRESENT));

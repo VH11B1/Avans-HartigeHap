@@ -15,42 +15,42 @@ import javax.persistence.Table;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 
 //Als klasse omdat JPA een ENUM niet als kolom kan opslaan
-public class EmployeeRole extends DomainObject{
+public class EmployeeRole extends DomainObject {
     private String roleName;
 
-    public EmployeeRole(final String roleName) {
+    public EmployeeRole (final String roleName) {
         this.roleName = roleName;
     }
 
-    public String getRoleName() {
+    public String getRoleName () {
         return roleName;
     }
 
-    public void setRoleName(final String roleName) {
+    public void setRoleName (final String roleName) {
         this.roleName = roleName;
     }
 
     @Override
-    public String toString(){
+    public String toString () {
         return this.roleName;
     }
 
     @Override
-    public boolean equals(final Object other){
+    public boolean equals (final Object other) {
         try {
             if (this.roleName.equals(((EmployeeRole) other).roleName)) {
                 return true;
             } else {
                 return false;
             }
-        }catch(ClassCastException e){
+        } catch (ClassCastException e) {
             // SonarQube will bitch, error logging bla bla
             return false;
         }
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode () {
         return super.hashCode();
     }
 }

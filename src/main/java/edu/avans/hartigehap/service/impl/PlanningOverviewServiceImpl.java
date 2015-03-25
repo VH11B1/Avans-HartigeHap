@@ -18,14 +18,14 @@ import java.util.List;
 @Service("planningOverviewService")
 @Repository
 @Transactional(rollbackFor = StateException.class)
-public class PlanningOverviewServiceImpl implements PlanningOverviewService{
+public class PlanningOverviewServiceImpl implements PlanningOverviewService {
     final Logger logger = LoggerFactory.getLogger(PlanningOverviewServiceImpl.class);
 
     //@Autowired
     //private PlanningRepository planningRepository;
 
     @Override
-    public List<Planning> getCurrentWorking() {
+    public List<Planning> getCurrentWorking () {
 
         PlanningOverview planningOverview = new PlanningOverview();
 
@@ -39,7 +39,7 @@ public class PlanningOverviewServiceImpl implements PlanningOverviewService{
     }
 
     @Override
-    public List<Planning> getWeekPlanning() {
+    public List<Planning> getWeekPlanning () {
         PlanningOverview planningOverview = new PlanningOverview();
 
         List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
@@ -50,7 +50,7 @@ public class PlanningOverviewServiceImpl implements PlanningOverviewService{
     }
 
     @Override
-    public List<Planning> getAllPlanningFromNow() {
+    public List<Planning> getAllPlanningFromNow () {
         PlanningOverview planningOverview = new PlanningOverview();
 
         List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate

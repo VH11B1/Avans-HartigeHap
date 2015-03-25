@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class PresentCommand extends CriteriaCommand {
     @Override
-    public List<Planning> fetch(final List<Planning> plannings) {
+    public List<Planning> fetch (final List<Planning> plannings) {
         CriteriaBuilder b = CriteriaBuilder.getInstance();
 
         b.single(Criteria.Type.PRESENT);

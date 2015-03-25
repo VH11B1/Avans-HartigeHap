@@ -11,23 +11,23 @@ import java.util.List;
  */
 public class PlannedDayPartFilter extends FilterDecorator<TimeSlot.DayPart> {
 
-    public PlannedDayPartFilter(List<Planning> list,TimeSlot.DayPart... l){
-        super(list,l);
+    public PlannedDayPartFilter (List<Planning> list, TimeSlot.DayPart... l) {
+        super(list, l);
     }
 
-    public PlannedDayPartFilter(Filter f,TimeSlot.DayPart... l){
-        super(f,l);
+    public PlannedDayPartFilter (Filter f, TimeSlot.DayPart... l) {
+        super(f, l);
         setOriginal(f);
     }
 
     @Override
-    public List<Planning> filter() {
+    public List<Planning> filter () {
         List<Planning> originalList = getPlanningList();
         List<Planning> filteredList = new ArrayList<Planning>();
         List<TimeSlot.DayPart> parts = getFilterItems();
 
-        for(Planning p : originalList){
-            if(parts.contains(p.getPlannedSlot().getPart())){
+        for (Planning p : originalList) {
+            if (parts.contains(p.getPlannedSlot().getPart())) {
                 filteredList.add(p);
             }
         }

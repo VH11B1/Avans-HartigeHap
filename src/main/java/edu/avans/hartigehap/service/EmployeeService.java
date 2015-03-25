@@ -7,10 +7,18 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> findAll();
-    List<Employee> findByRestaurant(Restaurant restaurant);
-    Employee findById(Long id);
-    Employee save(Employee employee);
-    void delete(Long id);
+    List<Employee> findAll ();
+
+    List<Employee> findByRestaurant (Restaurant restaurant);
+
+    Employee findByUsername (String username);
+
+    Employee findById (Long id);
+
+    Employee save (Employee employee);
+
+    void delete (Long id);
+
+    void checkTiming (String username);
 
 }

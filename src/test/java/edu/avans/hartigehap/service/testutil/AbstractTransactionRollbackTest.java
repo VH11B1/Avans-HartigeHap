@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/test-root-context.xml")
-@TransactionConfiguration(transactionManager = TestConstants.TX_MANAGER_NAME, defaultRollback = false)
+@TransactionConfiguration(transactionManager = TestConstants.TX_MANAGER_NAME, defaultRollback = true)
 @Transactional
 public abstract class AbstractTransactionRollbackTest extends AbstractTransactionalJUnit4SpringContextTests {
 

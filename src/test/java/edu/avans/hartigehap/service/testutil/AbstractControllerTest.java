@@ -1,12 +1,11 @@
 package edu.avans.hartigehap.service.testutil;
 
+import edu.avans.hartigehap.web.controller.ControllerTestConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import edu.avans.hartigehap.web.controller.ControllerTestConfig;
 
 
 // to indicate that running the test should be done using JUnit version 4
@@ -17,10 +16,10 @@ import edu.avans.hartigehap.web.controller.ControllerTestConfig;
 @ActiveProfiles("test")
 public abstract class AbstractControllerTest {
 
-	@Test
-	// class must contain a test to prevent "initialization error"
-	public void dummy() {
-		// deliberately empty
-	}
+    @Test
+    // class must contain a test to prevent "initialization error"
+    public void dummy () {
+        // deliberately empty
+    }
 
 }

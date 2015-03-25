@@ -9,24 +9,24 @@ import java.util.List;
 /**
  * Created by Alex on 10-3-2015.
  */
-public class PlannedEmployeeFilter extends FilterDecorator<Employee>{
+public class PlannedEmployeeFilter extends FilterDecorator<Employee> {
 
-    public PlannedEmployeeFilter(List<Planning> list, Employee... employees){
+    public PlannedEmployeeFilter (List<Planning> list, Employee... employees) {
         super(list, employees);
     }
 
-    public PlannedEmployeeFilter(Filter f, Employee... employees){
+    public PlannedEmployeeFilter (Filter f, Employee... employees) {
         super(f, employees);
         setOriginal(f);
     }
 
     @Override
-    public List<Planning> filter() {
+    public List<Planning> filter () {
         List<Planning> originalList = getPlanningList();
-        List<Planning> filteredList = new ArrayList<Planning>();
+        List<Planning> filteredList = new ArrayList<>();
 
-        for(Planning p : originalList){
-            if(employeeInList(p.getEmployee())){
+        for (Planning p : originalList) {
+            if (employeeInList(p.getEmployee())) {
                 filteredList.add(p);
             }
         }
@@ -34,10 +34,10 @@ public class PlannedEmployeeFilter extends FilterDecorator<Employee>{
         return filteredList;
     }
 
-    private boolean employeeInList(Employee e){
-        if (getFilterItems().contains(e)){
+    private boolean employeeInList (Employee e) {
+        if (getFilterItems().contains(e)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

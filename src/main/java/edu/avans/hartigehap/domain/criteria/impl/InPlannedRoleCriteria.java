@@ -14,15 +14,15 @@ import java.util.List;
 public class InPlannedRoleCriteria extends Criteria {
     private List<EmployeeRole> employeeRoles;
 
-    public InPlannedRoleCriteria(EmployeeRole... a){
+    public InPlannedRoleCriteria (EmployeeRole... a) {
         this.employeeRoles = Arrays.asList(a);
     }
 
     @Override
-    public List<Planning> meetCriteria(final List<Planning> l) {
+    public List<Planning> meetCriteria (final List<Planning> l) {
         List<Planning> meetCrit = new ArrayList<Planning>();
-        for(Planning p : l){
-            if(p.getEmployee().getRoles().contains(p.getRole())){
+        for (Planning p : l) {
+            if (p.getEmployee().getRoles().contains(p.getRole())) {
                 meetCrit.add(p);
             }
         }

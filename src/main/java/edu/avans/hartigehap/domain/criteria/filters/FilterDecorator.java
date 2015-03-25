@@ -6,17 +6,17 @@ import java.util.List;
 
 /**
  * Created by Alex on 7-3-2015.
- *
+ * <p/>
  * decorator pattern
  */
-public abstract class FilterDecorator<E> extends Filter<E>{
+public abstract class FilterDecorator<E> extends Filter<E> {
 
-    public FilterDecorator(Filter f, E... items){
+    public FilterDecorator (Filter f, E... items) {
         setPlanningList(f.getPlanningList());
         set(items);
     }
 
-    public FilterDecorator(List<Planning> list, E... items){
+    public FilterDecorator (List<Planning> list, E... items) {
         setPlanningList(list);
         set(items);
     }
