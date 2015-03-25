@@ -28,8 +28,7 @@ public class EmployeeRepoTest extends AbstractTransactionRollbackTest {
     private EmployeeService employeeService;
 
     @Test
-    public void findEmployeeByUsername()
-    {
+    public void findEmployeeByUsername () {
         // Prepare our employee
         Employee employee = prepareEmployee(
                 EMPLOYEE_NAME, EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, EMPLOYEE_EMAIL, EMPLOYEE_WORKHOURS
@@ -44,8 +43,7 @@ public class EmployeeRepoTest extends AbstractTransactionRollbackTest {
     }
 
     @Test
-    public void createEmployee()
-    {
+    public void createEmployee () {
         // Prepare our employee
         Employee employee = prepareEmployee(
                 EMPLOYEE_NAME, EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, EMPLOYEE_EMAIL, EMPLOYEE_WORKHOURS
@@ -60,8 +58,7 @@ public class EmployeeRepoTest extends AbstractTransactionRollbackTest {
     }
 
     @Test
-    public void saveEmployee()
-    {
+    public void saveEmployee () {
         // Prepare our employee
         Employee employee = prepareEmployee(
                 EMPLOYEE_NAME, EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, EMPLOYEE_EMAIL, EMPLOYEE_WORKHOURS
@@ -86,8 +83,7 @@ public class EmployeeRepoTest extends AbstractTransactionRollbackTest {
     }
 
     @Test
-    public void destroyEmployee()
-    {
+    public void destroyEmployee () {
         // Prepare our employee
         Employee employee = prepareEmployee(
                 EMPLOYEE_NAME, EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD, EMPLOYEE_EMAIL, EMPLOYEE_WORKHOURS
@@ -101,8 +97,7 @@ public class EmployeeRepoTest extends AbstractTransactionRollbackTest {
         assertNull("The employee has been deleted", foundEmployee);
     }
 
-    private Employee prepareEmployee(String name, String username, String password, String email, int hoursPerMonth)
-    {
+    private Employee prepareEmployee (String name, String username, String password, String email, int hoursPerMonth) {
         Employee employee = new Employee(
                 name, username, password, email, hoursPerMonth);
 

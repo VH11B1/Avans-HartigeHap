@@ -56,27 +56,23 @@ public class Employee extends DomainObject {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
     private Collection<Planning> plannings = new ArrayList<Planning>();
 
-    public Employee()
-    {
+    public Employee () {
         //
     }
 
-    public Employee(String name, String username, String email, int hoursPerMonth)
-    {
+    public Employee (String name, String username, String email, int hoursPerMonth) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.hoursPerMonth = hoursPerMonth;
     }
 
-    public Employee(String name, String username, String password, String email, int hoursPerMonth)
-    {
+    public Employee (String name, String username, String password, String email, int hoursPerMonth) {
         this(name, username, email, hoursPerMonth);
         this.password = password;
     }
 
-    public void updateEditableFields(Employee employee)
-    {
+    public void updateEditableFields (Employee employee) {
         this.name = employee.name;
         this.username = employee.username;
         this.email = employee.email;
@@ -84,7 +80,7 @@ public class Employee extends DomainObject {
         this.hoursPerMonth = employee.hoursPerMonth;
         this.restaurant = employee.restaurant;
 
-        if ( ! employee.password.isEmpty()) this.password = employee.password;
+        if (!employee.password.isEmpty()) this.password = employee.password;
     }
 
 }

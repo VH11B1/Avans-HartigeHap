@@ -16,27 +16,28 @@ import static org.junit.Assert.assertTrue;
 public class PlanningUtil {
 
     private static List<Planning> planning;
-    static{
+
+    static {
         planning = new ArrayList<Planning>();
         populate();
     }
 
-    public static void assertListsContainSame (List<Planning> expected, List<Planning> real){
+    public static void assertListsContainSame (List<Planning> expected, List<Planning> real) {
 
         // size must be the same
         assertEquals(expected.size(), real.size());
 
         // expected list should match real list
-        for (Planning p : real){
+        for (Planning p : real) {
             assertTrue(expected.contains(p));
         }
     }
 
-    public static List<Planning> getPlanningList(){
+    public static List<Planning> getPlanningList () {
         return planning;
     }
 
-    private static void populate(){
+    private static void populate () {
         Employee e1 = new Employee();
         e1.setName("E.M. Ployee");
         e1.setRoles(Arrays.asList(new EmployeeRole("KITCHEN"),
@@ -67,16 +68,16 @@ public class PlanningUtil {
                 LocalDateTime.now()));
         p1.setActualSlot(new ActualSlot(TimeSlot.DayPart.MORNING, LocalDateTime.now(),
                 LocalDateTime.now(), e1));
-        p1.setRole((EmployeeRole)e1.getRoles().toArray()[0]);
+        p1.setRole((EmployeeRole) e1.getRoles().toArray()[0]);
 
         // employee 2 planned, employee 3 actual
         Planning p2 = new Planning();
         p2.setEmployee(e2);
         p2.setPlannedSlot(new PlannedSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now(),
                 LocalDateTime.now()));
-        p2.setActualSlot(new ActualSlot(TimeSlot.DayPart.AFTERNOON,LocalDateTime.now(),
+        p2.setActualSlot(new ActualSlot(TimeSlot.DayPart.AFTERNOON, LocalDateTime.now(),
                 LocalDateTime.now(), e3));
-        p2.setRole((EmployeeRole)e2.getRoles().toArray()[0]);
+        p2.setRole((EmployeeRole) e2.getRoles().toArray()[0]);
 
         // employee 2 planned, employee 2 actual
         Planning p8 = new Planning();
@@ -132,8 +133,6 @@ public class PlanningUtil {
         planning.add(p7);
         planning.add(p8);
     }
-
-
 
 
 }

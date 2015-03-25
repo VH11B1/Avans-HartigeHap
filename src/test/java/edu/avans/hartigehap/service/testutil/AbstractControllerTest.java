@@ -16,10 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles("test")
 public abstract class AbstractControllerTest {
 
-	@Test
-	// class must contain a test to prevent "initialization error"
-	public void dummy() {
-		// deliberately empty
-	}
+    @Test
+    // class must contain a test to prevent "initialization error"
+    public void dummy () {
+        // deliberately empty
+    }
 
 }

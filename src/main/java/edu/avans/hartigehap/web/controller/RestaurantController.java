@@ -29,8 +29,7 @@ public class RestaurantController {
 
     // mapping to "/" is not RESTful, but is for bootstrapping!
     @RequestMapping(value = {"/", "/restaurants"}, method = RequestMethod.GET)
-    public String listRestaurants(Model uiModel)
-    {
+    public String listRestaurants (Model uiModel) {
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
 
@@ -42,8 +41,7 @@ public class RestaurantController {
     }
 
     @RequestMapping(value = "/restaurants/{restaurantName}", method = RequestMethod.GET)
-    public String showRestaurant(@PathVariable("restaurantName") String restaurantName, Model uiModel)
-    {
+    public String showRestaurant (@PathVariable("restaurantName") String restaurantName, Model uiModel) {
         // warmup stuff
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
@@ -56,8 +54,7 @@ public class RestaurantController {
 
     // called once immediately after bean creation
     @PostConstruct
-    public void createRestaurants()
-    {
+    public void createRestaurants () {
         //restaurantPopulatorService.createRestaurantsWithInventory();
     }
 

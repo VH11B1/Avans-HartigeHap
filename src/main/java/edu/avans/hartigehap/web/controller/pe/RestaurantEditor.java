@@ -12,12 +12,12 @@ public class RestaurantEditor extends PropertyEditorSupport {
 
     private final RestaurantService restaurantService;
 
-    public RestaurantEditor(RestaurantService restaurantService) {
+    public RestaurantEditor (RestaurantService restaurantService) {
         this.restaurantService = restaurantService;
     }
 
     @Override
-    public void setAsText(String text) throws IllegalArgumentException {
+    public void setAsText (String text) throws IllegalArgumentException {
         Restaurant restaurant = restaurantService.findById(text);
         setValue(restaurant);
     }

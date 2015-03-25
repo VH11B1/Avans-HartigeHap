@@ -14,27 +14,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * 
  * @author Erco
  */
 @Entity
 @Table(name = "FOODCATEGORIES")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-@Getter @Setter
-@ToString(callSuper=true, includeFieldNames=true, of= {"tag", "menuItems"})
+@Getter
+@Setter
+@ToString(callSuper = true, includeFieldNames = true, of = {"tag", "menuItems"})
 @NoArgsConstructor
 public class FoodCategory extends DomainObject {
-	private static final long serialVersionUID = 1L;
-	
-	private String tag;
+    private static final long serialVersionUID = 1L;
 
-	// no cascade
-	@ManyToMany(mappedBy = "foodCategories")
-	private Collection<MenuItem> menuItems = new ArrayList<MenuItem>();
-	
-	public FoodCategory(String tag) {
-		this.tag = tag;
-	}
+    private String tag;
+
+    // no cascade
+    @ManyToMany(mappedBy = "foodCategories")
+    private Collection<MenuItem> menuItems = new ArrayList<MenuItem>();
+
+    public FoodCategory (String tag) {
+        this.tag = tag;
+    }
 
 
 }

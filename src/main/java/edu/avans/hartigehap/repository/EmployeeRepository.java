@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long>, EmployeeRepositoryCustom {
 
-    Employee findByUsername(String username);
-    List<Employee> findByRestaurant(Restaurant restaurant);
-    Employee findById(long id);
+    Employee findByUsername (String username);
+
+    List<Employee> findByRestaurant (Restaurant restaurant);
+
+    Employee findById (long id);
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class PlanningOverviewTest extends TestCase {
 
     @Test
-    public void testGetPresentOrNotPresentEmployees(){
+    public void testGetPresentOrNotPresentEmployees () {
         PlanningOverview overview = new PlanningOverview();
         List<Planning> l = overview.getPresentOrNotPresentEmployees();
         System.err.println("------------ Present or Not Present employees, i.e. everyone-------------");
@@ -21,13 +21,13 @@ public class PlanningOverviewTest extends TestCase {
     }
 
     @Test
-    public void testGetAllPlannedAndNotPresentEmployees() throws Exception {
+    public void testGetAllPlannedAndNotPresentEmployees () throws Exception {
         PlanningOverview overview = new PlanningOverview();
         List<Planning> l = overview.getAllPlannedAndNotPresentEmployees();
 
         System.err.println("-------------- Planned employees who did not show up ------------------");
         for (Planning p : l) {
-            if(p.hasActualSlot()){
+            if (p.hasActualSlot()) {
                 System.err.println(p.getEmployee().getName()
                         + " was not present and was replaced by "
                         + p.getActualSlot().getActualEmployee().getName());
@@ -38,7 +38,7 @@ public class PlanningOverviewTest extends TestCase {
     }
 
     @Test
-    public void testWronglyPlannedEmployees(){
+    public void testWronglyPlannedEmployees () {
         PlanningOverview overview = new PlanningOverview();
         List<Planning> l = overview.getWronglyPlannedEmployees();
         System.err.println("--------------------Employees planned in wrong role----------------------");
@@ -53,7 +53,7 @@ public class PlanningOverviewTest extends TestCase {
     }
 
     @Test
-    public void testGetPresentEmployees(){
+    public void testGetPresentEmployees () {
         PlanningOverview overview = new PlanningOverview();
         List<Planning> l = overview.getPresentEmployees();
         System.err.println("-------------------------- Present employees ----------------------------");
@@ -65,7 +65,7 @@ public class PlanningOverviewTest extends TestCase {
     }
 
     @Test
-    public void testFilter(){
+    public void testFilter () {
         PlanningOverview overview = new PlanningOverview();
         List<Planning> l = overview.getPlannedServiceAndKitchenEmployees();
 
@@ -78,7 +78,7 @@ public class PlanningOverviewTest extends TestCase {
     }
 
     @Test
-    public void testDecoratedFilters(){
+    public void testDecoratedFilters () {
         PlanningOverview overview = new PlanningOverview();
         List<Planning> l = overview.getPlannedServiceForTomorrowAfternoon();
 
@@ -91,7 +91,7 @@ public class PlanningOverviewTest extends TestCase {
     }
 
     @Test
-    public void testBetweenStartDates(){
+    public void testBetweenStartDates () {
         PlanningOverview overview = new PlanningOverview();
         List<Planning> l = overview.getPlannedForNextWeekInclToday();
 
@@ -106,7 +106,7 @@ public class PlanningOverviewTest extends TestCase {
     }
 
     @Test
-    public void testGetCurrentOverview(){
+    public void testGetCurrentOverview () {
         // use case: het is mogelijk voor de manager om een overzicht op te vragen
         // met daarin wie op dat moment welke rol vervult
 
@@ -121,10 +121,10 @@ public class PlanningOverviewTest extends TestCase {
                             + " from " + p.getPlannedSlot().getStart().format(formatter) + " to " + p.getPlannedSlot().getEnd().format(formatter)
             );
 
-            if(p.getActualSlot().getActualEmployee().equals(p.getEmployee())){
-                System.err.print(" and logged in on " +  p.getActualSlot().getStart().format(formatter));
-            }else{
-                System.err.print(" but did not log on and was replaced by " + p.getActualSlot().getActualEmployee().getName() + " on "  +  p.getActualSlot().getStart().format(formatter));
+            if (p.getActualSlot().getActualEmployee().equals(p.getEmployee())) {
+                System.err.print(" and logged in on " + p.getActualSlot().getStart().format(formatter));
+            } else {
+                System.err.print(" but did not log on and was replaced by " + p.getActualSlot().getActualEmployee().getName() + " on " + p.getActualSlot().getStart().format(formatter));
             }
             System.err.println();
         }
@@ -132,7 +132,7 @@ public class PlanningOverviewTest extends TestCase {
     }
 
     @Test
-    public void testGetEmployeesPlannedToday(){
+    public void testGetEmployeesPlannedToday () {
 
         PlanningOverview overview = new PlanningOverview();
 
@@ -148,7 +148,7 @@ public class PlanningOverviewTest extends TestCase {
                     + p.getPlannedSlot().getStart().format(formatter)
                     + " to "
                     + p.getPlannedSlot().getEnd().format(formatter)
-            + " in " + p.getRole());
+                    + " in " + p.getRole());
         }
         System.err.println("------------------------------------------------------------------------");
     }

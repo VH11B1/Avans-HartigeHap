@@ -23,8 +23,7 @@ public class AvailableSlot extends TimeSlot {
 
     private boolean continuous;
 
-    public AvailableSlot(DayPart dayPart, LocalDateTime start, LocalDateTime end, boolean continuous)
-    {
+    public AvailableSlot (DayPart dayPart, LocalDateTime start, LocalDateTime end, boolean continuous) {
         super(dayPart, start, end);
         this.continuous = continuous;
     }

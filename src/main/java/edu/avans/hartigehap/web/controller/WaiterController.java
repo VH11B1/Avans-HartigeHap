@@ -41,8 +41,7 @@ public class WaiterController {
     private OrderService orderService;
 
     @RequestMapping(value = "/restaurants/{restaurantName}/waiter", method = RequestMethod.GET)
-    public String showWaiter(@PathVariable("restaurantName") String restaurantName, Model uiModel)
-    {
+    public String showWaiter (@PathVariable("restaurantName") String restaurantName, Model uiModel) {
         // warmup stuff
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
@@ -60,8 +59,7 @@ public class WaiterController {
 
 
     @RequestMapping(value = "/waiter/orders/{orderId}", method = RequestMethod.GET)
-    public String showOrderInWaiter(@PathVariable("orderId") String orderId, Model uiModel, Locale locale)
-    {
+    public String showOrderInWaiter (@PathVariable("orderId") String orderId, Model uiModel, Locale locale) {
 
         // warmup stuff
         Order order = orderService.findById(Long.valueOf(orderId));
@@ -75,8 +73,7 @@ public class WaiterController {
         uiModel.addAttribute("allSubmittedBills", allSubmittedBills);
 
         String orderContent = "";
-        for (OrderItem orderItem : order.getOrderItems())
-        {
+        for (OrderItem orderItem : order.getOrderItems()) {
             orderContent += orderItem.getMenuItem().getId() + " (" + orderItem.getQuantity() + "x)" + "; ";
         }
 
@@ -87,8 +84,7 @@ public class WaiterController {
 
 
     @RequestMapping(value = "/waiter/bills/{billId}", method = RequestMethod.GET)
-    public String showBillInWaiter(@PathVariable("billId") String billId, Model uiModel, Locale locale)
-    {
+    public String showBillInWaiter (@PathVariable("billId") String billId, Model uiModel, Locale locale) {
 
         // warmup stuff
         Bill bill = billService.findById(Long.valueOf(billId));
@@ -108,11 +104,9 @@ public class WaiterController {
 
 
     @RequestMapping(value = "/waiter/orders/{orderId}", method = RequestMethod.PUT)
-    public String receiveOrderEvent(@PathVariable("orderId") String orderId, @RequestParam String event, Model uiModel, Locale locale)
-    {
+    public String receiveOrderEvent (@PathVariable("orderId") String orderId, @RequestParam String event, Model uiModel, Locale locale) {
 
-        switch (event)
-        {
+        switch (event) {
             case "orderHasBeenServed":
                 return orderHasBeenServed(orderId, uiModel, locale);
             // break unreachable
@@ -126,15 +120,12 @@ public class WaiterController {
     }
 
 
-    private String orderHasBeenServed(String orderId, Model uiModel, Locale locale)
-    {
+    private String orderHasBeenServed (String orderId, Model uiModel, Locale locale) {
         Order order = orderService.findById(Long.valueOf(orderId));
         Restaurant restaurant = warmupRestaurant(order, uiModel);
-        try
-        {
+        try {
             orderService.orderServed(order);
-        } catch (StateException e)
-        {
+        } catch (StateException e) {
             logger.error("Internal error has occurred! Order " + Long.valueOf(orderId) + "has not been changed to served state!", e);
 
             // StateException triggers a rollback; consequently all Entities are
@@ -148,20 +139,16 @@ public class WaiterController {
 
 
     @RequestMapping(value = "/waiter/bills/{billId}", method = RequestMethod.PUT)
-    public String receiveBillEvent(@PathVariable("billId") String billId, @RequestParam String event, Model uiModel, Locale locale)
-    {
+    public String receiveBillEvent (@PathVariable("billId") String billId, @RequestParam String event, Model uiModel, Locale locale) {
 
         Bill bill = billService.findById(Long.valueOf(billId));
         Restaurant restaurant = warmupRestaurant(bill, uiModel);
 
-        switch (event)
-        {
+        switch (event) {
             case "billHasBeenPaid":
-                try
-                {
+                try {
                     billService.billHasBeenPaid(bill);
-                } catch (StateException e)
-                {
+                } catch (StateException e) {
                     logger.error("Internal error has occurred! Order " + Long.valueOf(billId) + "has not been changed to served state!", e);
                     // StateException triggers a rollback; consequently all Entities are invalidated by Hibernate
                     // So new warmup needed
@@ -178,8 +165,7 @@ public class WaiterController {
         return "redirect:/restaurants/" + restaurant.getId() + "/waiter";
     }
 
-    private Restaurant warmupRestaurant(Order order, Model uiModel)
-    {
+    private Restaurant warmupRestaurant (Order order, Model uiModel) {
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
         Restaurant restaurant = restaurantService.fetchWarmedUp(order.getBill().getDiningTable().getRestaurant().getId());
@@ -187,8 +173,7 @@ public class WaiterController {
         return restaurant;
     }
 
-    private Restaurant warmupRestaurant(Bill bill, Model uiModel)
-    {
+    private Restaurant warmupRestaurant (Bill bill, Model uiModel) {
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
         Restaurant restaurant = restaurantService.fetchWarmedUp(bill.getDiningTable().getRestaurant().getId());

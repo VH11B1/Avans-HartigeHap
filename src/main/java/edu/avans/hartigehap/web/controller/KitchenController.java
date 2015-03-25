@@ -39,8 +39,7 @@ public class KitchenController {
     private OrderService orderService;
 
     @RequestMapping(value = "/restaurants/{restaurantName}/kitchen", method = RequestMethod.GET)
-    public String showKitchen(@PathVariable("restaurantName") String restaurantName, Model uiModel)
-    {
+    public String showKitchen (@PathVariable("restaurantName") String restaurantName, Model uiModel) {
         // warmup stuff
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
@@ -58,8 +57,7 @@ public class KitchenController {
 
 
     @RequestMapping(value = "/kitchen/orders/{orderId}", method = RequestMethod.GET)
-    public String showOrderInKitchen(@PathVariable("orderId") String orderId, Model uiModel, Locale locale)
-    {
+    public String showOrderInKitchen (@PathVariable("orderId") String orderId, Model uiModel, Locale locale) {
         // warmup stuff
         Order order = orderService.findById(Long.valueOf(orderId));
         Restaurant restaurant = warmupRestaurant(order, uiModel);
@@ -72,8 +70,7 @@ public class KitchenController {
         uiModel.addAttribute("allPlannedOrders", allPlannedOrders);
 
         String orderContent = "";
-        for (OrderItem orderItem : order.getOrderItems())
-        {
+        for (OrderItem orderItem : order.getOrderItems()) {
             orderContent += orderItem.getMenuItem().getId() + " (" + orderItem.getQuantity() + "x)" + "; ";
         }
 
@@ -83,10 +80,8 @@ public class KitchenController {
     }
 
     @RequestMapping(value = "/kitchen/orders/{orderId}", method = RequestMethod.PUT)
-    public String receiveOrderEvent(@PathVariable("orderId") String orderId, @RequestParam String event, Model uiModel, Locale locale)
-    {
-        switch (event)
-        {
+    public String receiveOrderEvent (@PathVariable("orderId") String orderId, @RequestParam String event, Model uiModel, Locale locale) {
+        switch (event) {
             case "planOrder":
                 return planOrder(orderId, uiModel, locale);
             // break unreachable
@@ -104,15 +99,12 @@ public class KitchenController {
         }
     }
 
-    private String planOrder(String orderId, Model uiModel, Locale locale)
-    {
+    private String planOrder (String orderId, Model uiModel, Locale locale) {
         Order order = orderService.findById(Long.valueOf(orderId));
         Restaurant restaurant = warmupRestaurant(order, uiModel);
-        try
-        {
+        try {
             orderService.planOrder(order);
-        } catch (StateException e)
-        {
+        } catch (StateException e) {
             logger.error("Internal error has occurred! Order " + Long.valueOf(orderId) + "has not been changed to planned state!", e);
 
             // StateException triggers a rollback; consequently all Entities are
@@ -125,15 +117,12 @@ public class KitchenController {
         return "redirect:/restaurants/" + restaurant.getId() + "/kitchen";
     }
 
-    private String orderHasBeenPrepared(String orderId, Model uiModel, Locale locale)
-    {
+    private String orderHasBeenPrepared (String orderId, Model uiModel, Locale locale) {
         Order order = orderService.findById(Long.valueOf(orderId));
         Restaurant restaurant = warmupRestaurant(order, uiModel);
-        try
-        {
+        try {
             orderService.orderPrepared(order);
-        } catch (StateException e)
-        {
+        } catch (StateException e) {
             logger.error("Internal error has occurred! Order " + Long.valueOf(orderId) + "has not been changed to prepared state!", e);
 
             // StateException triggers a rollback; consequently all Entities are
@@ -146,8 +135,7 @@ public class KitchenController {
         return "redirect:/restaurants/" + restaurant.getId() + "/kitchen";
     }
 
-    private Restaurant warmupRestaurant(Order order, Model uiModel)
-    {
+    private Restaurant warmupRestaurant (Order order, Model uiModel) {
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
         Restaurant restaurant = restaurantService.fetchWarmedUp(order.getBill().getDiningTable().getRestaurant().getId());

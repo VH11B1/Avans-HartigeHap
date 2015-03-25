@@ -5,61 +5,61 @@
 
     <!-- EMPLOYEE VIEW BINDINGS -->
     <definition extends="default" name="employees/index">
-        <put-attribute name="body" value="/WEB-INF/views/employees/index.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/employees/index.jspx"/>
     </definition>
     <definition extends="default" name="employees/show">
-        <put-attribute name="body" value="/WEB-INF/views/employees/show.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/employees/show.jspx"/>
     </definition>
     <definition extends="default" name="employees/edit">
-        <put-attribute name="body" value="/WEB-INF/views/employees/edit.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/employees/edit.jspx"/>
     </definition>
     <definition extends="default" name="employees/create">
-        <put-attribute name="body" value="/WEB-INF/views/employees/create.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/employees/create.jspx"/>
     </definition>
     <!-- *** -->
 
     <!-- CUSTOMER VIEW BINDINGS -->
     <definition extends="default" name="customers/index">
-        <put-attribute name="body" value="/WEB-INF/views/customers/index.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/customers/index.jspx"/>
     </definition>
     <definition extends="default" name="customers/show">
-        <put-attribute name="body" value="/WEB-INF/views/customers/show.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/customers/show.jspx"/>
     </definition>
     <definition extends="default" name="customers/edit">
-        <put-attribute name="body" value="/WEB-INF/views/customers/edit.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/customers/edit.jspx"/>
     </definition>
     <!-- *** -->
 
     <!-- RESTAURANT VIEW BINDINGS -->
     <definition extends="default" name="restaurants/index">
-        <put-attribute name="body" value="/WEB-INF/views/restaurants/index.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/restaurants/index.jspx"/>
     </definition>
     <definition extends="default" name="restaurants/show">
-        <put-attribute name="body" value="/WEB-INF/views/restaurants/show.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/restaurants/show.jspx"/>
     </definition>
     <!-- *** -->
 
     <!-- DINING TABLE VIEW BINDINGS -->
     <definition extends="default" name="diningtables/show">
-        <put-attribute name="body" value="/WEB-INF/views/diningtables/show.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/diningtables/show.jspx"/>
     </definition>
     <!-- *** -->
 
     <!-- KITCHEN VIEW BINDINGS -->
     <definition extends="default" name="kitchens/show">
-        <put-attribute name="body" value="/WEB-INF/views/kitchens/show.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/kitchens/show.jspx"/>
     </definition>
     <!-- *** -->
 
     <!-- WAITER VIEW BINDINGS -->
     <definition extends="default" name="waiters/show">
-        <put-attribute name="body" value="/WEB-INF/views/waiters/show.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/waiters/show.jspx"/>
     </definition>
     <!-- *** -->
 
     <!-- PLANNING VIEW BINDINGS -->
     <definition extends="default" name="plannings/index">
-        <put-attribute name="body" value="/WEB-INF/views/plannings/index.jspx" />
+        <put-attribute name="body" value="/WEB-INF/views/plannings/index.jspx"/>
     </definition>
     <!-- *** -->
 

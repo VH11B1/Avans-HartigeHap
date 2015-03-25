@@ -7,5 +7,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  * Created by Mark on 11-3-2015.
  */
 public interface PlannedSlotsRepository extends PagingAndSortingRepository<PlannedSlot, String> {
-    public PlannedSlot findById(long id);
+    public PlannedSlot findById (long id);
 }

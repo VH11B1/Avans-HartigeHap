@@ -4,20 +4,20 @@
      xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
      xmlns:spring="http://www.springframework.org/tags" version="2.0"
      xmlns:sec="http://www.springframework.org/security/tags">
-    <jsp:directive.page contentType="text/html;charset=UTF-8" />
-    <jsp:output omit-xml-declaration="yes" />
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
 
-    <spring:message code="label_planning_overview" var="labelPlanningOverview" />
-    <spring:message code="label_employee_col" var="label_employee_col" />
-    <spring:message code="label_actual_employee_col" var="label_actual_employee_col" />
-    <spring:message code="label_role_col" var="label_role_col" />
-    <spring:message code="label_plannedslot_col" var="label_plannedslot_col" />
-    <spring:message code="label_actualslot_col" var="label_actualslot_col" />
-    <spring:message code="label_unauthorized" var="label_unauthorized" />
+    <spring:message code="label_planning_overview" var="labelPlanningOverview"/>
+    <spring:message code="label_employee_col" var="label_employee_col"/>
+    <spring:message code="label_actual_employee_col" var="label_actual_employee_col"/>
+    <spring:message code="label_role_col" var="label_role_col"/>
+    <spring:message code="label_plannedslot_col" var="label_plannedslot_col"/>
+    <spring:message code="label_actualslot_col" var="label_actualslot_col"/>
+    <spring:message code="label_unauthorized" var="label_unauthorized"/>
 
-    <spring:message code="label_plan_day" var="label_plan_day" />
-    <spring:message code="label_plan_week" var="label_plan_week" />
-    <spring:message code="label_plan_all" var="label_plan_all" />
+    <spring:message code="label_plan_day" var="label_plan_day"/>
+    <spring:message code="label_plan_week" var="label_plan_week"/>
+    <spring:message code="label_plan_all" var="label_plan_all"/>
 
     <sec:authorize access="!hasRole('ROLE_EMPLOYEE')">
         <h4>${label_unauthorized}</h4>
@@ -42,15 +42,15 @@
 
                 <ul class="nav nav-tabs">
                     <li role="presentation" class="${dayClass}">
-                        <spring:url var="showDailyPlanning" value="/plannings/daily" />
+                        <spring:url var="showDailyPlanning" value="/plannings/daily"/>
                         <a href="${showDailyPlanning}">${label_plan_day}</a>
                     </li>
                     <li role="presentation" class="${weekClass}">
-                        <spring:url var="showWeeklyPlanning" value="/plannings/weekly" />
+                        <spring:url var="showWeeklyPlanning" value="/plannings/weekly"/>
                         <a href="${showWeeklyPlanning}">${label_plan_week}</a>
                     </li>
                     <li role="presentation" class="${allClass}">
-                        <spring:url var="showAllPlanning" value="/plannings" />
+                        <spring:url var="showAllPlanning" value="/plannings"/>
                         <a href="${showAllPlanning}">${label_plan_all}</a>
                     </li>
                 </ul>
@@ -78,15 +78,18 @@
                         </c:when>
                         <c:otherwise>
                             <c:set var="warning" value="danger" scope="page"/>
-                            <c:set var="actualName" value="${planning.getActualSlot().getActualEmployee().getName()}" scope="page"/>
+                            <c:set var="actualName" value="${planning.getActualSlot().getActualEmployee().getName()}"
+                                   scope="page"/>
                         </c:otherwise>
                     </c:choose>
                     <tr class="${warning}">
                         <td>${planning.getEmployee().getName()}</td>
                         <td>${actualName}</td>
                         <td>${planning.getRole()}</td>
-                        <td><fmt:formatDate value="${planning.getPlannedSlot().getStartDate()}" pattern="HH:mm (dd-MM-yyyy)" /></td>
-                        <td><fmt:formatDate value="${planning.getActualSlot().getStartDate()}" pattern="HH:mm (dd-MM-yyyy)" /></td>
+                        <td><fmt:formatDate value="${planning.getPlannedSlot().getStartDate()}"
+                                            pattern="HH:mm (dd-MM-yyyy)"/></td>
+                        <td><fmt:formatDate value="${planning.getActualSlot().getStartDate()}"
+                                            pattern="HH:mm (dd-MM-yyyy)"/></td>
                     </tr>
                 </c:forEach>
                 </tbody>

@@ -142,8 +142,8 @@
     font-weight: 900;
     font-style: italic;
 }
-/*** END OF ROBOTO FONT ***/
 
+/*** END OF ROBOTO FONT ***/
 
 /*** START OF NOTO FONT ***/
 @font-face {
@@ -193,8 +193,8 @@
     font-style: normal;
 
 }
-/*** END OF NOTO FONT ***/
 
+/*** END OF NOTO FONT ***/
 
 /*** START OF OPEN SANS FONT ***/
 @font-face {
@@ -286,4 +286,5 @@
     font-style: normal;
 
 }
+
 /*** END OF OPEN SANS FONT ***/

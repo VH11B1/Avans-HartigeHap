@@ -27,41 +27,35 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @Transactional(readOnly=true)
-    public List<Employee> findAll()
-    {
+    @Transactional(readOnly = true)
+    public List<Employee> findAll () {
         return Lists.newArrayList(employeeRepository.findAll());
     }
 
-    @Transactional(readOnly=true)
-    public List<Employee> findByRestaurant(Restaurant worksAt)
-    {
+    @Transactional(readOnly = true)
+    public List<Employee> findByRestaurant (Restaurant worksAt) {
         return Lists.newArrayList(employeeRepository.findByRestaurant(worksAt));
     }
 
-    @Transactional(readOnly=true)
-    public Employee findById(Long id)
-    {
+    @Transactional(readOnly = true)
+    public Employee findById (Long id) {
         return employeeRepository.findOne(id);
     }
 
-    @Transactional(readOnly=true)
-    public Employee findByUsername(String username)
-    {
+    @Transactional(readOnly = true)
+    public Employee findByUsername (String username) {
         return employeeRepository.findByUsername(username);
     }
 
-    public Employee save(Employee employee)
-    {
+    public Employee save (Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    public void delete(Long id)
-    {
+    public void delete (Long id) {
         employeeRepository.delete(id);
     }
 
-    public void checkTiming(String username){
+    public void checkTiming (String username) {
         Employee employee = employeeRepository.findEmployeeByUsername(username);
         PlanningOverview overview = new PlanningOverview();
 

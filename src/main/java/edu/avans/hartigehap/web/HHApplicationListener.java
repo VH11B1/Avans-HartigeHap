@@ -9,13 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  * Created by Mark on 8-3-2015.
  */
-public class HHApplicationListener implements ApplicationListener<AuthenticationSuccessEvent>  {
+public class HHApplicationListener implements ApplicationListener<AuthenticationSuccessEvent> {
 
     @Autowired
     EmployeeService employeeService;
 
     @Override
-    public void onApplicationEvent(AuthenticationSuccessEvent authenticationSuccessEvent) {
+    public void onApplicationEvent (AuthenticationSuccessEvent authenticationSuccessEvent) {
         UserDetails userDetails = (UserDetails) authenticationSuccessEvent.getAuthentication().getPrincipal();
         employeeService.checkTiming(userDetails.getUsername());
     }

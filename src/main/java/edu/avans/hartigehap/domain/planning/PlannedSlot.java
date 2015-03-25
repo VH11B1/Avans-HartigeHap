@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @NoArgsConstructor
 public class PlannedSlot extends TimeSlot {
-    public PlannedSlot(TimeSlot.DayPart dayPart, LocalDateTime start, LocalDateTime end) {
+    public PlannedSlot (TimeSlot.DayPart dayPart, LocalDateTime start, LocalDateTime end) {
         super(dayPart, start, end);
     }
 }

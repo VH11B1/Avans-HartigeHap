@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Created by Alex on 3-3-2015.
  */
-public class PlannedCriteria extends Criteria{
+public class PlannedCriteria extends Criteria {
     @Override
-    public List<Planning> meetCriteria(List<Planning> l) {
+    public List<Planning> meetCriteria (List<Planning> l) {
         return l;
     }
 }

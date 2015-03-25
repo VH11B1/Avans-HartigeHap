@@ -17,19 +17,19 @@ import java.util.Date;
 @Setter
 @MappedSuperclass
 @NoArgsConstructor
-public abstract class TimeSlot extends DomainObject{
+public abstract class TimeSlot extends DomainObject {
     private DayPart part;
     private LocalDateTime start;
     private Date startDate;
     private LocalDateTime end;
 
-    public TimeSlot(TimeSlot.DayPart dayPart, LocalDateTime start, LocalDateTime end) {
+    public TimeSlot (TimeSlot.DayPart dayPart, LocalDateTime start, LocalDateTime end) {
         setPart(dayPart);
         setEnd(end);
         setStart(start);
     }
 
-    public Date getStartDate(){
+    public Date getStartDate () {
         return Date.from(start.atZone(ZoneId.systemDefault()).toInstant());
     }
 
@@ -42,7 +42,7 @@ public abstract class TimeSlot extends DomainObject{
         private String start;
         private String end;
 
-        private DayPart(String start, String end) {
+        private DayPart (String start, String end) {
             this.start = start;
             this.end = end;
         }

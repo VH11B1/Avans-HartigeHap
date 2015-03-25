@@ -15,15 +15,15 @@ import static org.junit.Assert.assertTrue;
 public class EmailServiceTest extends AbstractTransactionRollbackTest {
 
     @Test
-    public void dummy() {
+    public void dummy () {
         // empty - tests configuration of test context.
     }
 
     @Test
-    public void SendMail(){
+    public void SendMail () {
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("spring-context.xml");
         NotificationService notificationService = (EmailServiceImpl) context.getBean("emailService");
-        assertTrue(notificationService.sendNotification("ivh11b1@rsgrijks.nl", "mbartele@avans.nl", "Test", "Hallo test test"));
+        assertTrue(notificationService.sendNotification("ivh11b1@rsgrijks.nl", "ivh11b1@rsgrijks.nl", "Test", "Hallo test test"));
     }
 }

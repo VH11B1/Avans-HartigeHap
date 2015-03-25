@@ -13,10 +13,10 @@ import java.util.List;
 public class PresentCriteria extends Criteria {
 
     @Override
-    public List<Planning> meetCriteria(List<Planning> l) {
+    public List<Planning> meetCriteria (List<Planning> l) {
         List<Planning> present = new ArrayList<Planning>();
         for (Planning p : l) {
-            if(p.hasActualSlot()) {
+            if (p.hasActualSlot()) {
                 ActualSlot actual = p.getActualSlot();
                 if (p.getEmployee().equals(actual.getActualEmployee())) {
                     present.add(p);

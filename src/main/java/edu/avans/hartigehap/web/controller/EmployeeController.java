@@ -43,13 +43,12 @@ public class EmployeeController {
     private RestaurantService restaurantService;
 
     @InitBinder
-    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+    protected void initBinder (HttpServletRequest request, ServletRequestDataBinder binder) {
         binder.registerCustomEditor(Restaurant.class, new RestaurantEditor(this.restaurantService));
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
-    public String listEmployees(Model model)
-    {
+    public String listEmployees (Model model) {
         model.addAttribute("employees", employeeService.findAll());
 
         logger.info("Listing employees");
@@ -58,8 +57,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.GET)
-    public String showEmployee(@PathVariable("id") Long id, Model model)
-    {
+    public String showEmployee (@PathVariable("id") Long id, Model model) {
         Employee employee = employeeService.findById(id);
         model.addAttribute("employee", employee);
 
@@ -69,8 +67,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees/{id}/edit", method = RequestMethod.GET)
-    public String editEmployee(@PathVariable("id") Long id, Model model)
-    {
+    public String editEmployee (@PathVariable("id") Long id, Model model) {
         Employee employee = employeeService.findById(id);
         List<Restaurant> restaurants = restaurantService.findAll();
 
@@ -83,7 +80,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT)
-    public String updateEmployee(
+    public String updateEmployee (
             @PathVariable("id") Long id,
             @Valid Employee employee,
             BindingResult bindingResult,
@@ -91,10 +88,8 @@ public class EmployeeController {
             HttpServletRequest httpServletRequest,
             RedirectAttributes redirectAttributes,
             Locale locale
-    )
-    {
-        if (bindingResult.hasErrors())
-        {
+    ) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("message", new Message("error", messageSource.getMessage(
                     "employee_save_fail", new Object[]{}, locale)));
 
@@ -105,7 +100,7 @@ public class EmployeeController {
 
         model.asMap().clear();
         redirectAttributes.addFlashAttribute("message", messageSource.getMessage(
-                "employee_save_success", new Object[] {}, locale));
+                "employee_save_success", new Object[]{}, locale));
 
         Employee existingEmployee = employeeService.findById(employee.getId());
         existingEmployee.updateEditableFields(employee);
@@ -117,8 +112,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees/create", method = RequestMethod.GET)
-    public String createEmployee(Model model)
-    {
+    public String createEmployee (Model model) {
         model.addAttribute("employee", new Employee());
         model.addAttribute("restaurants", restaurantService.findAll());
 
@@ -128,19 +122,17 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.POST)
-    public String storeEmployee(
+    public String storeEmployee (
             @Valid Employee employee,
             BindingResult bindingResult,
             Model model,
             HttpServletRequest httpServletRequest,
             RedirectAttributes redirectAttributes,
             Locale locale
-    )
-    {
-        if (bindingResult.hasErrors())
-        {
+    ) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("message", new Message("error", messageSource.getMessage(
-                    "employee_create_fail", new Object[] {}, locale)));
+                    "employee_create_fail", new Object[]{}, locale)));
 
             model.addAttribute("employee", employee);
 
@@ -149,7 +141,7 @@ public class EmployeeController {
 
         model.asMap().clear();
         redirectAttributes.addFlashAttribute("message", messageSource.getMessage(
-                "employee_create_success", new Object[] {}, locale));
+                "employee_create_success", new Object[]{}, locale));
 
         Employee storedEmployee = employeeService.save(employee);
 
@@ -160,8 +152,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE)
-    public String destroyEmployee(@PathVariable("id") Long id)
-    {
+    public String destroyEmployee (@PathVariable("id") Long id) {
         employeeService.delete(id);
 
         logger.info("Deleted employee");

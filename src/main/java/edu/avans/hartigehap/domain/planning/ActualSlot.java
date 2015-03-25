@@ -22,8 +22,8 @@ import java.time.LocalDateTime;
 public class ActualSlot extends TimeSlot {
     private Employee actualEmployee;
 
-    public ActualSlot(TimeSlot.DayPart dayPart, LocalDateTime start, LocalDateTime end,
-                      Employee actualEmployee) {
+    public ActualSlot (TimeSlot.DayPart dayPart, LocalDateTime start, LocalDateTime end,
+                       Employee actualEmployee) {
         super(dayPart, start, end);
         this.actualEmployee = actualEmployee;
     }

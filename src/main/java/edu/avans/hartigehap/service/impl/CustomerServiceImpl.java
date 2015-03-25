@@ -23,67 +23,59 @@ import java.util.List;
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
-	final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
+    final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
-	@Autowired
-	private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-	@Transactional(readOnly=true)
-	public List<Customer> findAll()
-    {
-		return Lists.newArrayList(customerRepository.findAll());
-	}
+    @Transactional(readOnly = true)
+    public List<Customer> findAll () {
+        return Lists.newArrayList(customerRepository.findAll());
+    }
 
-	@Transactional(readOnly=true)
-	public Customer findById(Long id)
-    {
-		return customerRepository.findOne(id);
-	}
+    @Transactional(readOnly = true)
+    public Customer findById (Long id) {
+        return customerRepository.findOne(id);
+    }
 
-	@Transactional(readOnly=true)
-	public Customer findByFirstNameAndLastName(String firstName, String lastName)
-    {
-		List<Customer> customers = customerRepository.findByFirstNameAndLastName(firstName, lastName);
+    @Transactional(readOnly = true)
+    public Customer findByFirstNameAndLastName (String firstName, String lastName) {
+        List<Customer> customers = customerRepository.findByFirstNameAndLastName(firstName, lastName);
 
-		if ( ! customers.isEmpty())
-			return customers.get(0);
+        if (!customers.isEmpty())
+            return customers.get(0);
 
         return null;
-	}
+    }
 
-	@Transactional(readOnly=true)
-	public List<Customer> findCustomersForRestaurant(Restaurant restaurant)
-    {
-		List<Customer> customersForRestaurants = customerRepository.findByRestaurants(
+    @Transactional(readOnly = true)
+    public List<Customer> findCustomersForRestaurant (Restaurant restaurant) {
+        List<Customer> customersForRestaurants = customerRepository.findByRestaurants(
                 Arrays.asList(new Restaurant[]{restaurant}), new Sort(Sort.Direction.ASC, "lastName"));
 
-		return customersForRestaurants;
-	}
-	
-	@Transactional(readOnly=true)
-	public Page<Customer> findAllByPage(Pageable pageable)
-    {
-		return customerRepository.findAll(pageable);
-	}	
+        return customersForRestaurants;
+    }
 
-	@Transactional(readOnly=true)
-	public Page<Customer> findCustomersForRestaurantByPage(Restaurant restaurant, Pageable pageable)
-    {
-		Page<Customer> customersForRestaurants = customerRepository.
-				findByRestaurants(Arrays.asList(new Restaurant[]{restaurant}), pageable);
-		
-		return customersForRestaurants;
-	}
-	
-	public Customer save(Customer customer)
-    {
-		return customerRepository.save(customer);
-	}
+    @Transactional(readOnly = true)
+    public Page<Customer> findAllByPage (Pageable pageable) {
+        return customerRepository.findAll(pageable);
+    }
 
-	public void delete(Long id)
-    {
-		customerRepository.delete(id);
-	}
-	
+    @Transactional(readOnly = true)
+    public Page<Customer> findCustomersForRestaurantByPage (Restaurant restaurant, Pageable pageable) {
+        Page<Customer> customersForRestaurants = customerRepository.
+                findByRestaurants(Arrays.asList(new Restaurant[]{restaurant}), pageable);
+
+        return customersForRestaurants;
+    }
+
+    public Customer save (Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    public void delete (Long id) {
+        customerRepository.delete(id);
+    }
+
 }
 

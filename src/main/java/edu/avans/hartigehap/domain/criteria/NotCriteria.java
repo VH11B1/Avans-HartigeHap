@@ -13,16 +13,17 @@ public class NotCriteria extends Criteria {
     private Criteria notCriteria;
 
     // slechts een, anders gedoe met default AND/OR
-    public NotCriteria(final Criteria criteria){
+    public NotCriteria (final Criteria criteria) {
         this.notCriteria = criteria;
     }
+
     @Override
-    public List<Planning> meetCriteria(final List<Planning> l) {
+    public List<Planning> meetCriteria (final List<Planning> l) {
 
         List<Planning> meetCriteria = notCriteria.meetCriteria(l);
         List<Planning> notMeetCriteria = new ArrayList<>(l);
 
-        for(Planning p : meetCriteria){
+        for (Planning p : meetCriteria) {
             notMeetCriteria.remove(p);
         }
 

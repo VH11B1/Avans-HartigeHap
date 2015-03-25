@@ -10,11 +10,11 @@ import java.io.UnsupportedEncodingException;
 
 public class UrlUtil {
 
-	private UrlUtil() {
-		
-	}
-	
-	public static String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
+    private UrlUtil () {
+
+    }
+
+    public static String encodeUrlPathSegment (String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {
             enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
@@ -22,10 +22,10 @@ public class UrlUtil {
         try {
             pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
         } catch (UnsupportedEncodingException uee) {
-        	Logger logger = LoggerFactory.getLogger(UrlUtil.class);
-        	logger.error("UnsupportedEncodingException", uee);
-        	}
+            Logger logger = LoggerFactory.getLogger(UrlUtil.class);
+            logger.error("UnsupportedEncodingException", uee);
+        }
         return pathSegment;
-    }	
-	
+    }
+
 }

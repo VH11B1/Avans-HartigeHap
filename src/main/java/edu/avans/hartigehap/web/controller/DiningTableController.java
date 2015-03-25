@@ -37,8 +37,7 @@ public class DiningTableController {
     private DiningTableService diningTableService;
 
     @RequestMapping(value = "/diningTables/{diningTableId}", method = RequestMethod.GET)
-    public String showTable(@PathVariable("diningTableId") String diningTableId, Model uiModel)
-    {
+    public String showTable (@PathVariable("diningTableId") String diningTableId, Model uiModel) {
         logger.info("diningTable = " + diningTableId);
 
         warmupRestaurant(diningTableId, uiModel);
@@ -47,8 +46,7 @@ public class DiningTableController {
     }
 
     @RequestMapping(value = "/diningTables/{diningTableId}/menuItems", method = RequestMethod.POST)
-    public String addMenuItem(@PathVariable("diningTableId") String diningTableId, @RequestParam String menuItemName, Model uiModel)
-    {
+    public String addMenuItem (@PathVariable("diningTableId") String diningTableId, @RequestParam String menuItemName, Model uiModel) {
         DiningTable diningTable = diningTableService.fetchWarmedUp(Long.valueOf(diningTableId));
         uiModel.addAttribute("diningTable", diningTable);
 
@@ -58,8 +56,7 @@ public class DiningTableController {
     }
 
     @RequestMapping(value = "/diningTables/{diningTableId}/menuItems/{menuItemName}", method = RequestMethod.DELETE)
-    public String deleteMenuItem(@PathVariable("diningTableId") String diningTableId, @PathVariable("menuItemName") String menuItemName, Model uiModel)
-    {
+    public String deleteMenuItem (@PathVariable("diningTableId") String diningTableId, @PathVariable("menuItemName") String menuItemName, Model uiModel) {
         DiningTable diningTable = diningTableService.fetchWarmedUp(Long.valueOf(diningTableId));
         uiModel.addAttribute("diningTable", diningTable);
 
@@ -69,8 +66,7 @@ public class DiningTableController {
     }
 
     @RequestMapping(value = "/diningTables/{diningTableId}", method = RequestMethod.PUT)
-    public String receiveEvent(@PathVariable("diningTableId") String diningTableId, @RequestParam String event, RedirectAttributes redirectAttributes, Model uiModel, Locale locale)
-    {
+    public String receiveEvent (@PathVariable("diningTableId") String diningTableId, @RequestParam String event, RedirectAttributes redirectAttributes, Model uiModel, Locale locale) {
         logger.info("(receiveEvent) diningTable = " + diningTableId);
 
 
@@ -78,8 +74,7 @@ public class DiningTableController {
         // the request mapping so all events for the same resource will be handled by the same
         // controller method; so we end up with an if statement
 
-        switch (event)
-        {
+        switch (event) {
             case "submitOrder":
                 return submitOrder(diningTableId, redirectAttributes, uiModel, locale);
             // break unreachable
@@ -95,14 +90,11 @@ public class DiningTableController {
         }
     }
 
-    private String submitOrder(String diningTableId, RedirectAttributes redirectAttributes, Model uiModel, Locale locale)
-    {
+    private String submitOrder (String diningTableId, RedirectAttributes redirectAttributes, Model uiModel, Locale locale) {
         DiningTable diningTable = warmupRestaurant(diningTableId, uiModel);
-        try
-        {
+        try {
             diningTableService.submitOrder(diningTable);
-        } catch (StateException e)
-        {
+        } catch (StateException e) {
             logger.error("StateException", e);
             uiModel.addAttribute("message", new Message("error", messageSource.getMessage("message_submit_order_fail", new Object[]{}, locale)));
 
@@ -118,19 +110,15 @@ public class DiningTableController {
 
     }
 
-    private String submitBill(String diningTableId, RedirectAttributes redirectAttributes, Model uiModel, Locale locale)
-    {
+    private String submitBill (String diningTableId, RedirectAttributes redirectAttributes, Model uiModel, Locale locale) {
         DiningTable diningTable = warmupRestaurant(diningTableId, uiModel);
-        try
-        {
+        try {
             diningTableService.submitBill(diningTable);
-        } catch (EmptyBillException e)
-        {
+        } catch (EmptyBillException e) {
             logger.error("EmptyBillException", e);
             uiModel.addAttribute("message", new Message("error", messageSource.getMessage("message_submit_empty_bill_fail", new Object[]{}, locale)));
             return "diningtables/show";
-        } catch (StateException e)
-        {
+        } catch (StateException e) {
             logger.error("StateException", e);
             uiModel.addAttribute("message", new Message("error", messageSource.getMessage("message_submit_bill_fail", new Object[]{}, locale)));
 
@@ -145,8 +133,7 @@ public class DiningTableController {
         return "redirect:/diningTables/" + diningTableId;
     }
 
-    private DiningTable warmupRestaurant(String diningTableId, Model uiModel)
-    {
+    private DiningTable warmupRestaurant (String diningTableId, Model uiModel) {
         Collection<Restaurant> restaurants = restaurantService.findAll();
 
         uiModel.addAttribute("restaurants", restaurants);

@@ -12,22 +12,22 @@ import java.util.List;
  */
 public class PlannedStartFromDateFilter extends FilterDecorator<LocalDateTime> {
 
-    public PlannedStartFromDateFilter(List<Planning> list,LocalDateTime... dates){
-        super(list,dates);
+    public PlannedStartFromDateFilter (List<Planning> list, LocalDateTime... dates) {
+        super(list, dates);
     }
 
-    public PlannedStartFromDateFilter(Filter f,LocalDateTime... dates){
-        super(f,dates);
+    public PlannedStartFromDateFilter (Filter f, LocalDateTime... dates) {
+        super(f, dates);
         setOriginal(f);
     }
 
     @Override
-    public List<Planning> filter() {
+    public List<Planning> filter () {
         List<Planning> originalList = getPlanningList();
         List<Planning> filteredList = new ArrayList<Planning>();
 
-        for(Planning p : originalList){
-            if(dateMatch(p.getPlannedSlot())){
+        for (Planning p : originalList) {
+            if (dateMatch(p.getPlannedSlot())) {
                 filteredList.add(p);
             }
         }
@@ -35,11 +35,11 @@ public class PlannedStartFromDateFilter extends FilterDecorator<LocalDateTime> {
         return filteredList;
     }
 
-    private boolean dateMatch(TimeSlot slot){
+    private boolean dateMatch (TimeSlot slot) {
 
         LocalDateTime startDate = slot.getStart();
 
-        if(startDate.compareTo(getFilterItems().get(0)) >= -1){
+        if (startDate.compareTo(getFilterItems().get(0)) >= -1) {
             return true;
         }
         return false;

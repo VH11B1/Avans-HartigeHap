@@ -46,8 +46,7 @@ public class CustomerController {
     private RestaurantService restaurantService;
 
     @RequestMapping(value = "/restaurants/{restaurantName}/customers", method = RequestMethod.GET)
-    public String listCustomers(@PathVariable("restaurantName") String restaurantName, Model uiModel)
-    {
+    public String listCustomers (@PathVariable("restaurantName") String restaurantName, Model uiModel) {
         Restaurant restaurant = warmupRestaurant(restaurantName, uiModel);
 
         logger.info("Listing customers");
@@ -59,8 +58,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/restaurants/{restaurantName}/customers/{id}", method = RequestMethod.GET)
-    public String showCustomer(@PathVariable("restaurantName") String restaurantName, @PathVariable("id") Long id, Model uiModel)
-    {
+    public String showCustomer (@PathVariable("restaurantName") String restaurantName, @PathVariable("id") Long id, Model uiModel) {
         warmupRestaurant(restaurantName, uiModel);
 
         logger.info("Show customer: " + id);
@@ -71,8 +69,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/restaurants/{restaurantName}/customers/{id}", params = "form", method = RequestMethod.GET)
-    public String updateCustomerForm(@PathVariable("restaurantName") String restaurantName, @PathVariable("id") Long id, Model uiModel)
-    {
+    public String updateCustomerForm (@PathVariable("restaurantName") String restaurantName, @PathVariable("id") Long id, Model uiModel) {
         warmupRestaurant(restaurantName, uiModel);
 
         logger.info("Customer update form for customer: " + id);
@@ -84,13 +81,11 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/restaurants/{restaurantName}/customers/{id}", params = "form", method = RequestMethod.PUT)
-    public String updateCustomer(
+    public String updateCustomer (
             // the path variable is not used; data binding retrieves its info from
             // query string parameters and form fields, so customer includes id as well
-            @PathVariable("restaurantName") String restaurantName, @PathVariable("id") Long id, @Valid Customer customer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale, @RequestParam(required = false) Part file)
-    {
-        if (bindingResult.hasErrors())
-        {
+            @PathVariable("restaurantName") String restaurantName, @PathVariable("id") Long id, @Valid Customer customer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale, @RequestParam(required = false) Part file) {
+        if (bindingResult.hasErrors()) {
             uiModel.addAttribute("message", new Message("error", messageSource.getMessage("customer_save_fail", new Object[]{}, locale)));
             uiModel.addAttribute("customer", customer);
             return "customers/edit";
@@ -99,23 +94,19 @@ public class CustomerController {
         redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("customer_save_success", new Object[]{}, locale)));
 
         // Process upload file
-        if (file != null)
-        {
+        if (file != null) {
             logger.info("File name: " + file.getName());
             logger.info("File size: " + file.getSize());
             logger.info("File content type: " + file.getContentType());
             byte[] fileContent = null;
-            try
-            {
+            try {
                 InputStream inputStream = file.getInputStream();
-                if (inputStream == null)
-                {
+                if (inputStream == null) {
                     logger.info("File inputstream is null");
                 }
                 fileContent = IOUtils.toByteArray(inputStream);
                 customer.setPhoto(fileContent);
-            } catch (IOException ex)
-            {
+            } catch (IOException ex) {
                 logger.error("Error saving uploaded file", ex);
             }
             customer.setPhoto(fileContent);
@@ -132,8 +123,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/restaurants/{restaurantName}/customers", params = "form", method = RequestMethod.GET)
-    public String createCustomerForm(@PathVariable("restaurantName") String restaurantName, Model uiModel)
-    {
+    public String createCustomerForm (@PathVariable("restaurantName") String restaurantName, Model uiModel) {
         warmupRestaurant(restaurantName, uiModel);
 
         logger.info("Create customer form");
@@ -145,14 +135,12 @@ public class CustomerController {
 
 
     @RequestMapping(value = "/restaurants/{restaurantName}/customers", params = "form", method = RequestMethod.POST)
-    public String createCustomer(@PathVariable("restaurantName") String restaurantName, @Valid Customer customer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale, @RequestParam(value = "file", required = false) Part file)
-    {
+    public String createCustomer (@PathVariable("restaurantName") String restaurantName, @Valid Customer customer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale, @RequestParam(value = "file", required = false) Part file) {
         logger.info("Creating customer: " + customer.getFirstName() + " " + customer.getLastName());
         logger.info("Binding Result target: " + (Customer) bindingResult.getTarget());
         logger.info("Binding Result: " + bindingResult);
 
-        if (bindingResult.hasErrors())
-        {
+        if (bindingResult.hasErrors()) {
             uiModel.addAttribute("message", new Message("error", messageSource.getMessage("customer_save_fail", new Object[]{}, locale)));
             uiModel.addAttribute("customer", customer);
             return "customers/edit";
@@ -161,23 +149,19 @@ public class CustomerController {
         redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("customer_save_success", new Object[]{}, locale)));
 
         // Process upload file
-        if (file != null)
-        {
+        if (file != null) {
             logger.info("File name: " + file.getName());
             logger.info("File size: " + file.getSize());
             logger.info("File content type: " + file.getContentType());
             byte[] fileContent = null;
-            try
-            {
+            try {
                 InputStream inputStream = file.getInputStream();
-                if (inputStream == null)
-                {
+                if (inputStream == null) {
                     logger.info("File inputstream is null");
                 }
                 fileContent = IOUtils.toByteArray(inputStream);
                 customer.setPhoto(fileContent);
-            } catch (IOException ex)
-            {
+            } catch (IOException ex) {
                 logger.error("Error saving uploaded file", ex);
             }
             customer.setPhoto(fileContent);
@@ -195,11 +179,9 @@ public class CustomerController {
 
     @RequestMapping(value = "/restaurants/{restaurantName}/customers/{id}/photo", method = RequestMethod.GET)
     @ResponseBody
-    public byte[] downloadPhoto(@PathVariable("id") Long id)
-    {
+    public byte[] downloadPhoto (@PathVariable("id") Long id) {
         Customer customer = customerService.findById(id);
-        if (customer.getPhoto() != null)
-        {
+        if (customer.getPhoto() != null) {
             logger.info("Downloading photo for id: {} with size: {}", customer.getId(), customer.getPhoto().length);
         }
         return customer.getPhoto();
@@ -207,8 +189,7 @@ public class CustomerController {
 
     // to be truly RESTful use DELETE instead of GET
     @RequestMapping(value = "/restaurants/{restaurantName}/customers/{id}", params = "delete", method = RequestMethod.GET)
-    public String delete(@PathVariable("restaurantName") String restaurantName, @PathVariable("id") Long id)
-    {
+    public String delete (@PathVariable("restaurantName") String restaurantName, @PathVariable("id") Long id) {
         logger.info("Deleting customer: " + id);
         customerService.delete(id);
         return "redirect:/restaurants/" + restaurantName + "/customers/";
@@ -217,25 +198,19 @@ public class CustomerController {
 
     @RequestMapping(value = "/restaurants/{restaurantName}/customers/listgrid", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public CustomerGrid listGrid(@PathVariable("restaurantName") String restaurantName, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "rows", required = false) Integer rows, @RequestParam(value = "sidx", required = false) String sortBy, @RequestParam(value = "sord", required = false) String order)
-    {
+    public CustomerGrid listGrid (@PathVariable("restaurantName") String restaurantName, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "rows", required = false) Integer rows, @RequestParam(value = "sidx", required = false) String sortBy, @RequestParam(value = "sord", required = false) String order) {
         logger.info("Listing customers for grid with page: {}, rows: {}", page, rows);
         logger.info("Listing customers for grid with sort: {}, order: {}", sortBy, order);
         // Process order by
         Sort sort = null;
         String orderBy = sortBy;
-        if (orderBy != null && "birthDateString".equals(orderBy))
-        {
+        if (orderBy != null && "birthDateString".equals(orderBy)) {
             orderBy = "birthDate";
         }
-        if (orderBy != null && order != null)
-        {
-            if ("desc".equals(order))
-            {
+        if (orderBy != null && order != null) {
+            if ("desc".equals(order)) {
                 sort = new Sort(Sort.Direction.DESC, orderBy);
-            }
-            else
-            {
+            } else {
                 sort = new Sort(Sort.Direction.ASC, orderBy);
             }
         }
@@ -244,12 +219,9 @@ public class CustomerController {
         // Note: page number for Spring Data JPA starts with 0, while jqGrid
         // starts with 1
         PageRequest pageRequest = null;
-        if (sort != null)
-        {
+        if (sort != null) {
             pageRequest = new PageRequest(page - 1, rows, sort);
-        }
-        else
-        {
+        } else {
             pageRequest = new PageRequest(page - 1, rows);
         }
 
@@ -270,8 +242,7 @@ public class CustomerController {
         // cannot handle a JSON response with all information about restaurants
         // and bills in it. So temporary solution:
         Iterator<Customer> custIt = customers.iterator();
-        while (custIt.hasNext())
-        {
+        while (custIt.hasNext()) {
             Customer c = custIt.next();
             c.setRestaurants(null);
             c.setBills(null);
@@ -281,8 +252,7 @@ public class CustomerController {
         return customerGrid;
     }
 
-    private Restaurant warmupRestaurant(String restaurantName, Model uiModel)
-    {
+    private Restaurant warmupRestaurant (String restaurantName, Model uiModel) {
         Collection<Restaurant> restaurants = restaurantService.findAll();
         uiModel.addAttribute("restaurants", restaurants);
         Restaurant restaurant = restaurantService.fetchWarmedUp(restaurantName);

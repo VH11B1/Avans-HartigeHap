@@ -12,13 +12,13 @@ import java.util.List;
 
 public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
 
-	List<Customer> findByFirstNameAndLastName(String firstName, String lastName);
+    List<Customer> findByFirstNameAndLastName (String firstName, String lastName);
 
-	List<Customer> findByRestaurants(
-			Collection<Restaurant> restaurants, 
-			Sort sort);
+    List<Customer> findByRestaurants (
+            Collection<Restaurant> restaurants,
+            Sort sort);
 
-	Page<Customer> findByRestaurants(
-			Collection<Restaurant> restaurants, 
-			Pageable pageable);
+    Page<Customer> findByRestaurants (
+            Collection<Restaurant> restaurants,
+            Pageable pageable);
 }

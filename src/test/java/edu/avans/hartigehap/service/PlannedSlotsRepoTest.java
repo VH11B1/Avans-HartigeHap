@@ -27,13 +27,13 @@ public class PlannedSlotsRepoTest extends AbstractTransactionRollbackTest {
     EmployeeRepository employeeRepository;
 
     @Test
-    public void save(){
+    public void save () {
 
         String str = "11-03-2015 11:15";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
 
-        PlannedSlot slot = new PlannedSlot(TimeSlot.DayPart.AFTERNOON,dateTime,dateTime.plusMinutes(50));
+        PlannedSlot slot = new PlannedSlot(TimeSlot.DayPart.AFTERNOON, dateTime, dateTime.plusMinutes(50));
         Planning planning = new Planning();
         planning.setEmployee(employeeRepository.findById(1));
         planning.setSupervisor(planning.getEmployee());

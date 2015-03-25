@@ -11,30 +11,30 @@ public class NotificationSubject {
 
     private static Collection<IObserver> observerCollection;
 
-    private NotificationSubject(){
+    private NotificationSubject () {
         observerCollection = new ArrayList<>();
 
         //Functie om mailobserver initieel toe te voegen
         registerObserver(new MailObserver());
     }
 
-    public static NotificationSubject getInstance(){
-        if(subject == null) {
+    public static NotificationSubject getInstance () {
+        if (subject == null) {
             subject = new NotificationSubject();
         }
         return subject;
     }
 
-    public static void registerObserver(IObserver observer){
+    public static void registerObserver (IObserver observer) {
         observerCollection.add(observer);
     }
 
-    public void unregisterObserver(IObserver observer){
+    public void unregisterObserver (IObserver observer) {
         observerCollection.remove(observer);
     }
 
-    public void notifyObservers(Employee employee, Employee supervisor, String subject, String message){
-        for(IObserver observer : observerCollection){
+    public void notifyObservers (Employee employee, Employee supervisor, String subject, String message) {
+        for (IObserver observer : observerCollection) {
             observer.update(employee, supervisor, subject, message);
         }
     }

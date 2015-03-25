@@ -4,25 +4,25 @@
      version="2.0"
      xmlns:spring="http://www.springframework.org/tags"
      xmlns:sec="http://www.springframework.org/security/tags">
-	<jsp:directive.page contentType="text/html;charset=UTF-8" />
-	<jsp:output omit-xml-declaration="yes" />
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
 
-	<spring:message code="label_restaurant" var="labelRestaurant" />
-	<spring:message code="label_ordering_subsystem" var="labelOrderingSubsystem" />
-	<spring:message code="label_kitchen_subsystem" var="labelKitchenSubsystem" />
-	<spring:message code="label_waiter_subsystem" var="labelWaiterSubsystem" />
-	<spring:message code="label_customer_subsystem" var="labelCustomerSubsystem" />
-	<spring:message code="label_dining_tables" var="labelDiningTables" />
-	<spring:message code="label_dining_table" var="labelDiningTable" />
+    <spring:message code="label_restaurant" var="labelRestaurant"/>
+    <spring:message code="label_ordering_subsystem" var="labelOrderingSubsystem"/>
+    <spring:message code="label_kitchen_subsystem" var="labelKitchenSubsystem"/>
+    <spring:message code="label_waiter_subsystem" var="labelWaiterSubsystem"/>
+    <spring:message code="label_customer_subsystem" var="labelCustomerSubsystem"/>
+    <spring:message code="label_dining_tables" var="labelDiningTables"/>
+    <spring:message code="label_dining_table" var="labelDiningTable"/>
 
 
-	<h1 class="page-title">${labelRestaurant} ${restaurant.id}</h1>
+    <h1 class="page-title">${labelRestaurant} ${restaurant.id}</h1>
 
-	<!--<h3>${labelOrderingSubsystem}</h3>-->
+    <!--<h3>${labelOrderingSubsystem}</h3>-->
 
-	<c:if test="${not empty message}">
-		<div id="message" class="${message.type}">${message.message}</div>
-	</c:if>
+    <c:if test="${not empty message}">
+        <div id="message" class="${message.type}">${message.message}</div>
+    </c:if>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -33,7 +33,7 @@
         <ul class="list-group">
             <c:forEach items="${restaurant.diningTables}" var="diningTable">
                 <li class="list-group-item">
-                    <spring:url var="showTable" value="/diningTables/${diningTable.id}" />
+                    <spring:url var="showTable" value="/diningTables/${diningTable.id}"/>
                     <a href="${showTable}">${labelDiningTable} ${diningTable.tableNr}</a>
                 </li>
             </c:forEach>
@@ -49,15 +49,15 @@
             </div>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <spring:url var="kitchenSubsystem" value="/restaurants/${restaurant.id}/kitchen" />
+                    <spring:url var="kitchenSubsystem" value="/restaurants/${restaurant.id}/kitchen"/>
                     <a href="${kitchenSubsystem}">${labelKitchenSubsystem}</a>
                 </li>
                 <li class="list-group-item">
-                    <spring:url var="waiterSubsystem" value="/restaurants/${restaurant.id}/waiter" />
+                    <spring:url var="waiterSubsystem" value="/restaurants/${restaurant.id}/waiter"/>
                     <a href="${waiterSubsystem}">${labelWaiterSubsystem}</a>
                 </li>
                 <li class="list-group-item">
-                    <spring:url var="customerSubsystem" value="/restaurants/${restaurant.id}/customers" />
+                    <spring:url var="customerSubsystem" value="/restaurants/${restaurant.id}/customers"/>
                     <a href="${customerSubsystem}">${labelCustomerSubsystem}</a>
                 </li>
             </ul>

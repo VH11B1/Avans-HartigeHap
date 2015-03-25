@@ -16,27 +16,27 @@ import javax.persistence.*;
 @Entity
 @Table(name = "PLANNINGS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class Planning extends DomainObject{
+public class Planning extends DomainObject {
 
-        @ManyToOne
-        private Employee employee;
+    @ManyToOne
+    private Employee employee;
 
-        private EmployeeRole role;
+    private EmployeeRole role;
 
-        @OneToOne
-        private PlannedSlot plannedSlot;
+    @OneToOne
+    private PlannedSlot plannedSlot;
 
-        @OneToOne
-        private ActualSlot actualSlot;
+    @OneToOne
+    private ActualSlot actualSlot;
 
-        @ManyToOne
-        private Employee supervisor;
+    @ManyToOne
+    private Employee supervisor;
 
-        @Transient
-        public boolean hasActualSlot(){
-            if(actualSlot==null){
-                return false;
-            }
-            return true;
+    @Transient
+    public boolean hasActualSlot () {
+        if (actualSlot == null) {
+            return false;
         }
+        return true;
+    }
 }

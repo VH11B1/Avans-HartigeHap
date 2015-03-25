@@ -20,13 +20,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
 
     // this is a custom method for which Spring cannot create an implementation
     // so we need to make our own repository implementation!
-    public Employee findEmployeeByUsername(String username) {
+    public Employee findEmployeeByUsername (String username) {
         Query query = em.createNativeQuery("SELECT employeeId FROM users WHERE username = ?");
         query.setParameter(1, username);
 
         Object result = query.getSingleResult();
-        if(result !=null) {
-            int employeeId = ((BigInteger)result).intValue();
+        if (result != null) {
+            int employeeId = ((BigInteger) result).intValue();
             return employeeRepository.findById(employeeId);
         }
         return null;
