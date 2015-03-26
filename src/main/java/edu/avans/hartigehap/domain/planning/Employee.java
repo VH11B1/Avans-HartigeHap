@@ -84,5 +84,4 @@ public class Employee extends DomainObject {
             this.password = employee.password;
         }
     }
-
 }
