@@ -61,6 +61,9 @@
     <definition extends="default" name="plannings/index">
         <put-attribute name="body" value="/WEB-INF/views/plannings/index.jspx"/>
     </definition>
+    <definition extends="default" name="plannings/pageable">
+        <put-attribute name="body" value="/WEB-INF/views/plannings/pageable.jspx"/>
+    </definition>
     <!-- *** -->
 
 </tiles-definitions>

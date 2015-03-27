@@ -1,21 +1,23 @@
 package edu.avans.hartigehap.service.impl;
 
-import edu.avans.hartigehap.domain.planning.Employee;
-import edu.avans.hartigehap.domain.planning.EmployeeRole;
-import edu.avans.hartigehap.domain.planning.Planning;
+import edu.avans.hartigehap.domain.planning.*;
+import edu.avans.hartigehap.repository.RestaurantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * Created by Alex on 26-3-2015.
  */
 public class PlanningPopulator {
     private static final int AMOUNT_KITCHEN = 20;
-    private static final int AMOUNT_SERVICE = 50;
+    private static final int KITCHEN_PER_DAY_PART = 5;
+    private static final int AMOUNT_SERVICE = 52;
+    private static final int SERVICE_PER_DAY_PART = 13;
     private static final int AMOUNT_MANAGEMENT = 4;
+    private static final int MANAGEMENT_PER_DAY_PART = 1;
+    private static final int DAYS_TO_PLAN = 30;
 
     private static final String[] RESTAURANTS = new String[]{"HartigeHap","HmmmBurger","PittigePannekoek"};
     private static final EmployeeRole[] ROLES = new EmployeeRole[]{new EmployeeRole("KITCHEN"),new EmployeeRole("SERVICE"),new EmployeeRole("MANAGEMENT")};
@@ -26,23 +28,98 @@ public class PlanningPopulator {
             'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
             's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
     private static final String[] EXTENSIONS = new String[] {".net", ".com", ".nl",".edu",".org",".de",".fr",".gov"};
+    private static final TimeSlot.DayPart[] DAY_PARTS = new TimeSlot.DayPart[]{TimeSlot.DayPart.MORNING, TimeSlot.DayPart.AFTERNOON, TimeSlot.DayPart.EVENING, TimeSlot.DayPart.NIGHT};
 
     private List<Employee> employees = new LinkedList<>();
+    private List<Planning> planningList = new LinkedList<>();
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
     public final List<Employee> getEmployeeList(){
-        generateEmployees();
         return employees;
     }
 
     public final List<Planning> generateRandomPlanning(){
-        List<Planning> list = new LinkedList<>();
         generateEmployees();
 
-        for (Employee employee : employees) {
-            //random chance of getting planned
+        // planning for a month
+        int counter = 0;
+        Calendar c = Calendar.getInstance();
+        int hours = c.get(Calendar.HOUR_OF_DAY);
+        int minutes = c.get(Calendar.MINUTE);
+
+        // start of today is now() - current hours - current minutes
+        LocalDateTime dateIncrement = LocalDateTime.now().minusHours(hours).minusMinutes(minutes);
+
+        // for every day
+        while(counter < DAYS_TO_PLAN){
+
+            // for every day part
+            for(TimeSlot.DayPart daypart : DAY_PARTS){
+
+                LocalDateTime start = dateIncrement.plusHours(daypart.getStart());
+                LocalDateTime end = dateIncrement.plusHours(daypart.getEnd());
+
+                // for every restaurant
+                for(String restaurant : RESTAURANTS){
+
+                    // for kitchen
+                    for (int i = 0; i < KITCHEN_PER_DAY_PART; i++) {
+                        planAnEmployee(start,end,daypart,ROLES[0],restaurant);
+                    }
+
+                    // for service
+                    for (int i = 0; i < SERVICE_PER_DAY_PART; i++) {
+                        planAnEmployee(start,end,daypart,ROLES[1],restaurant);
+                    }
+
+                    // for manager
+                    planAnEmployee(start,end,daypart,ROLES[2],restaurant);
+
+                }
+            }
+            dateIncrement = dateIncrement.plusDays(1);
+            counter++;
         }
 
-        return list;
+        return planningList;
+    }
+
+    private void planAnEmployee(LocalDateTime startDate, LocalDateTime endDate, TimeSlot.DayPart part, EmployeeRole role, String restaurant){
+        Employee toPlan = getRandomEmployeeForRestaurant(role, restaurant, startDate);
+        Planning p = new Planning();
+        p.setEmployee(toPlan);
+        p.setPlannedSlot(new PlannedSlot(part, startDate, endDate));
+        p.setRole(role);
+        planningList.add(p);
+    }
+
+    private boolean isPlannedOnDate(final Employee e, final LocalDateTime date){
+        for(Planning p : planningList){
+            if(p.getPlannedSlot().getStart().compareTo(date) == 0){
+                if(p.getEmployee().equals(e)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private Employee getRandomEmployeeForRestaurant(final EmployeeRole role, final String restaurant, final LocalDateTime date){
+        List<Employee> employeesForRestaurant = new LinkedList<>();
+
+        for (Employee employee : employees) {
+            if(employee.getRoles().contains(role) && employee.getEmail().contains(restaurant)){
+                employeesForRestaurant.add(employee);
+            }
+        }
+        Employee random = employeesForRestaurant.get(new Random().nextInt(employeesForRestaurant.size()));
+        if(isPlannedOnDate(random,date)){
+            return getRandomEmployeeForRestaurant(role,restaurant,date);
+        }else{
+            return random;
+        }
     }
 
     private final List<Employee> generateEmployees() {
@@ -60,7 +137,7 @@ public class PlanningPopulator {
                 int hoursPerMonth = getRandomHoursPerMonth();
                 Employee e = new Employee(name,userName,email,hoursPerMonth);
 
-                //e.setRestaurant(restaurantService.findById(restaurant));
+                //e.setRestaurant(restaurantRepository.findOne(restaurant));
                 if(counter < AMOUNT_KITCHEN){
                     e.setRoles(getRandomRoles(0));
                 }else if(counter < AMOUNT_SERVICE){
@@ -72,6 +149,7 @@ public class PlanningPopulator {
                 employees.add(e);
                 counter++;
             }
+            counter = 0;
         }
         return l;
     }

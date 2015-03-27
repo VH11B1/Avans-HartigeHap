@@ -9,6 +9,7 @@ import edu.avans.hartigehap.domain.query.PlannedAndNotPresentCommand;
 import edu.avans.hartigehap.domain.query.PlannedInWrongRoleCommand;
 import edu.avans.hartigehap.domain.query.PresentCommand;
 import edu.avans.hartigehap.domain.query.PresentOrNotPresentCommand;
+import edu.avans.hartigehap.service.impl.PlanningPopulator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -52,7 +53,10 @@ public class PlanningOverview {
         this.planning = new ArrayList<Planning>();
         this.employees = new ArrayList<Employee>();
 
-        populate();
+        //populate();
+        PlanningPopulator p = new PlanningPopulator();
+        this.planning = p.generateRandomPlanning();
+        this.employees = p.getEmployeeList();
     }
 
     public void addEmployee (Employee employee) {

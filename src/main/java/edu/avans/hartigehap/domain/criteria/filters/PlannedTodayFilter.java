@@ -50,6 +50,6 @@ public class PlannedTodayFilter extends FilterDecorator<LocalDateTime> {
     @Override
     public void set (LocalDateTime... l) {
 
-        LOGGER.info("This filter does not require filter items to be set");
+        LOGGER.debug("This filter does not require filter items to be set");
     }
 }
