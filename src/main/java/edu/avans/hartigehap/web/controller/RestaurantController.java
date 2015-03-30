@@ -55,7 +55,8 @@ public class RestaurantController {
     // called once immediately after bean creation
     @PostConstruct
     public void createRestaurants () {
-          // restaurantPopulatorService.createRestaurantsWithInventory();
+        LOGGER.info("Populating a new database... prepare for console spam");
+        restaurantPopulatorService.createRestaurantsWithInventory();
     }
 
 }

@@ -10,7 +10,7 @@ public class PlanningPopulatorTest {
 
     @Test
     public void testGetEmployeeList () throws Exception {
-        PlanningPopulator populator = new PlanningPopulator();
+        PlanningPopulatorServiceImpl populator = new PlanningPopulatorServiceImpl();
         List<Employee> l = populator.getEmployeeList();
         for (Employee employee : l) {
             System.err.println(employee.getName() + " " + employee.getUsername() + " " + employee.getEmail() + " " + employee.getRoles() + " " + employee.getHoursPerMonth());

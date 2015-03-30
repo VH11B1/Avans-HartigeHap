@@ -7,6 +7,7 @@ import edu.avans.hartigehap.domain.planning.NotificationSubject;
 import edu.avans.hartigehap.domain.planning.Planning;
 import edu.avans.hartigehap.domain.planning.PlanningOverview;
 import edu.avans.hartigehap.repository.EmployeeRepository;
+import edu.avans.hartigehap.repository.PlanningRepository;
 import edu.avans.hartigehap.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private PlanningRepository planningRepository;
 
     @Transactional(readOnly = true)
     public List<Employee> findAll () {
@@ -57,14 +61,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void checkTiming (String username) {
         Employee employee = employeeRepository.findEmployeeByUsername(username);
         PlanningOverview overview = new PlanningOverview();
+        overview.setPlanningList(Lists.newArrayList(planningRepository.findAll()));
+        overview.setEmployeeList(Lists.newArrayList(employeeRepository.findAll()));
 
         if (employee != null) {
-            overview.addEmployee(employee);
-
-            for (Planning p : employee.getPlannings()) {
-                overview.addPlanning(p);
-            }
-
             List<Planning> l = overview.getEmployeesPlannedToday(employee);
 
             Date currentDate = Calendar.getInstance().getTime();
@@ -86,5 +86,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 NotificationSubject.getInstance().notifyObservers(employee, supervisor, employee.getName() + " te laat", employee.getName() + " is " + -diff + " minuten te laat aangemeld.");
             }
         }
+
     }
 }

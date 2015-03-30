@@ -5,7 +5,7 @@ import edu.avans.hartigehap.domain.planning.Planning;
 import edu.avans.hartigehap.domain.planning.TimeSlot;
 import edu.avans.hartigehap.repository.EmployeeRepository;
 import edu.avans.hartigehap.repository.PlannedSlotsRepository;
-import edu.avans.hartigehap.repository.PlanningRepo;
+import edu.avans.hartigehap.repository.PlanningRepository;
 import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class PlannedSlotsRepoTest extends AbstractTransactionRollbackTest {
     PlannedSlotsRepository plannedSlotsRepository;
 
     @Autowired
-    PlanningRepo planningRepo;
+    PlanningRepository planningRepo;
 
     @Autowired
     EmployeeRepository employeeRepository;

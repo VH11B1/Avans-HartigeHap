@@ -2,6 +2,7 @@ package edu.avans.hartigehap.web.controller;
 
 import edu.avans.hartigehap.domain.planning.Planning;
 import edu.avans.hartigehap.service.PlanningOverviewService;
+import edu.avans.hartigehap.service.PlanningPopulatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Collection;
@@ -31,6 +33,8 @@ public class PlanningOverviewController {
     @Autowired
     private PlanningOverviewService planningOverviewService;
 
+    @Autowired
+    private PlanningPopulatorService planningPopulatorService;
 
     // TODO replace with listPlanningsPageable
     @RequestMapping(value = "/plannings", method = RequestMethod.GET)
@@ -46,22 +50,21 @@ public class PlanningOverviewController {
     @RequestMapping(value = "/plannings/list", method = RequestMethod.GET)
     public String listPlanningsPageable (Model uiModel, Integer page, Integer perpage) {
         if(page == null || page < 1){
+            LOGGER.warn("No valid page number specified, setting to default.");
             page = 0;
         }
         if(perpage == null){
+            LOGGER.warn("No amount per page specified, setting to default.");
             perpage = 10;
         }
 
         PageRequest request = new PageRequest(page,perpage);
-
-
 
         Page<Planning> list = planningOverviewService.getAllPlanningFromNowPageable(request);
 
         // note, due to there not being a database for planning items this next part needs
         // to be hardcoded, normally this would be resolved by the repository
         Collection<Planning> allPlanning = planningOverviewService.getAllPlanningFromNow();
-        double totPages = allPlanning.size() / perpage;
 
         int totalPages = 0;
         if(allPlanning.size() % perpage == 0){
@@ -72,7 +75,6 @@ public class PlanningOverviewController {
         int currentPage = page;
         // end of hardcoded nastiness
 
-        System.err.println(list.getTotalPages());
         uiModel.addAttribute("plannings", list.getContent());
         uiModel.addAttribute("currentpage", currentPage);
         uiModel.addAttribute("totalpages", totalPages - 1); // 0 based
@@ -189,4 +191,8 @@ public class PlanningOverviewController {
         return "plannings/index";
     }
     */
+    @PostConstruct
+    public void populatePlanning(){
+        planningPopulatorService.populate();
+    }
 }

@@ -1,13 +1,15 @@
 package edu.avans.hartigehap.service.impl;
 
-import edu.avans.hartigehap.domain.StateException;
+import com.google.common.collect.Lists;
 import edu.avans.hartigehap.domain.planning.Planning;
 import edu.avans.hartigehap.domain.planning.PlanningOverview;
+import edu.avans.hartigehap.repository.EmployeeRepository;
+import edu.avans.hartigehap.repository.PlanningRepository;
 import edu.avans.hartigehap.service.PlanningOverviewService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -20,12 +22,15 @@ import java.util.List;
  */
 @Service("planningOverviewService")
 @Repository
-@Transactional(rollbackFor = StateException.class)
+@Transactional
 public class PlanningOverviewServiceImpl implements PlanningOverviewService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PlanningOverviewServiceImpl.class);
 
-    //@Autowired
-    //private PlanningRepository planningRepository;
+    @Autowired
+    private PlanningRepository planningRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Override
     public List<Planning> getCurrentWorking () {
@@ -54,13 +59,17 @@ public class PlanningOverviewServiceImpl implements PlanningOverviewService {
 
     @Override
     public List<Planning> getAllPlanningFromNow () {
-        PlanningOverview planningOverview = new PlanningOverview();
-
-        List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
-
-        planningOverview.setPlanningList(allPlanning);
-
-        return planningOverview.getFullOverviewFromNow();
+//        PlanningOverview planningOverview = new PlanningOverview();
+//        planningOverview.setPlanningList(Lists.newArrayList
+//                (planningRepository.findAll()));
+//        planningOverview.setEmployeeList(Lists.newArrayList(employeeRepository.findAll()));
+//
+//        List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
+//
+//        planningOverview.setPlanningList(allPlanning);
+        List<Planning> allPlanning =Lists.newArrayList(planningRepository.findAll());
+        System.err.println(allPlanning.size());
+        return allPlanning;
     }
 
     @Override
@@ -73,29 +82,30 @@ public class PlanningOverviewServiceImpl implements PlanningOverviewService {
         //
         // in other words, in order to implement real pagination, this is the only part that
         // requires alteration
-        PlanningOverview planningOverview = new PlanningOverview();
+//        PlanningOverview planningOverview = new PlanningOverview();
 
-        // fetch dummydata
-        List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
+//        // fetch dummydata
+//        List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
+//
+//        // set dummydata for filter, criteria usage etc.
+//        planningOverview.setPlanningList(allPlanning);
+//
+//        // get full overview from current date
+//        List<Planning> all = planningOverview.getFullOverviewFromNow();
+//
+//        int startFrom = pageable.getPageNumber()*pageable.getPageSize();
+//        int endAt = startFrom + pageable.getPageSize();
+//        if(endAt > all.size()){
+//            endAt = all.size();
+//        }
+//
+//        try{
+//            all = all.subList(startFrom,endAt);
+//        }catch(IndexOutOfBoundsException e){
+//            LOGGER.error("Can not create a sublist from index " + startFrom + " to " + endAt, e);
+//        }
+//        Page<Planning> page =  new PageImpl<>(all,pageable,all.size());
 
-        // set dummydata for filter, criteria usage etc.
-        planningOverview.setPlanningList(allPlanning);
-
-        // get full overview from current date
-        List<Planning> all = planningOverview.getFullOverviewFromNow();
-
-        int startFrom = pageable.getPageNumber()*pageable.getPageSize();
-        int endAt = startFrom + pageable.getPageSize();
-        if(endAt > all.size()){
-            endAt = all.size();
-        }
-
-        try{
-            all = all.subList(startFrom,endAt);
-        }catch(IndexOutOfBoundsException e){
-            LOGGER.error("Can not create a sublist from index " + startFrom + " to " + endAt, e);
-        }
-        Page<Planning> page =  new PageImpl<>(all,pageable,all.size());
-        return page;
+        return planningRepository.findAll(pageable);
     }
 }
