@@ -19,6 +19,9 @@
     <spring:message code="label_plan_week" var="label_plan_week"/>
     <spring:message code="label_plan_all" var="label_plan_all"/>
 
+    <spring:message code="label_next" var="label_next"/>
+    <spring:message code="label_previous" var="label_previous"/>
+
     <spring:url value="?page=${currentpage+1}" var="nextUrl"></spring:url>
     <spring:url value="?page=${currentpage-1}" var="prevUrl"></spring:url>
 
@@ -58,7 +61,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+
             <table class="table table-striped table-responsive">
                 <thead>
                 <tr>
@@ -86,7 +89,7 @@
                                    scope="page"/>
                         </c:otherwise>
                     </c:choose>
-                    <tr id="list">
+                    <tr class="${warning}">
                         <td>${planning.getEmployee().getName()}</td>
                         <td>${actualName}</td>
                         <td>${planning.getRole()}</td>
@@ -99,25 +102,26 @@
                 </tbody>
             </table>
             <nav>
-                <ul class="pagination">
-                    <li>
-                        <a href="${prevUrl}" aria-label="Previous">
-                            <span aria-hidden="true"> &#171; </span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
+                <ul class="pager">
+
+                    <!-- only show previous button if there is a previous page-->
+                    <c:if test="${(currentpage>0)}">
+                        <li>
+                            <a href="${prevUrl}" aria-label="Previous">
+                                <span aria-hidden="true"> ${label_previous} </span>
+                            </a>
+                        </li>
+                    </c:if>
+                    <!-- only show next button if there is a previous page-->
                     <c:if test="${!(currentpage >= totalpages)}">
                         <li>
                             <a href="${nextUrl}" aria-label="Next">
-                                <span aria-hidden="true"> &#187; </span>
+                                <span aria-hidden="true"> ${label_next} </span>
                             </a>
                         </li>
                     </c:if>
                 </ul>
             </nav>
+        </div>
     </sec:authorize>
 </div>

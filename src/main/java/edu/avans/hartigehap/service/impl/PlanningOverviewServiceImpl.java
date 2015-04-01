@@ -3,7 +3,6 @@ package edu.avans.hartigehap.service.impl;
 import com.google.common.collect.Lists;
 import edu.avans.hartigehap.domain.planning.Planning;
 import edu.avans.hartigehap.domain.planning.PlanningOverview;
-import edu.avans.hartigehap.repository.EmployeeRepository;
 import edu.avans.hartigehap.repository.PlanningRepository;
 import edu.avans.hartigehap.service.PlanningOverviewService;
 import org.slf4j.Logger;
@@ -29,16 +28,15 @@ public class PlanningOverviewServiceImpl implements PlanningOverviewService {
     @Autowired
     private PlanningRepository planningRepository;
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
     @Override
     public List<Planning> getCurrentWorking () {
 
+        LOGGER.info("Fetching planning of currently working employees");
+
         PlanningOverview planningOverview = new PlanningOverview();
 
-        // List<Planning> allPlanning = planningRepository.getAllPlannedEmployees();
-        List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
+        List<Planning> allPlanning = Lists.newLinkedList(planningRepository
+                .findAll());
 
         planningOverview.setPlanningList(allPlanning);
 
@@ -48,9 +46,13 @@ public class PlanningOverviewServiceImpl implements PlanningOverviewService {
 
     @Override
     public List<Planning> getWeekPlanning () {
+
+        LOGGER.info("Fetching planning of employees working this week");
+
         PlanningOverview planningOverview = new PlanningOverview();
 
-        List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
+        List<Planning> allPlanning = Lists.newLinkedList(planningRepository
+                .findAll());
 
         planningOverview.setPlanningList(allPlanning);
 
@@ -59,52 +61,19 @@ public class PlanningOverviewServiceImpl implements PlanningOverviewService {
 
     @Override
     public List<Planning> getAllPlanningFromNow () {
-//        PlanningOverview planningOverview = new PlanningOverview();
-//        planningOverview.setPlanningList(Lists.newArrayList
-//                (planningRepository.findAll()));
-//        planningOverview.setEmployeeList(Lists.newArrayList(employeeRepository.findAll()));
-//
-//        List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
-//
-//        planningOverview.setPlanningList(allPlanning);
-        List<Planning> allPlanning =Lists.newArrayList(planningRepository.findAll());
-        System.err.println(allPlanning.size());
+
+        LOGGER.info("Fetching entire planning from now");
+
+        List<Planning> allPlanning = Lists.newLinkedList(planningRepository
+                .findAll());
+
         return allPlanning;
     }
 
     @Override
     public Page<Planning> getAllPlanningFromNowPageable(Pageable pageable){
 
-        // note, due to planning being dummy data there is no actual call to the repository
-        // starting here the pageable will be ignored, however, up until this point
-        // the code is similar to an actual pageable implementation
-        // also, it returns a Page<Planning> implementation like a normal pagination method would
-        //
-        // in other words, in order to implement real pagination, this is the only part that
-        // requires alteration
-//        PlanningOverview planningOverview = new PlanningOverview();
-
-//        // fetch dummydata
-//        List<Planning> allPlanning = planningOverview.getAllPlannedEmployees(); // populate
-//
-//        // set dummydata for filter, criteria usage etc.
-//        planningOverview.setPlanningList(allPlanning);
-//
-//        // get full overview from current date
-//        List<Planning> all = planningOverview.getFullOverviewFromNow();
-//
-//        int startFrom = pageable.getPageNumber()*pageable.getPageSize();
-//        int endAt = startFrom + pageable.getPageSize();
-//        if(endAt > all.size()){
-//            endAt = all.size();
-//        }
-//
-//        try{
-//            all = all.subList(startFrom,endAt);
-//        }catch(IndexOutOfBoundsException e){
-//            LOGGER.error("Can not create a sublist from index " + startFrom + " to " + endAt, e);
-//        }
-//        Page<Planning> page =  new PageImpl<>(all,pageable,all.size());
+        LOGGER.info("Fetching entire planning from now as pageable");
 
         return planningRepository.findAll(pageable);
     }

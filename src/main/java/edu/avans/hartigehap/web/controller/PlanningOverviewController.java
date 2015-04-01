@@ -36,48 +36,22 @@ public class PlanningOverviewController {
     @Autowired
     private PlanningPopulatorService planningPopulatorService;
 
-    // TODO replace with listPlanningsPageable
     @RequestMapping(value = "/plannings", method = RequestMethod.GET)
-    public String listPlannings (Model uiModel) {
-        Collection<Planning> list = planningOverviewService.getAllPlanningFromNow();
-
-        uiModel.addAttribute("plannings", list);
-        uiModel.addAttribute("scope", "all");
-
-        return "plannings/index";
-    }
-
-    @RequestMapping(value = "/plannings/list", method = RequestMethod.GET)
     public String listPlanningsPageable (Model uiModel, Integer page, Integer perpage) {
         if(page == null || page < 1){
             LOGGER.warn("No valid page number specified, setting to default.");
             page = 0;
         }
-        if(perpage == null){
-            LOGGER.warn("No amount per page specified, setting to default.");
+        if(perpage == null || perpage < 1){
+            LOGGER.warn("No valid amount per page specified, setting to default.");
             perpage = 10;
         }
 
-        PageRequest request = new PageRequest(page,perpage);
-
-        Page<Planning> list = planningOverviewService.getAllPlanningFromNowPageable(request);
-
-        // note, due to there not being a database for planning items this next part needs
-        // to be hardcoded, normally this would be resolved by the repository
-        Collection<Planning> allPlanning = planningOverviewService.getAllPlanningFromNow();
-
-        int totalPages = 0;
-        if(allPlanning.size() % perpage == 0){
-            totalPages = allPlanning.size() / perpage;
-        }else{
-            totalPages = (allPlanning.size() / perpage) + 1;
-        }
-        int currentPage = page;
-        // end of hardcoded nastiness
+        Page<Planning> list = planningOverviewService.getAllPlanningFromNowPageable(new PageRequest(page,perpage));
 
         uiModel.addAttribute("plannings", list.getContent());
-        uiModel.addAttribute("currentpage", currentPage);
-        uiModel.addAttribute("totalpages", totalPages - 1); // 0 based
+        uiModel.addAttribute("currentpage", list.getNumber());
+        uiModel.addAttribute("totalpages", list.getTotalPages());
         uiModel.addAttribute("scope", "all");
         return "plannings/pageable";
     }
@@ -153,44 +127,6 @@ public class PlanningOverviewController {
         return null;
     }
 
-    /*
-    @RequestMapping(value = "/currentoverviews", method = RequestMethod.GET)
-    public String currentOverview(Model uiModel)
-    {
-        Collection<Planning> list = planningOverviewService.getCurrentWorking();
-
-        uiModel.addAttribute("plannings", list);
-        uiModel.addAttribute("scope", "day");
-
-        return "plannings/index";
-    }
-    */
-
-    /*
-    @RequestMapping(value = "/weekoverviews", method = RequestMethod.GET)
-    public String currentWeekOverview(Model uiModel)
-    {
-        Collection<Planning> list = planningOverviewService.getWeekPlanning();
-
-        uiModel.addAttribute("plannings", list);
-        uiModel.addAttribute("scope", "week");
-
-        return "plannings/index";
-    }
-
-    @RequestMapping(value = "/fulloverview", method = RequestMethod.GET)
-    public String fullOverview(Model uiModel)
-    {
-        // TODO pagination
-
-        Collection<Planning> list = planningOverviewService.getAllPlanningFromNow();
-
-        uiModel.addAttribute("plannings", list);
-        uiModel.addAttribute("scope", "full");
-
-        return "plannings/index";
-    }
-    */
     @PostConstruct
     public void populatePlanning(){
         planningPopulatorService.populate();

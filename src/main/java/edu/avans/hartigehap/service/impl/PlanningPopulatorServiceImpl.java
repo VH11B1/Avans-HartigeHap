@@ -27,15 +27,19 @@ import java.util.*;
 @Repository
 @Transactional
 public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
+    private static final Logger LOGGER = LoggerFactory.getLogger
+            (PlanningPopulatorServiceImpl.class);
 
+    // amounts and variables
     private static final int AMOUNT_KITCHEN = 30;
     private static final int KITCHEN_PER_DAY_PART = 5;
     private static final int AMOUNT_SERVICE = 82;
     private static final int SERVICE_PER_DAY_PART = 10;
     private static final int AMOUNT_MANAGEMENT = 12;
-    private static final int MANAGEMENT_PER_DAY_PART = 1;
     private static final int DAYS_TO_PLAN = 15;
 
+
+    // known values and so on, hardcoded ugliness
     private static final String[] RESTAURANTS = new String[]{"HartigeHap","HmmmBurger","PittigePannekoek"};
     private static final EmployeeRole[] ROLES = new EmployeeRole[]{new EmployeeRole("KITCHEN"),new EmployeeRole("SERVICE"),new EmployeeRole("MANAGEMENT")};
     private static final char[] CAPS_LETTERS = new char[] { 'A', 'B', 'C', 'D', 'E',
@@ -47,13 +51,10 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
     private static final String[] EXTENSIONS = new String[] {".net", ".com", ".nl",".edu",".org",".de",".fr",".gov"};
     private static final TimeSlot.DayPart[] DAY_PARTS = new TimeSlot.DayPart[]{TimeSlot.DayPart.MORNING, TimeSlot.DayPart.AFTERNOON, TimeSlot.DayPart.EVENING, TimeSlot.DayPart.NIGHT};
 
-    private static final Logger LOGGER = LoggerFactory.getLogger
-            (PlanningPopulatorServiceImpl.class);
-
     private List<Employee> employees = new LinkedList<>();
-
     private List<Planning> planningList = new LinkedList<>();
 
+    // repo's
     @Autowired
     private RestaurantRepository restaurantRepository;
     @Autowired
@@ -63,9 +64,11 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    // for all sorts of nasty workarounds
     @Autowired
     private DataSource dataSource;
 
+    // start populating
     public void populate(){
         LOGGER.info("Populating planning. Please hold, your call is important to us.");
         generateRandomPlanning();
@@ -76,9 +79,11 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
     }
 
     public final List<Planning> generateRandomPlanning(){
+
+        // need employees first
         generateEmployees();
 
-        // planning for a month
+
         int counter = 0;
         Calendar c = Calendar.getInstance();
         int hours = c.get(Calendar.HOUR_OF_DAY);
@@ -114,6 +119,8 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
 
                 }
             }
+
+            // next day
             dateIncrement = dateIncrement.plusDays(1);
             counter++;
         }
@@ -127,13 +134,10 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
         Planning p = new Planning();
         p.setEmployee(toPlan);
         PlannedSlot slot = new PlannedSlot(part, startDate, endDate);
-//        plannedSlotsRepository.save(slot);
         p.setPlannedSlot(slot);
         p.setRole(role);
         planningList.add(p);
         planningRepository.save(p);
-        //employeeRepository.save(toPlan);
-
     }
 
     private boolean isPlannedOnDate(final Employee e, final LocalDateTime date){
@@ -167,7 +171,7 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
         }
     }
 
-    // very @#$@# important: transient errors will ensue if removed
+    // very @#$@# important: transient errors will ensue if @Transactional removed
     @Transactional
     private final List<Employee> generateEmployees() {
         List<Employee> l = new LinkedList<>();
@@ -210,7 +214,6 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
             LOGGER.error(e.getMessage(), e);
         }
 
-
         if(employeeRepository.findById(1)==null){
 
                 // super god power employees
@@ -230,20 +233,30 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
         // 50 service => morning, evening, afternoon, night
         // 4 manager => morning, evening, afternoon, night
         for (String restaurant : RESTAURANTS) {
+
             while (counter < AMOUNT_KITCHEN + AMOUNT_SERVICE + AMOUNT_MANAGEMENT) {
+
+                // randomize fields
                 String name = getRandomName();
                 String userName = getRandomUserName();
                 String email = getRandomEmail(userName,restaurant);
                 int hoursPerMonth = getRandomHoursPerMonth();
+
+                // enter fields
                 Employee e = new Employee(name,userName,email,hoursPerMonth);
-                e.setPassword("admin");
                 e.setRestaurant(restaurantRepository.findOne(restaurant));
-                //e.setRestaurant(null);
+
+                // sshhtt
+                e.setPassword("admin");
+
                 if(counter < AMOUNT_KITCHEN){
+                    // if we are a kitchen employee
                     e.setRoles(getRandomRoles(0));
                 }else if(counter < AMOUNT_SERVICE){
+                    // if we are a service employee
                     e.setRoles(getRandomRoles(1));
                 }else{
+                    // if we are manager
                     e.setRoles(getRandomRoles(2));
                 }
 
@@ -261,23 +274,43 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
         // max 30 chars => 10 + 19
         StringBuilder b = new StringBuilder();
         int i = 0;
+
+        // first letter of first name
         b.append(CAPS_LETTERS[new Random().nextInt(CAPS_LETTERS.length)]);
         i++;
+
+        // rest of first name
         while(i < 10){
             b.append(LETTERS[new Random().nextInt(LETTERS.length)]);
+
+            // if we have more than 5 letters
             if(i > 5){
+
+                // random stop
                 if(new Random().nextBoolean()){
-                    break; // sorry Pascal
+
+                    // sorry Pascal
+                    break;
                 }
             }
             i++;
         }
+
+        // space between first and last name
         b.append(" ");
+
+        // first letter of last name
         b.append(CAPS_LETTERS[new Random().nextInt(CAPS_LETTERS.length)]);
-        i++; 
+        i++;
+
+        // rest of last name
         while(i<27){
             b.append(LETTERS[new Random().nextInt(LETTERS.length)]);
+
+            // if we have more than 15 letters
             if(i > 15){
+
+                // random stop
                 if(new Random().nextBoolean()){
                     return b.toString();
                 }
@@ -298,6 +331,8 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
         // must be unique
         for (Employee employee : employees) {
             if(employee.getUsername().equals(b.toString())){
+
+                // if at first you don't succeed, try and try again
                 return getRandomUserName();
             }
         }
@@ -306,6 +341,7 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
     }
 
     private final String getRandomEmail(final String userName, final String restaurantName){
+        // username@restaurantname.randomextension
         StringBuilder b = new StringBuilder();
         b.append(userName);
         b.append("@");
@@ -321,9 +357,17 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
 
     private List<EmployeeRole> getRandomRoles(int alwaysInclude){
         List<EmployeeRole> roles = new ArrayList<>();
+
+        // i.e. if we are kitchen, always add kitchen
         roles.add(ROLES[alwaysInclude]);
+
+        // pick a card, any card
         int random = new Random().nextInt(ROLES.length);
+
+        // is this your card?
         if (random != alwaysInclude){
+
+            // well it is now
             roles.add(ROLES[random]);
         }
         return roles;
