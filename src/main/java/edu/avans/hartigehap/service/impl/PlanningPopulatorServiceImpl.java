@@ -31,11 +31,11 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
             (PlanningPopulatorServiceImpl.class);
 
     // amounts and variables
-    private static final int AMOUNT_KITCHEN = 30;
-    private static final int KITCHEN_PER_DAY_PART = 5;
-    private static final int AMOUNT_SERVICE = 82;
-    private static final int SERVICE_PER_DAY_PART = 10;
-    private static final int AMOUNT_MANAGEMENT = 12;
+    private static final int AMOUNT_KITCHEN = 15;
+    private static final int KITCHEN_PER_DAY_PART = 2;
+    private static final int AMOUNT_SERVICE = 40;
+    private static final int SERVICE_PER_DAY_PART = 4;
+    private static final int AMOUNT_MANAGEMENT = 8;
     private static final int DAYS_TO_PLAN = 15;
 
 
@@ -82,7 +82,6 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
 
         // need employees first
         generateEmployees();
-
 
         int counter = 0;
         Calendar c = Calendar.getInstance();
@@ -133,9 +132,14 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
                 startDate);
         Planning p = new Planning();
         p.setEmployee(toPlan);
+
+        p.setRole(role);
+
+
         PlannedSlot slot = new PlannedSlot(part, startDate, endDate);
         p.setPlannedSlot(slot);
-        p.setRole(role);
+
+        toPlan.getPlannings().add(p);
         planningList.add(p);
         planningRepository.save(p);
     }
@@ -224,7 +228,7 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
 
                 Employee erco = new Employee("erco","erco","erco@test.nl",160);
                 erco.setPassword("erco");
-                mark.setUsername("erco");
+                erco.setUsername("erco");
                 employeeRepository.saveEmployeeAndUser(erco);
         }
 

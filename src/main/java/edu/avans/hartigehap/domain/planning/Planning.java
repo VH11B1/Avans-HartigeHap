@@ -22,15 +22,15 @@ public class Planning extends DomainObject {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "role_id")
     private EmployeeRole role;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "plannedSlot_id")
     private PlannedSlot plannedSlot;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "actualSlot_id")
     private ActualSlot actualSlot;
 

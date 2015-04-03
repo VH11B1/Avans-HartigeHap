@@ -56,7 +56,7 @@ public class RestaurantController {
     @PostConstruct
     public void createRestaurants () {
         LOGGER.info("Populating a new database... prepare for console spam");
-        restaurantPopulatorService.createRestaurantsWithInventory();
+        //restaurantPopulatorService.createRestaurantsWithInventory();
     }
 
 }

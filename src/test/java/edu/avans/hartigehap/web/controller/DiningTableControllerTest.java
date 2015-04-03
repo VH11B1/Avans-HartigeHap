@@ -26,10 +26,11 @@ public class DiningTableControllerTest extends AbstractTransactionRollbackTest {
 
     @Test
     public void createRestaurantsWithInventory () {
-        // restaurantPopulatorService.createRestaurantsWithInventory() is implicitly called
+         //restaurantPopulatorService.createRestaurantsWithInventory(); is implicitly called
         // for every test case if the package scan includes the controller map.
         // so no need to call it in this method
 
+        // except it doesn't
 
         String diningTableId = "1";
         ExtendedModelMap uiModel = new ExtendedModelMap();

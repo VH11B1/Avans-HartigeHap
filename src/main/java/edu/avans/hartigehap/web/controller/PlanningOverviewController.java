@@ -129,6 +129,6 @@ public class PlanningOverviewController {
 
     @PostConstruct
     public void populatePlanning(){
-        planningPopulatorService.populate();
+        //planningPopulatorService.populate();
     }
 }
