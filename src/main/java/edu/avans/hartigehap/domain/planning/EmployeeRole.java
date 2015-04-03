@@ -20,6 +20,9 @@ import javax.persistence.Table;
 public class EmployeeRole extends DomainObject {
     private String roleName;
     private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeRole.class);
+    public EmployeeRole(){
+        this.roleName = "SERVICE";
+    }
     public EmployeeRole (final String roleName) {
         this.roleName = roleName;
     }

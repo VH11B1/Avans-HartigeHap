@@ -26,7 +26,7 @@ import java.util.Collection;
 public class Employee extends DomainObject {
 
     @NotBlank(message = "{validation.employee.name.NotBlank.message}")
-    @Size(max = 30, message = "{validation.employee.name.Size.message}")
+    @Size(max = 40, message = "{validation.employee.name.Size.message}")
     private String name;
 
     @NotBlank(message = "{validation.employee.username.NotBlank.message}")
@@ -84,5 +84,4 @@ public class Employee extends DomainObject {
             this.password = employee.password;
         }
     }
-
 }

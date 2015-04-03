@@ -25,9 +25,10 @@ public class RestaurantServiceTest extends AbstractTransactionRollbackTest {
 
     @Test
     public void createRestaurantsWithInventory () {
-        // restaurantPopulatorService.createRestaurantsWithInventory() is implicitly called
+        // restaurantPopulatorService.createRestaurantsWithInventory();
         // for every test case if the package scan includes the controller map.
         // so no need to call it in this method
+
         List<Restaurant> restaurants = restaurantService.findAll();
 
         assertEquals("HartigeHap", restaurants.get(0).getId());

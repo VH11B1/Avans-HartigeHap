@@ -40,13 +40,26 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
         if(employee.getId() == null){
             employee = employeeRepository.save(employee);
 
-            Query query = em.createNativeQuery("INSERT INTO users (username,password,enabled,employeeId) VALUES (:username,:password,1,:employeeId)");
+            Query query = em.createNativeQuery("INSERT INTO users (username," +
+                    "password,enabled,employeeId) VALUES (:username," +
+                    ":password,1,:employeeId)");
             query.setParameter("username", employee.getUsername());
 
-            String encodedPassword = bCryptPasswordEncoder.encode(employee.getPassword());
+            String encodedPassword = bCryptPasswordEncoder.encode(employee
+                    .getPassword());
             query.setParameter("password", encodedPassword);
 
             query.setParameter("employeeId", employee.getId());
+            query.executeUpdate();
+
+            query = em.createNativeQuery("INSERT INTO user_roles (username, ROLE) VALUES (:username,:role)");
+            query.setParameter("username", employee.getUsername());
+            query.setParameter("role", "ROLE_EMPLOYEE");
+            query.executeUpdate();
+
+            query = em.createNativeQuery("INSERT INTO user_roles (username, ROLE) VALUES (:username,:role)");
+            query.setParameter("username", employee.getUsername());
+            query.setParameter("role", "ROLE_CUSTOMER");
             query.executeUpdate();
         }
         else {

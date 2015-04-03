@@ -20,7 +20,6 @@ import java.util.Date;
 public abstract class TimeSlot extends DomainObject {
     private DayPart part;
     private LocalDateTime start;
-    private Date startDate;
     private LocalDateTime end;
 
     public TimeSlot (TimeSlot.DayPart dayPart, LocalDateTime start, LocalDateTime end) {
@@ -36,13 +35,13 @@ public abstract class TimeSlot extends DomainObject {
     @Getter
     public enum DayPart {
 
-        MORNING("7:00", "12:00"), AFTERNOON("12:00", "16:00"), EVENING("16:00",
-                "21:00"), NIGHT("21:00", "1:00");
+        MORNING(7, 12), AFTERNOON(12, 16), EVENING(16,
+                21), NIGHT(21, 1);
 
-        private String start;
-        private String end;
+        private int start;
+        private int end;
 
-        private DayPart (String start, String end) {
+        private DayPart (int start, int end) {
             this.start = start;
             this.end = end;
         }
