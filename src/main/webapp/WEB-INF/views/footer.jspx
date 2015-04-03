@@ -6,12 +6,16 @@
 
     <spring:message code="label_en_US" var="labelEnUs"/>
     <spring:message code="label_nl_NL" var="labelNlNl"/>
+    <spring:message code="label_theme_standard" var="labelThemeStandard"/>
+    <spring:message code="label_theme_elegant" var="labelThemeElegant"/>
 
     <nav class="navbar navbar-default navbar-inverse navbar-fixed-bottom">
         <div class="container">
             <ul class="nav navbar-nav">
                 <li><a href="?lang=en_US">${labelEnUs}</a></li>
                 <li><a href="?lang=nl_NL">${labelNlNl}</a></li>
+                <li><a href="?theme=standard">${labelThemeStandard}</a></li>
+                <li><a href="?theme=elegant">${labelThemeElegant}</a></li>
             </ul>
         </div>
     </nav>

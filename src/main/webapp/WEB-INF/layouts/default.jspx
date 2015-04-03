@@ -16,7 +16,12 @@
     <!-- Resource binding -->
     <spring:url value="/resources/css/bootstrap.min.css" var="bootstrap_css_url"/>
     <spring:url value="/resources/css/fonts.css" var="fonts_css_url"/>
-    <spring:url value="/resources/css/app.css" var="custom_css_url"/>
+    <!--<spring:url value="/resources/css/app.css" var="custom_css_url"/>-->
+
+    <spring:theme code="styleSheet" var="app_css" />
+    <spring:url value="/${app_css}" var="app_css_url" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${app_css_url}" />
+
     <spring:url value="/resources/js/jquery-2.1.3.min.js" var="jquery_url"/>
     <spring:url value="/resources/js/bootstrap.min.js" var="bootstrap_js_url"/>
     <spring:url value="/resources/js/app.js" var="app_js_url"/>
@@ -26,7 +31,7 @@
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" media="screen" href="${bootstrap_css_url}"/>
     <link rel="stylesheet" type="text/css" media="screen" href="${fonts_css_url}"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="${custom_css_url}"/>
+    <!--<link rel="stylesheet" type="text/css" media="screen" href="${custom_css_url}"/>-->
 
     <!-- Get the user locale from the page context (it was set by Spring MVC's locale resolver) -->
     <c:set var="userLocale">
