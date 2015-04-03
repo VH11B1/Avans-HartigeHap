@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 @Slf4j
 public class HomePageLoginIT {
 
-    public static String URL = "http://localhost:8080/";
+    public static String URL = "http://localhost:8080/hh";
 
     @Test
     public void login () {
