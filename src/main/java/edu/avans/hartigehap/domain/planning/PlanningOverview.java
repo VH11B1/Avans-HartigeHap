@@ -50,11 +50,6 @@ public class PlanningOverview {
     public PlanningOverview () {
         this.planning = new ArrayList<Planning>();
         this.employees = new ArrayList<Employee>();
-
-        //populate();
-//        PlanningPopulatorServiceImpl p = new PlanningPopulatorServiceImpl();
-//        this.planning = p.generateRandomPlanning();
-//        this.employees = p.getEmployeeList();
     }
 
     public void addEmployee (Employee employee) {
@@ -96,7 +91,8 @@ public class PlanningOverview {
     // TODO inefficient example for demonstrating decorator only
     public List<Planning> getPlannedServiceAndKitchenEmployees () {
 
-        List<Planning> list = planning; // normally from a command
+        // normally from a command
+        List<Planning> list = planning;
 
         // filters will override each other
         // this one will keep only service, kitchen and management employees
@@ -111,7 +107,8 @@ public class PlanningOverview {
 
     // TODO inefficient example for demonstration purposes only
     public List<Planning> getPlannedServiceForTomorrowAfternoon () {
-        List<Planning> list = planning; // all planned
+        // all planned
+        List<Planning> list = planning;
 
         // filter by tomorrow
         Filter<LocalDateTime> dateFilter = new PlannedStartDateFilter(list, LocalDateTime.now().plusDays(1));
@@ -127,7 +124,8 @@ public class PlanningOverview {
     }
 
     public List<Planning> getPlannedForNextWeekInclToday () {
-        List<Planning> list = planning; // all planned
+        // all planned
+        List<Planning> list = planning;
 
         // filter by next week, starting today
         Filter<LocalDateTime> dateFilter = new PlannedStartBetweenDatesFilter(list, LocalDateTime.now().plusDays(1).minusMinutes(5), LocalDateTime.now().plusDays(7));
@@ -139,7 +137,8 @@ public class PlanningOverview {
     }
 
     public List<Planning> getEmployeesPlannedToday (final Employee... employees) {
-        List<Planning> list = planning; // all planned
+        // all planned
+        List<Planning> list = planning;
 
         Filter<LocalDateTime> dateFilter = new PlannedTodayFilter(list);
         Filter<Employee> employeeFilter = new PlannedEmployeeFilter(dateFilter, employees);

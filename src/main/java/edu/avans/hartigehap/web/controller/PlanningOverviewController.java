@@ -10,17 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.Collection;
-import java.util.Locale;
 
 /**
  * Created by Alex on 9-3-2015.
@@ -77,53 +71,65 @@ public class PlanningOverviewController {
     }
 
     @RequestMapping(value = "/plannings/{id}", method = RequestMethod.GET)
-    public String showPlanning (@PathVariable("id") Long id) {
+    public String showPlanning (
+    //        @PathVariable("id") Long id
+    ) {
         // TODO
+        LOGGER.info("Unimplemented method");
         return null;
     }
 
     @RequestMapping(value = "/plannings/create", method = RequestMethod.GET)
     public String createPlanning () {
         // TODO
+        LOGGER.info("Unimplemented method");
         return null;
     }
 
     @RequestMapping(value = "/plannings", method = RequestMethod.POST)
     public String storePlanning (
-            @Valid Planning planning,
-            BindingResult bindingResult,
-            Model model,
-            HttpServletRequest httpServletRequest,
-            RedirectAttributes redirectAttributes,
-            Locale locale
+//            @Valid Planning planning,
+//            BindingResult bindingResult,
+//            Model model,
+//            HttpServletRequest httpServletRequest,
+//            RedirectAttributes redirectAttributes,
+//            Locale locale
     ) {
         // TODO
+        LOGGER.info("Unimplemented method");
         return null;
     }
 
     @RequestMapping(value = "/plannings/{id}/edit", method = RequestMethod.GET)
-    public String editPlanning (@PathVariable("id") Long id) {
+    public String editPlanning (
+    //        @PathVariable("id") Long id
+    ) {
         // TODO
+        LOGGER.info("Unimplemented method");
         return null;
     }
 
     @RequestMapping(value = "/plannings/{id}", method = RequestMethod.PUT)
     public String updatePlanning (
-            @PathVariable("id") Long id,
-            @Valid Planning planning,
-            BindingResult bindingResult,
-            Model model,
-            HttpServletRequest httpServletRequest,
-            RedirectAttributes redirectAttributes,
-            Locale locale
+//            @PathVariable("id") Long id,
+//            @Valid Planning planning,
+//            BindingResult bindingResult,
+//            Model model,
+//            HttpServletRequest httpServletRequest,
+//            RedirectAttributes redirectAttributes,
+//            Locale locale
     ) {
         // TODO
+        LOGGER.info("Unimplemented method");
         return null;
     }
 
     @RequestMapping(value = "/plannings/{id}", method = RequestMethod.DELETE)
-    public String destroyPlanning (@PathVariable("id") Long id) {
+    public String destroyPlanning (
+//            @PathVariable("id") Long id
+    ) {
         // TODO
+        LOGGER.info("Unimplemented method");
         return null;
     }
 

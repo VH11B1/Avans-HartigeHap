@@ -61,8 +61,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepositoryCustom {
             query.setParameter("username", employee.getUsername());
             query.setParameter("role", "ROLE_CUSTOMER");
             query.executeUpdate();
-        }
-        else {
+        }else {
             employee = employeeRepository.save(employee);
 
             Query query = em.createNativeQuery("UPDATE users SET password = :password WHERE employeeId = :employeeId");

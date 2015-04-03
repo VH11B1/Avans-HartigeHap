@@ -51,6 +51,8 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
     private static final String[] EXTENSIONS = new String[] {".net", ".com", ".nl",".edu",".org",".de",".fr",".gov"};
     private static final TimeSlot.DayPart[] DAY_PARTS = new TimeSlot.DayPart[]{TimeSlot.DayPart.MORNING, TimeSlot.DayPart.AFTERNOON, TimeSlot.DayPart.EVENING, TimeSlot.DayPart.NIGHT};
 
+    private static final int HOURS = 160;
+
     private List<Employee> employees = new LinkedList<>();
     private List<Planning> planningList = new LinkedList<>();
 
@@ -146,10 +148,9 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
 
     private boolean isPlannedOnDate(final Employee e, final LocalDateTime date){
         for(Planning p : planningList){
-            if(p.getPlannedSlot().getStart().compareTo(date) == 0){
-                if(p.getEmployee().equals(e)){
-                    return true;
-                }
+            if(p.getPlannedSlot().getStart().compareTo(date) == 0 & p.getEmployee().equals(e)){
+                return true;
+
             }
         }
         return false;
@@ -221,12 +222,12 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
         if(employeeRepository.findById(1)==null){
 
                 // super god power employees
-                Employee mark = new Employee("mark","mark","mbartele@avans.nl",160);
+                Employee mark = new Employee("mark","mark","mbartele@avans.nl",HOURS);
                 mark.setPassword("mark");
                 mark.setUsername("mark");
                 employeeRepository.saveEmployeeAndUser(mark);
 
-                Employee erco = new Employee("erco","erco","erco@test.nl",160);
+                Employee erco = new Employee("erco","erco","erco@test.nl",HOURS);
                 erco.setPassword("erco");
                 erco.setUsername("erco");
                 employeeRepository.saveEmployeeAndUser(erco);
@@ -287,15 +288,11 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
         while(i < 10){
             b.append(LETTERS[new Random().nextInt(LETTERS.length)]);
 
-            // if we have more than 5 letters
-            if(i > 5){
+            // if we have more than 5 letters, random stop
+            if(i > 5 & new Random().nextBoolean()){
 
-                // random stop
-                if(new Random().nextBoolean()){
-
-                    // sorry Pascal
-                    break;
-                }
+                // sorry Pascal
+                break;
             }
             i++;
         }
@@ -311,13 +308,9 @@ public class PlanningPopulatorServiceImpl implements PlanningPopulatorService{
         while(i<27){
             b.append(LETTERS[new Random().nextInt(LETTERS.length)]);
 
-            // if we have more than 15 letters
-            if(i > 15){
-
-                // random stop
-                if(new Random().nextBoolean()){
-                    return b.toString();
-                }
+            // if we have more than 15 letters, random stop
+            if(i > 15 & new Random().nextBoolean()){
+                return b.toString();
             }
             i++;
         }
