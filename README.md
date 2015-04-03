@@ -273,6 +273,26 @@ Om deze test uit te kunnen voeren zijn een aantal stappen noodzakelijk.
  - Observer pattern \> (HHAplicationListener, IObserver, MailObserver, NotificationSubject)
  - Template Pattern \> (NotificationService, EmailServiceImpl)
 
+## Highlights ##
+
+* listener/observer voor "fysieke" inlog controle
+* criteria/filter patterns werken goed, beetje complex geworden door alle andere patterns (met name command is overbodige stap)
+
+## Lowlights ##
+
+* aanmaken van tabellen in database via populater, toevoegen van twee basis employees (mark/erco) gaat op niet-Spring manier.
+* pagination niet overal toe kunnen passen vanwege criteria pattern
+
+## Diagrammen ##
+
+Zie **hhB1_Proftaak.vpp**
+  
+Alleen onze eigen toevoegingen zijn weergegeven om overdaad te voorkomen. Al onze toevoegingen zijn beperkt tot employees, rol aanduiding is dus achterwege gelaten.
+
+**Use case:** Employees, Planning  
+**Class:** Domain, Services, Repository, Controller  
+**Activity:** Nagivation
+
 # ORIGINELE README #
 
 Deze Hartige Hap webapplicatie is gemaakt met Spring MVC.
